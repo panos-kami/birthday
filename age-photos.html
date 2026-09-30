@@ -10,13 +10,13 @@
   content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 >
 
-<title>Kami — 20 Years</title>
+<title>20 Years of Kami</title>
 
 <style>
 
-/* ============================
+/* =====================================================
    RESET
-============================ */
+===================================================== */
 
 *{
   margin:0;
@@ -42,153 +42,46 @@ body{
   background:
     linear-gradient(
       180deg,
-      #182351 0%,
-      #363d80 28%,
-      #725295 62%,
-      #a56888 100%
+      #141c40 0%,
+      #30366f 25%,
+      #594580 55%,
+      #865779 78%,
+      #a66f87 100%
     );
 }
 
 
-/* ============================
-   START / MUSIC SCREEN
-============================ */
+/* =====================================================
+   BACKGROUND DECORATION
+===================================================== */
 
-#startScreen{
+body::before{
+  content:"";
+
   position:fixed;
   inset:0;
 
-  z-index:1000;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:25px;
-
-  text-align:center;
+  pointer-events:none;
 
   background:
     radial-gradient(
-      circle at 50% 30%,
-      rgba(255,213,178,.22),
+      circle at 15% 10%,
+      rgba(255,198,216,.12),
       transparent 30%
     ),
-    linear-gradient(
-      160deg,
-      #111936,
-      #30376f 52%,
-      #704f86
+    radial-gradient(
+      circle at 85% 25%,
+      rgba(140,150,255,.10),
+      transparent 30%
     );
 
-  transition:
-    opacity .7s ease,
-    visibility .7s ease;
-}
-
-#startScreen.hide{
-  opacity:0;
-  visibility:hidden;
-}
-
-.startInner{
-  width:min(100%,430px);
-}
-
-.startSmall{
-  font-size:10px;
-
-  letter-spacing:.32em;
-
-  text-transform:uppercase;
-
-  color:#f5c9bb;
-}
-
-.startTitle{
-  margin-top:16px;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:
-    clamp(
-      52px,
-      15vw,
-      88px
-    );
-
-  font-weight:400;
-
-  line-height:.9;
-
-  letter-spacing:-.05em;
-}
-
-.startTitle span{
-  display:block;
-
-  color:#ffd5bc;
-
-  font-style:italic;
-}
-
-.startText{
-  max-width:320px;
-
-  margin:
-    22px auto 0;
-
-  font-size:14px;
-
-  line-height:1.6;
-
-  color:
-    rgba(255,255,255,.7);
-}
-
-#startButton{
-  margin-top:30px;
-
-  border:none;
-
-  padding:
-    16px 30px;
-
-  border-radius:999px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff0cf,
-      #ffd2bd
-    );
-
-  color:#35306a;
-
-  font-size:12px;
-
-  font-weight:800;
-
-  letter-spacing:.14em;
-
-  cursor:pointer;
-
-  box-shadow:
-    0 18px 45px
-    rgba(10,12,40,.28);
-}
-
-#startButton:active{
-  transform:scale(.96);
+  z-index:-1;
 }
 
 
-/* ============================
+/* =====================================================
    MUSIC BUTTON
-============================ */
+===================================================== */
 
 #musicButton{
   position:fixed;
@@ -202,33 +95,38 @@ body{
 
   right:14px;
 
-  z-index:100;
+  z-index:999;
 
-  width:42px;
-  height:42px;
+  width:44px;
+  height:44px;
 
-  border:none;
+  border:1px solid
+    rgba(255,255,255,.18);
 
   border-radius:50%;
 
   background:
-    rgba(20,24,59,.75);
+    rgba(20,23,55,.82);
 
   color:white;
 
-  font-size:17px;
+  font-size:18px;
 
   cursor:pointer;
 
   box-shadow:
-    0 8px 25px
-    rgba(10,10,35,.20);
+    0 8px 22px
+    rgba(0,0,0,.18);
+}
+
+#musicButton.playing{
+  color:#ffd6bd;
 }
 
 
-/* ============================
+/* =====================================================
    HERO
-============================ */
+===================================================== */
 
 .hero{
   min-height:92svh;
@@ -237,24 +135,26 @@ body{
   align-items:center;
   justify-content:center;
 
-  text-align:center;
-
   padding:
-    70px 24px;
+    70px 22px
+    50px;
+
+  text-align:center;
 }
 
 .heroInner{
-  width:min(100%,600px);
+  width:100%;
+  max-width:570px;
 }
 
 .heroSmall{
   font-size:10px;
 
-  letter-spacing:.32em;
+  letter-spacing:.34em;
 
   text-transform:uppercase;
 
-  color:#efc4b9;
+  color:#f0c4b6;
 }
 
 .heroTitle{
@@ -267,60 +167,62 @@ body{
 
   font-size:
     clamp(
-      58px,
-      17vw,
-      105px
+      56px,
+      16vw,
+      100px
     );
 
-  font-weight:400;
-
-  line-height:.83;
+  line-height:.84;
 
   letter-spacing:-.06em;
+
+  font-weight:400;
 }
 
 .heroTitle span{
   display:block;
 
-  color:#ffd4bd;
+  margin-top:7px;
+
+  color:#ffd5bd;
 
   font-style:italic;
 }
 
 .heroText{
-  max-width:360px;
+  max-width:350px;
 
   margin:
-    27px auto 0;
+    28px auto 0;
 
   font-size:15px;
 
   line-height:1.7;
 
   color:
-    rgba(255,255,255,.72);
+    rgba(255,255,255,.70);
 }
 
 .scrollHint{
-  margin-top:42px;
+  margin-top:45px;
 
-  font-size:10px;
+  font-size:9px;
 
-  letter-spacing:.24em;
+  letter-spacing:.25em;
 
   text-transform:uppercase;
 
   color:
-    rgba(255,255,255,.48);
+    rgba(255,255,255,.40);
 
   animation:
-    moveDown
+    floating
     1.8s
-    infinite
-    ease-in-out;
+    ease-in-out
+    infinite;
 }
 
-@keyframes moveDown{
+@keyframes floating{
 
   50%{
     transform:translateY(7px);
@@ -329,9 +231,9 @@ body{
 }
 
 
-/* ============================
-   PHOTO STORY
-============================ */
+/* =====================================================
+   STORY
+===================================================== */
 
 #story{
   width:100%;
@@ -341,37 +243,31 @@ body{
   margin:auto;
 
   padding:
-    0 17px
-    70px;
+    0 14px
+    80px;
 }
 
 
-/* EACH YEAR */
+/* =====================================================
+   YEAR
+===================================================== */
 
 .year{
-  min-height:92svh;
+  width:100%;
+
+  min-height:90svh;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  position:relative;
+  padding:
+    45px 0;
 
-  opacity:0;
+  content-visibility:auto;
 
-  transform:
-    translateY(35px);
-
-  transition:
-    opacity .7s ease,
-    transform .7s ease;
-}
-
-.year.visible{
-  opacity:1;
-
-  transform:
-    translateY(0);
+  contain-intrinsic-size:
+    700px;
 }
 
 .yearInner{
@@ -379,16 +275,20 @@ body{
 }
 
 
-/* AGE */
+/* =====================================================
+   AGE HEADER
+===================================================== */
 
-.ageTop{
+.ageRow{
   display:flex;
 
   align-items:center;
 
-  gap:13px;
+  gap:12px;
 
-  margin-bottom:13px;
+  margin:
+    0 5px
+    13px;
 }
 
 .ageNumber{
@@ -397,9 +297,11 @@ body{
     "Times New Roman",
     serif;
 
-  font-size:38px;
+  font-size:40px;
 
-  color:#ffd4bd;
+  line-height:1;
+
+  color:#ffd5bc;
 }
 
 .ageLine{
@@ -408,79 +310,80 @@ body{
   flex:1;
 
   background:
-    rgba(255,255,255,.16);
+    rgba(255,255,255,.15);
 }
 
-.ageLabel{
+.ageText{
   font-size:9px;
 
   letter-spacing:.25em;
 
-  text-transform:uppercase;
-
   color:
-    rgba(255,255,255,.52);
+    rgba(255,255,255,.48);
+
+  text-transform:uppercase;
 }
 
 
-/* PHOTO */
+/* =====================================================
+   PHOTO CARD
+===================================================== */
 
 .photoCard{
   width:100%;
 
-  padding:7px;
+  padding:6px;
 
-  border-radius:25px;
+  overflow:hidden;
+
+  border-radius:23px;
 
   background:
-    rgba(255,255,255,.09);
+    rgba(255,255,255,.075);
 
   border:
     1px solid
-    rgba(255,255,255,.13);
+    rgba(255,255,255,.10);
 
   box-shadow:
-    0 24px 65px
-    rgba(10,12,40,.22);
+    0 22px 55px
+    rgba(8,10,35,.20);
 }
 
 .photoCard img{
   width:100%;
 
-  max-height:68svh;
-
   display:block;
+
+  border-radius:18px;
 
   object-fit:cover;
 
-  border-radius:19px;
-
-  background:#2c3268;
+  background:#272d61;
 }
 
 
-/* subtle alternating look */
+/* subtle movement */
 
 .year:nth-child(odd)
 .photoCard{
-  transform:
-    rotate(-.7deg);
+  transform:rotate(-.45deg);
 }
 
 .year:nth-child(even)
 .photoCard{
-  transform:
-    rotate(.7deg);
+  transform:rotate(.45deg);
 }
 
 
-/* CAPTION */
+/* =====================================================
+   CAPTION
+===================================================== */
 
 .caption{
-  margin-top:17px;
-
-  padding:
-    0 7px;
+  margin:
+    17px 7px
+    0;
 
   font-family:
     Georgia,
@@ -490,31 +393,31 @@ body{
   font-size:
     clamp(
       22px,
-      6.5vw,
+      6.3vw,
       30px
     );
 
-  line-height:1.1;
+  line-height:1.15;
 
   color:#ffe0cf;
 }
 
 
-/* ============================
-   MEMORY BREAK
-============================ */
+/* =====================================================
+   MEMORY TEXT BETWEEN PHOTOS
+===================================================== */
 
 .memoryBreak{
-  min-height:55svh;
+  min-height:46svh;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  text-align:center;
-
   padding:
-    50px 25px;
+    45px 22px;
+
+  text-align:center;
 }
 
 .memoryBreak p{
@@ -528,42 +431,48 @@ body{
   font-size:
     clamp(
       30px,
-      9vw,
-      48px
+      8vw,
+      46px
     );
 
-  font-style:italic;
+  line-height:1.17;
 
-  line-height:1.2;
+  font-style:italic;
 
   color:#ffe0cf;
 }
 
 
-/* ============================
-   AGE 20
-============================ */
+/* =====================================================
+   AGE 20 SPECIAL
+===================================================== */
 
-.year.twenty .ageNumber{
-  color:#fff0b9;
-
-  font-size:46px;
+.year.twenty{
+  padding-top:65px;
 }
 
-.year.twenty .photoCard{
+.year.twenty
+.ageNumber{
+  font-size:50px;
+
+  color:#ffebb3;
+}
+
+.year.twenty
+.photoCard{
   border:
     1px solid
-    rgba(255,225,176,.35);
+    rgba(255,226,177,.27);
 
   box-shadow:
-    0 30px 80px
-    rgba(10,12,40,.32);
+    0 28px 65px
+    rgba(6,8,30,.27);
 }
 
 
-/* ============================
+/* =====================================================
    END
-============================ */
+===================================================== */
 
 .end{
   min-height:90svh;
@@ -572,22 +481,23 @@ body{
   align-items:center;
   justify-content:center;
 
-  text-align:center;
-
   padding:
-    70px 25px;
+    70px 24px;
+
+  text-align:center;
 
   background:
     linear-gradient(
-      155deg,
-      #17204a,
-      #4b4687,
-      #925e85
+      160deg,
+      #171f48,
+      #49427f,
+      #8b5b80
     );
 }
 
 .endInner{
-  width:min(100%,480px);
+  width:100%;
+  max-width:450px;
 }
 
 .endSmall{
@@ -595,13 +505,13 @@ body{
 
   letter-spacing:.3em;
 
-  text-transform:uppercase;
+  color:#f1c7b9;
 
-  color:#f3c9bc;
+  text-transform:uppercase;
 }
 
 .endTitle{
-  margin-top:16px;
+  margin-top:17px;
 
   font-family:
     Georgia,
@@ -612,18 +522,20 @@ body{
     clamp(
       43px,
       12vw,
-      75px
+      72px
     );
 
   font-weight:400;
 
-  line-height:.95;
+  line-height:.94;
 
   letter-spacing:-.045em;
 }
 
 .endTitle span{
-  color:#ffd7bf;
+  display:block;
+
+  color:#ffd5bd;
 
   font-style:italic;
 }
@@ -654,55 +566,79 @@ body{
 
   text-decoration:none;
 
-  color:#342f6b;
+  color:#342f68;
 
   background:
     linear-gradient(
       135deg,
       #fff0d0,
-      #ffd3bf
+      #ffd3bd
     );
 
-  font-weight:800;
-
   font-size:12px;
+
+  font-weight:800;
 
   letter-spacing:.14em;
 
   box-shadow:
-    0 17px 45px
-    rgba(10,12,40,.27);
+    0 16px 40px
+    rgba(7,9,35,.22);
 }
 
 
-/* ============================
+/* =====================================================
    MOBILE
-============================ */
+===================================================== */
 
 @media(max-width:600px){
 
   .hero{
     min-height:88svh;
+
+    padding:
+      65px 20px
+      45px;
+  }
+
+  .heroTitle{
+    font-size:
+      clamp(
+        55px,
+        17vw,
+        78px
+      );
   }
 
   #story{
-    padding-left:13px;
-    padding-right:13px;
+    padding-left:11px;
+    padding-right:11px;
   }
 
   .year{
     min-height:auto;
 
     padding:
-      40px 0
-      65px;
+      38px 0
+      58px;
+  }
+
+  .photoCard{
+    border-radius:20px;
   }
 
   .photoCard img{
+    width:100%;
+
+    height:auto;
+
     max-height:none;
 
-    aspect-ratio:
-      4 / 5;
+    border-radius:15px;
+  }
+
+  .ageNumber{
+    font-size:35px;
   }
 
   .caption{
@@ -710,37 +646,46 @@ body{
   }
 
   .memoryBreak{
-    min-height:44svh;
+    min-height:38svh;
+
+    padding:
+      35px 18px;
+  }
+
+  .memoryBreak p{
+    font-size:
+      clamp(
+        28px,
+        8.5vw,
+        40px
+      );
+  }
+
+  #musicButton{
+    width:42px;
+    height:42px;
   }
 
 }
 
 
-/* ============================
+/* =====================================================
    DESKTOP
-============================ */
+===================================================== */
 
-@media(min-width:800px){
+@media(min-width:750px){
 
-  .photoCard{
-    max-width:480px;
-
-    margin:auto;
-  }
-
-  .ageTop{
-    max-width:480px;
-
-    margin-left:auto;
-    margin-right:auto;
-    margin-bottom:14px;
-  }
-
+  .photoCard,
+  .ageRow,
   .caption{
-    max-width:480px;
+    max-width:490px;
 
     margin-left:auto;
     margin-right:auto;
+  }
+
+  .ageRow{
+    margin-bottom:13px;
   }
 
 }
@@ -753,91 +698,76 @@ body{
 <body>
 
 
-<!-- ============================
-     AUDIO
-============================ -->
+<!-- =====================================================
+     MUSIC
+===================================================== -->
 
 <audio
   id="music"
   loop
-  preload="metadata"
+  preload="none"
+  playsinline
 >
+
   <source
     src="memories-song.mp3"
     type="audio/mpeg"
   >
+
 </audio>
 
 
 <button
   id="musicButton"
-  aria-label="Music"
+  aria-label="Toggle music"
 >
   ♪
 </button>
 
 
 
-<!-- ============================
-     START
-============================ -->
-
-<div id="startScreen">
-
-<div class="startInner">
-
-  <div class="startSmall">
-    CHAPTER ONE
-  </div>
-
-  <div class="startTitle">
-    Ready to go
-    <span>back in time?</span>
-  </div>
-
-  <p class="startText">
-    Twenty years.
-    Twenty little moments.
-    Put your sound on.
-  </p>
-
-  <button id="startButton">
-    START THE MEMORIES
-  </button>
-
-</div>
-
-</div>
-
-
-
-<!-- ============================
+<!-- =====================================================
      HERO
-============================ -->
+===================================================== -->
 
 <section class="hero">
 
 <div class="heroInner">
 
+
   <div class="heroSmall">
     20 YEARS OF KAMI
   </div>
 
+
   <h1 class="heroTitle">
+
     Once upon
-    <span>a life.</span>
+
+    <span>
+      a life.
+    </span>
+
   </h1>
 
+
   <p class="heroText">
+
     Twenty years.
     Twenty versions of you.
+
     Some you remember.
     Some you probably don't.
+
   </p>
 
+
   <div class="scrollHint">
+
     scroll to go back in time ↓
+
   </div>
+
 
 </div>
 
@@ -845,35 +775,49 @@ body{
 
 
 
-<!-- ============================
-     PHOTOS GENERATED HERE
-============================ -->
+<!-- =====================================================
+     STORY
+===================================================== -->
 
 <main id="story"></main>
 
 
 
-<!-- ============================
+<!-- =====================================================
      END
-============================ -->
+===================================================== -->
 
 <section class="end">
 
 <div class="endInner">
 
+
   <div class="endSmall">
     END OF CHAPTER ONE
   </div>
 
+
   <div class="endTitle">
+
     Before the
-    <span>big surprise...</span>
+
+    <span>
+      big surprise...
+    </span>
+
   </div>
 
+
   <p class="endText">
-    You've survived twenty years of photos.
-    Now let's see if you can survive one little game.
+
+    You've just survived
+    twenty years of photos.
+
+    Now let's see if you can survive
+    one little game.
+
   </p>
+
 
   <a
     href="game.html"
@@ -881,6 +825,7 @@ body{
   >
     PLAY THE GAME
   </a>
+
 
 </div>
 
@@ -890,9 +835,9 @@ body{
 
 <script>
 
-/* ==============================
+/* =====================================================
    PHOTO DATA
-============================== */
+===================================================== */
 
 const photos = [
 
@@ -1020,9 +965,9 @@ const photos = [
 
 
 
-/* ==============================
-   CREATE STORY
-============================== */
+/* =====================================================
+   BUILD STORY
+===================================================== */
 
 const story =
 document.getElementById(
@@ -1054,48 +999,83 @@ photos.forEach(
   }
 
 
+  /*
+    First 2 images load immediately.
+    The rest load only when needed.
+  */
+
+  const loadingType =
+  index < 2
+  ?
+  "eager"
+  :
+  "lazy";
+
+
   year.innerHTML = `
 
     <div class="yearInner">
 
-      <div class="ageTop">
+
+      <div class="ageRow">
+
 
         <div class="ageNumber">
+
           ${photo.age}
+
         </div>
+
 
         <div class="ageLine"></div>
 
-        <div class="ageLabel">
+
+        <div class="ageText">
+
           AGE ${photo.age}
+
         </div>
 
+
       </div>
+
 
 
       <div class="photoCard">
 
+
         <img
           src="${photo.file}"
           alt="Kami age ${photo.age}"
-          loading="lazy"
+          loading="${loadingType}"
           decoding="async"
         >
+
 
       </div>
 
 
+
       ${
         photo.caption
+
         ?
+
         `
+
         <div class="caption">
+
           ${photo.caption}
+
         </div>
+
         `
+
         :
+
         ""
       }
+
 
     </div>
 
@@ -1108,8 +1088,9 @@ photos.forEach(
 
 
   /*
-    Emotional breaks
+    MEMORY BREAKS
   */
+
 
   if(
     photo.age === 5
@@ -1143,8 +1124,10 @@ photos.forEach(
 
   }
 
+
 }
 );
+
 
 
 function addBreak(text){
@@ -1160,7 +1143,15 @@ function addBreak(text){
 
 
   section.innerHTML =
-  `<p>${text}</p>`;
+  `
+
+    <p>
+
+      ${text}
+
+    </p>
+
+  `;
 
 
   story.appendChild(
@@ -1171,9 +1162,9 @@ function addBreak(text){
 
 
 
-/* ==============================
+/* =====================================================
    MUSIC
-============================== */
+===================================================== */
 
 const music =
 document.getElementById(
@@ -1185,75 +1176,205 @@ document.getElementById(
   "musicButton"
 );
 
-const startScreen =
-document.getElementById(
-  "startScreen"
-);
-
-const startButton =
-document.getElementById(
-  "startButton"
-);
-
 
 music.volume =
-0.32;
+0.30;
 
 
-/*
-This click is what makes
-sound reliable on mobile.
-*/
 
-startButton.addEventListener(
-"click",
-()=>{
+function setMusicIcon(){
 
-  music
-  .play()
-  .then(()=>{
-
-    musicButton.textContent =
-    "♫";
-
-  })
-  .catch(()=>{
+  if(
+    music.paused
+  ){
 
     musicButton.textContent =
     "♪";
 
-  });
+    musicButton.classList.remove(
+      "playing"
+    );
+
+  }
+
+  else{
+
+    musicButton.textContent =
+    "♫";
+
+    musicButton.classList.add(
+      "playing"
+    );
+
+  }
+
+}
 
 
-  startScreen
-  .classList
-  .add("hide");
+
+/* =====================================================
+   TRY AUTOPLAY WHEN PAGE OPENS
+===================================================== */
+
+async function tryAutoplay(){
+
+  try{
+
+    await music.play();
+
+    setMusicIcon();
+
+    return true;
+
+  }
+
+  catch(error){
+
+    setMusicIcon();
+
+    return false;
+
+  }
+
+}
+
+
+
+/*
+Try as soon as page loads.
+Desktop will usually allow it.
+Some mobile browsers won't.
+*/
+
+window.addEventListener(
+"load",
+()=>{
+
+  tryAutoplay();
 
 }
 );
 
 
 
-/* ==============================
-   MUSIC TOGGLE
-============================== */
+/* =====================================================
+   MOBILE FALLBACK
 
-musicButton.addEventListener(
-"click",
-()=>{
+   If mobile blocks autoplay,
+   the FIRST touch anywhere
+   starts the music.
+
+   No extra start screen.
+===================================================== */
+
+let audioUnlocked =
+false;
+
+
+async function unlockAudio(){
+
+  if(
+    audioUnlocked
+  ){
+    return;
+  }
+
 
   if(
     music.paused
   ){
 
-    music
-    .play()
-    .then(()=>{
+    try{
 
-      musicButton.textContent =
-      "♫";
+      await music.play();
 
-    });
+      audioUnlocked =
+      true;
+
+      setMusicIcon();
+
+    }
+
+    catch(error){
+
+      /* Browser still blocked it */
+
+    }
+
+  }
+
+  else{
+
+    audioUnlocked =
+    true;
+
+  }
+
+}
+
+
+/*
+Pointerdown works well on modern
+mobile and desktop browsers.
+*/
+
+document.addEventListener(
+  "pointerdown",
+  unlockAudio,
+  {
+    once:true,
+    passive:true
+  }
+);
+
+
+/*
+Extra fallback for older mobile Safari.
+*/
+
+document.addEventListener(
+  "touchstart",
+  unlockAudio,
+  {
+    once:true,
+    passive:true
+  }
+);
+
+
+
+/* =====================================================
+   MUSIC BUTTON
+===================================================== */
+
+musicButton.addEventListener(
+"click",
+async event=>{
+
+  event.stopPropagation();
+
+
+  if(
+    music.paused
+  ){
+
+    try{
+
+      await music.play();
+
+      audioUnlocked =
+      true;
+
+    }
+
+    catch(error){
+
+      console.log(
+        "Music could not start",
+        error
+      );
+
+    }
 
   }
 
@@ -1261,58 +1382,63 @@ musicButton.addEventListener(
 
     music.pause();
 
-    musicButton.textContent =
-    "♪";
-
   }
 
+
+  setMusicIcon();
+
 }
 );
 
 
 
-/* ==============================
-   SCROLL ANIMATION
-============================== */
-
-const observer =
-new IntersectionObserver(
-
-entries=>{
-
-  entries.forEach(
-  entry=>{
-
-    if(
-      entry.isIntersecting
-    ){
-
-      entry.target
-      .classList
-      .add("visible");
-
-    }
-
-  });
-
-},
-
-{
-  threshold:.12
-}
-
+music.addEventListener(
+  "play",
+  setMusicIcon
 );
 
 
-document
-.querySelectorAll(".year")
-.forEach(
-  year =>
-  observer.observe(year)
+music.addEventListener(
+  "pause",
+  setMusicIcon
+);
+
+
+/*
+If the MP3 itself has a problem,
+you'll see it in the browser console.
+*/
+
+music.addEventListener(
+"error",
+()=>{
+
+  console.log(
+    "Audio error:",
+    music.error
+  );
+
+}
+);
+
+
+
+/* =====================================================
+   STOP MUSIC WHEN LEAVING PAGE
+===================================================== */
+
+window.addEventListener(
+"pagehide",
+()=>{
+
+  music.pause();
+
+}
 );
 
 </script>
 
 
 </body>
+
 </html>
