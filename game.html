@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kami Game</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,sans-serif;
+  color:white;
+  background:linear-gradient(145deg,#172250,#51458d,#a3678b);
+}
+
+section{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:25px 18px;
+}
+
+.box{
+  width:100%;
+  max-width:430px;
+  text-align:center;
+}
+
+.small{
+  font-size:11px;
+  letter-spacing:4px;
+  color:#ffd3c2;
+}
+
+h1{
+  font-family:Georgia,serif;
+  font-size:52px;
+  line-height:.95;
+  font-weight:400;
+  margin:15px 0;
+}
+
+h1 span{
+  color:#ffd4ba;
+  font-style:italic;
+}
+
+p{
+  color:rgba(255,255,255,.7);
+  line-height:1.5;
+}
+
+
+/* PUZZLE */
+
+#puzzle{
+  width:100%;
+  aspect-ratio:4/3;
+
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  grid-template-rows:repeat(3,1fr);
+
+  gap:3px;
+
+  margin-top:25px;
+
+  padding:6px;
+
+  border-radius:20px;
+
+  background:rgba(255,255,255,.12);
+
+  overflow:hidden;
+}
+
+.piece{
+  background-image:url("Puzzle-Photo.jpeg");
+  background-repeat:no-repeat;
+
+  cursor:pointer;
+
+  border-radius:3px;
+
+  transition:.2s;
+}
+
+.piece.selected{
+  transform:scale(.9);
+
+  box-shadow:
+    inset 0 0 0 4px #ffd8b7;
+}
+
+#status{
+  margin-top:18px;
+
+  font-family:Georgia,serif;
+  font-style:italic;
+
+  color:#ffd8c6;
+}
+
+
+/* POPUP */
+
+#popup{
+  position:fixed;
+  inset:0;
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  padding:25px;
+
+  background:rgba(10,12,40,.8);
+
+  z-index:10;
+}
+
+.popupBox{
+  max-width:360px;
+
+  padding:35px 25px;
+
+  text-align:center;
+
+  border-radius:25px;
+
+  background:#4b4282;
+}
+
+
+/* BUTTON */
+
+button,
+.next{
+  border:0;
+
+  padding:15px 25px;
+
+  margin-top:20px;
+
+  border-radius:50px;
+
+  background:#ffe2c4;
+
+  color:#39306b;
+
+  font-weight:bold;
+
+  cursor:pointer;
+
+  text-decoration:none;
+}
+
+
+/* REMEMBER */
+
+#remember{
+  display:none;
+}
+
+.photoBox{
+  margin-top:25px;
+
+  padding:8px;
+
+  border-radius:22px;
+
+  background:rgba(255,255,255,.12);
+}
+
+#rememberPhoto{
+  width:100%;
+  display:block;
+
+  border-radius:16px;
+
+  filter:blur(25px);
+
+  transform:scale(1.1);
+
+  transition:1s;
+}
+
+input{
+  width:100%;
+
+  margin-top:20px;
+
+  padding:15px;
+
+  border:1px solid rgba(255,255,255,.25);
+
+  border-radius:15px;
+
+  background:rgba(255,255,255,.12);
+
+  color:white;
+
+  text-align:center;
+
+  font-size:16px;
+
+  outline:none;
+}
+
+input::placeholder{
+  color:rgba(255,255,255,.5);
+}
+
+#message{
+  min-height:30px;
+
+  margin-top:15px;
+
+  color:#ffd5c2;
+
+  font-family:Georgia,serif;
+  font-style:italic;
+}
+
+
+/* FINAL */
+
+#final{
+  display:none;
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- PUZZLE -->
+
+<section id="puzzlePage">
+
+<div class="box">
+
+  <div class="small">
+    CHALLENGE 01
+  </div>
+
+  <h1>
+    Piece it
+    <span>together.</span>
+  </h1>
+
+  <p>
+    Tap two pieces to swap them.
+  </p>
+
+  <div id="puzzle"></div>
+
+  <div id="status">
+    12 pieces. Good luck.
+  </div>
+
+</div>
+
+</section>
+
+
+
+<!-- PUZZLE COMPLETE -->
+
+<div id="popup">
+
+<div class="popupBox">
+
+  <h1 style="font-size:38px">
+    You got it.
+  </h1>
+
+  <p>
+    But there is one more challenge.
+  </p>
+
+  <button onclick="openRemember()">
+    NEXT CHALLENGE
+  </button>
+
+</div>
+
+</div>
+
+
+
+<!-- REMEMBER -->
+
+<section id="remember">
+
+<div class="box">
+
+  <div class="small">
+    CHALLENGE 02
+  </div>
+
+  <h1>
+    Remember
+    <span>this?</span>
+  </h1>
+
+  <div class="photoBox">
+
+    <img
+      id="rememberPhoto"
+      src="Remember-Photo.jpeg"
+    >
+
+  </div>
+
+  <p style="margin-top:25px">
+    Which country was this photo taken in?
+  </p>
+
+  <input
+    id="answer"
+    placeholder="Type the country..."
+  >
+
+  <button onclick="checkAnswer()">
+    CHECK
+  </button>
+
+  <div id="message"></div>
+
+</div>
+
+</section>
+
+
+
+<!-- FINAL -->
+
+<section id="final">
+
+<div class="box">
+
+  <div class="small">
+    GAME COMPLETE
+  </div>
+
+  <h1>
+    You
+    <span>made it.</span>
+  </h1>
+
+  <p>
+    Okay. You earned the next part.
+  </p>
+
+  <a
+    href="mystery-gift.html"
+    class="next"
+  >
+    UNLOCK THE SURPRISE
+  </a>
+
+</div>
+
+</section>
+
+
+
+<script>
+
+/* =====================
+   PUZZLE
+===================== */
+
+const puzzle =
+document.getElementById("puzzle");
+
+let pieces =
+[0,1,2,3,4,5,6,7,8,9,10,11];
+
+let selected = null;
+
+
+/* shuffle */
+
+pieces.sort(
+  ()=>Math.random()-.5
+);
+
+
+function drawPuzzle(){
+
+  puzzle.innerHTML="";
+
+
+  pieces.forEach(
+  (piece,index)=>{
+
+    const div =
+    document.createElement("div");
+
+    div.className="piece";
+
+
+    if(index===selected){
+      div.classList.add("selected");
+    }
+
+
+    const row =
+    Math.floor(piece/4);
+
+    const col =
+    piece%4;
+
+
+    div.style.backgroundSize =
+    "400% 300%";
+
+
+    div.style.backgroundPosition =
+    `${col*33.333}% ${row*50}%`;
+
+
+    div.onclick=
+    ()=>selectPiece(index);
+
+
+    puzzle.appendChild(div);
+
+  });
+
+}
+
+
+function selectPiece(index){
+
+  if(selected===null){
+
+    selected=index;
+
+    drawPuzzle();
+
+    return;
+
+  }
+
+
+  if(selected===index){
+
+    selected=null;
+
+    drawPuzzle();
+
+    return;
+
+  }
+
+
+  [
+    pieces[selected],
+    pieces[index]
+  ]
+  =
+  [
+    pieces[index],
+    pieces[selected]
+  ];
+
+
+  selected=null;
+
+  drawPuzzle();
+
+
+  if(
+    pieces.every(
+      (value,index)=>
+      value===index
+    )
+  ){
+
+    document.getElementById("status")
+    .textContent="You did it!";
+
+
+    setTimeout(
+      ()=>{
+        document.getElementById("popup")
+        .style.display="flex";
+      },
+      500
+    );
+
+  }
+
+}
+
+
+drawPuzzle();
+
+
+
+/* =====================
+   NEXT CHALLENGE
+===================== */
+
+function openRemember(){
+
+  document.getElementById("popup")
+  .style.display="none";
+
+
+  document.getElementById("puzzlePage")
+  .style.display="none";
+
+
+  document.getElementById("remember")
+  .style.display="flex";
+
+}
+
+
+
+/* =====================
+   REMEMBER GAME
+===================== */
+
+let attempts=0;
+
+const blurLevels=[
+  25,
+  17,
+  10,
+  5,
+  0
+];
+
+
+function checkAnswer(){
+
+  const input =
+  document.getElementById("answer");
+
+  const photo =
+  document.getElementById("rememberPhoto");
+
+  const message =
+  document.getElementById("message");
+
+
+  const answer =
+  input.value
+  .trim()
+  .toLowerCase();
+
+
+  if(!answer){
+    return;
+  }
+
+
+  attempts++;
+
+
+  if(
+    answer==="georgia"
+    ||
+    answer==="γεωργια"
+    ||
+    answer==="γεωργία"
+  ){
+
+    photo.style.filter="blur(0px)";
+    photo.style.transform="scale(1)";
+
+
+    if(attempts===1){
+
+      message.textContent=
+      "Okay, impressive. You knew it immediately.";
+
+    }
+
+    else{
+
+      message.textContent=
+      "Finally 😭 At least you got it.";
+
+    }
+
+
+    setTimeout(
+      ()=>{
+
+        document.getElementById("remember")
+        .style.display="none";
+
+
+        document.getElementById("final")
+        .style.display="flex";
+
+      },
+      2200
+    );
+
+
+    return;
+
+  }
+
+
+  const level =
+  Math.min(
+    attempts,
+    blurLevels.length-1
+  );
+
+
+  photo.style.filter =
+  `blur(${blurLevels[level]}px)`;
+
+
+  if(attempts===1){
+
+    message.textContent=
+    "No... look again.";
+
+  }
+
+  else if(attempts===2){
+
+    message.textContent=
+    "Still no... I'll make it easier.";
+
+  }
+
+  else if(attempts===3){
+
+    message.textContent=
+    "Come on 😭 You know this one.";
+
+  }
+
+  else{
+
+    message.textContent=
+    "I'm basically showing you the photo now 😭";
+
+  }
+
+
+  input.value="";
+
+}
+
+
+/* ENTER */
+
+document
+.getElementById("answer")
+.addEventListener(
+"keydown",
+e=>{
+
+  if(e.key==="Enter"){
+    checkAnswer();
+  }
+
+}
+);
+
+</script>
+
+
+</body>
+</html>
