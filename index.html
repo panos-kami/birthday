@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 
 <meta
@@ -12,55 +10,37 @@
 
 <title>Kami</title>
 
-
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
 
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
 }
 
 html,
 body{
   width:100%;
-  min-height:100%;
-}
-
-body{
-  margin:0;
+  height:100%;
   overflow:hidden;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
-  color:white;
-
+  font-family:Arial,Helvetica,sans-serif;
   background:#10152f;
+  color:white;
 }
 
 button,
 a{
-  font-family:inherit;
+  -webkit-tap-highlight-color:transparent;
 }
 
-
-/* =====================================================
+/* =================================
    FIRST SCREEN
-===================================================== */
+================================= */
 
 #gate{
   position:fixed;
   inset:0;
-
-  z-index:1000;
+  z-index:999;
 
   display:flex;
   justify-content:center;
@@ -80,17 +60,15 @@ a{
     );
 
   transition:
-    opacity .7s ease,
-    transform .7s ease,
-    visibility .7s ease;
+    opacity .8s ease,
+    transform .8s ease,
+    visibility .8s;
 }
 
 #gate.hide{
   opacity:0;
   visibility:hidden;
-
-  transform:
-    scale(1.05);
+  transform:scale(1.07);
 }
 
 .gateInner{
@@ -104,14 +82,14 @@ a{
     "Times New Roman",
     serif;
 
+  font-weight:400;
+
   font-size:
     clamp(
       44px,
       12vw,
       82px
     );
-
-  font-weight:400;
 
   letter-spacing:-.04em;
 
@@ -140,18 +118,29 @@ a{
   letter-spacing:.2em;
 
   cursor:pointer;
+
+  backdrop-filter:
+    blur(10px);
+
+  transition:.25s ease;
+}
+
+#yesButton:active{
+  transform:scale(.96);
 }
 
 
-/* =====================================================
-   INTRO WORLD
-===================================================== */
+/* =================================
+   BIRTHDAY WORLD
+================================= */
 
 #world{
   position:fixed;
   inset:0;
 
   overflow:hidden;
+
+  perspective:1500px;
 
   background:
     radial-gradient(
@@ -162,13 +151,13 @@ a{
 
     radial-gradient(
       circle at 13% 72%,
-      rgba(236,130,190,.24),
+      rgba(236,130,190,.26),
       transparent 34%
     ),
 
     radial-gradient(
       circle at 88% 27%,
-      rgba(110,127,245,.28),
+      rgba(110,127,245,.31),
       transparent 38%
     ),
 
@@ -182,9 +171,9 @@ a{
 }
 
 
-/* =====================================================
-   BLACK OPENING
-===================================================== */
+/* =================================
+   OPENING DARKNESS
+================================= */
 
 #blackout{
   position:absolute;
@@ -207,31 +196,29 @@ a{
 }
 
 
-/* =====================================================
-   BACKGROUND LIGHT
-===================================================== */
+/* =================================
+   MOVING HAZE
+================================= */
 
 .haze{
   position:absolute;
-  inset:-25%;
+  inset:-30%;
 
-  opacity:.5;
+  filter:blur(75px);
 
-  filter:blur(70px);
-
-  pointer-events:none;
+  opacity:.55;
 }
 
 .haze1{
   background:
     radial-gradient(
       circle at 25% 40%,
-      rgba(255,175,213,.56),
+      rgba(255,175,213,.62),
       transparent 31%
     );
 
   animation:
-    hazeOne
+    haze1
     10s
     ease-in-out
     infinite alternate;
@@ -241,41 +228,149 @@ a{
   background:
     radial-gradient(
       circle at 75% 39%,
-      rgba(108,132,255,.48),
+      rgba(108,132,255,.54),
       transparent 34%
     );
 
   animation:
-    hazeTwo
-    11s
+    haze2
+    12s
     ease-in-out
     infinite alternate;
 }
 
-@keyframes hazeOne{
-
+@keyframes haze1{
   to{
     transform:
-      translate(5%,-3%)
-      scale(1.06);
+      translate(6%,-4%)
+      scale(1.09);
   }
-
 }
 
-@keyframes hazeTwo{
-
+@keyframes haze2{
   to{
     transform:
-      translate(-5%,4%)
-      scale(1.08);
+      translate(-5%,5%)
+      scale(1.12);
   }
-
 }
 
 
-/* =====================================================
-   TITLE
-===================================================== */
+/* =================================
+   SEARCH LIGHTS
+================================= */
+
+.light{
+  position:absolute;
+
+  bottom:-50%;
+
+  width:200px;
+  height:170%;
+
+  transform-origin:
+    bottom center;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(255,239,180,.32),
+      transparent
+    );
+
+  filter:blur(31px);
+
+  opacity:.72;
+
+  z-index:2;
+}
+
+.light.left{
+  left:-25px;
+
+  animation:
+    leftLight
+    4.1s
+    ease-in-out
+    infinite alternate;
+}
+
+.light.right{
+  right:-25px;
+
+  animation:
+    rightLight
+    4.5s
+    ease-in-out
+    infinite alternate;
+}
+
+@keyframes leftLight{
+  from{
+    transform:rotate(25deg);
+  }
+
+  to{
+    transform:rotate(-7deg);
+  }
+}
+
+@keyframes rightLight{
+  from{
+    transform:rotate(-25deg);
+  }
+
+  to{
+    transform:rotate(8deg);
+  }
+}
+
+
+/* =================================
+   SPARKLES
+================================= */
+
+.spark{
+  position:absolute;
+
+  width:3px;
+  height:3px;
+
+  border-radius:50%;
+
+  background:#fff3c0;
+
+  box-shadow:
+    0 0 13px 4px
+    rgba(255,225,150,.48);
+
+  opacity:0;
+
+  animation:
+    sparkle
+    3.6s
+    ease-in-out
+    infinite;
+
+  z-index:3;
+}
+
+@keyframes sparkle{
+  0%,100%{
+    opacity:0;
+    transform:scale(.3);
+  }
+
+  50%{
+    opacity:1;
+    transform:scale(1.25);
+  }
+}
+
+
+/* =================================
+   BIRTHDAY TITLE
+================================= */
 
 #birthdayIntro{
   position:absolute;
@@ -288,61 +383,84 @@ a{
   justify-content:center;
 
   text-align:center;
+
+  transform-style:
+    preserve-3d;
 }
 
 #titleGroup{
-  width:94vw;
+  position:relative;
+
+  width:92vw;
 
   opacity:0;
 
   transform:
-    scale(.25);
+    translateZ(-1700px)
+    scale(.08);
 
   filter:
-    blur(20px);
+    blur(30px);
 }
 
 #titleGroup.play{
   animation:
-    titleIn
-    2.2s
-    cubic-bezier(.15,.8,.2,1)
+    titleArrival
+    5.1s
+    cubic-bezier(.12,.8,.18,1)
     forwards;
 }
 
-@keyframes titleIn{
+@keyframes titleArrival{
 
   0%{
     opacity:0;
 
     transform:
-      scale(.25);
+      translateZ(-1700px)
+      scale(.08);
 
     filter:
-      blur(20px);
+      blur(30px);
+  }
+
+  16%{
+    opacity:1;
+  }
+
+  72%{
+    transform:
+      translateZ(90px)
+      scale(1.06);
+
+    filter:
+      blur(0);
   }
 
   100%{
     opacity:1;
 
     transform:
+      translateZ(0)
       scale(1);
 
     filter:
       blur(0);
   }
-
 }
+
+
+/* 20 */
 
 .twenty{
   font-size:
     clamp(
-      150px,
+      155px,
       47vw,
-      310px
+      320px
     );
 
-  line-height:.7;
+  line-height:.69;
 
   font-weight:900;
 
@@ -351,10 +469,10 @@ a{
   background:
     linear-gradient(
       180deg,
-      #fffbea,
-      #ffe2a0,
-      #dca13f,
-      #fff1bd
+      #fffbea 0%,
+      #ffe2a0 34%,
+      #dca13f 68%,
+      #fff1bd 100%
     );
 
   -webkit-background-clip:text;
@@ -363,12 +481,19 @@ a{
   filter:
     drop-shadow(
       0 18px 28px
-      rgba(25,18,70,.35)
+      rgba(25,18,70,.45)
+    )
+    drop-shadow(
+      0 0 25px
+      rgba(255,225,150,.20)
     );
 }
 
+
+/* HAPPY BIRTHDAY */
+
 .happy{
-  margin-top:28px;
+  margin-top:31px;
 
   font-size:
     clamp(
@@ -384,10 +509,17 @@ a{
   text-transform:uppercase;
 
   color:#fff0cd;
+
+  text-shadow:
+    0 9px 25px
+    rgba(25,18,70,.36);
 }
 
+
+/* KAMI */
+
 .kami{
-  margin-top:9px;
+  margin-top:10px;
 
   font-family:
     Georgia,
@@ -405,35 +537,113 @@ a{
 
   line-height:.94;
 
-  color:white;
+  color:#fff;
+
+  text-shadow:
+    0 13px 36px
+    rgba(25,17,75,.38),
+    0 0 25px
+    rgba(255,226,175,.14);
 }
+
+
+/* LIGHT HALO AROUND TITLE */
+
+.titleHalo{
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  width:95vw;
+  height:70vh;
+
+  transform:
+    translate(-50%,-50%);
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(255,227,169,.22),
+      transparent 60%
+    );
+
+  filter:blur(30px);
+
+  z-index:-1;
+}
+
+
+/* LIGHT LINES */
+
+.streak{
+  position:absolute;
+
+  left:50%;
+
+  height:1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,246,212,.85),
+      transparent
+    );
+
+  transform-origin:center;
+
+  opacity:.7;
+}
+
+.streak.s1{
+  width:82vw;
+
+  top:36%;
+
+  transform:
+    translateX(-50%)
+    rotate(-5deg);
+}
+
+.streak.s2{
+  width:72vw;
+
+  top:66%;
+
+  transform:
+    translateX(-50%)
+    rotate(5deg);
+}
+
+
+/* EXIT */
 
 #titleGroup.out{
   animation:
     titleOut
-    .7s
+    .85s
     ease
     forwards;
 }
 
 @keyframes titleOut{
-
   to{
     opacity:0;
 
     transform:
-      scale(1.15);
+      translateZ(300px)
+      scale(1.17);
 
     filter:
-      blur(14px);
+      blur(16px);
   }
-
 }
 
 
-/* =====================================================
+/* =================================
    AND NOW
-===================================================== */
+================================= */
 
 #bridge{
   position:absolute;
@@ -449,7 +659,7 @@ a{
   visibility:hidden;
 
   transition:
-    opacity .4s ease;
+    opacity .45s ease;
 }
 
 #bridge.show{
@@ -473,12 +683,16 @@ a{
     );
 
   color:#fff0d5;
+
+  text-shadow:
+    0 13px 36px
+    rgba(20,15,70,.4);
 }
 
 
-/* =====================================================
-   TALK VIDEO
-===================================================== */
+/* =================================
+   VIDEO
+================================= */
 
 #videoStage{
   position:absolute;
@@ -507,8 +721,57 @@ a{
   inset:0;
 
   background:
-    rgba(13,17,47,.72);
+    rgba(13,17,47,.66);
+
+  backdrop-filter:
+    blur(16px);
 }
+
+
+/* FIRST LIGHT LINE */
+
+#videoLine{
+  position:absolute;
+
+  width:2px;
+  height:3px;
+
+  background:#fff2c7;
+
+  box-shadow:
+    0 0 28px 9px
+    rgba(255,229,171,.50);
+
+  opacity:0;
+}
+
+#videoLine.open{
+  animation:
+    openLine
+    .65s
+    ease
+    forwards;
+}
+
+@keyframes openLine{
+
+  from{
+    width:2px;
+    opacity:0;
+  }
+
+  20%{
+    opacity:1;
+  }
+
+  to{
+    width:84vw;
+    opacity:1;
+  }
+}
+
+
+/* VIDEO FRAME */
 
 #videoFrame{
   position:relative;
@@ -524,34 +787,71 @@ a{
 
   opacity:0;
 
+  clip-path:
+    inset(
+      50% 0
+      50% 0
+      round 27px
+    );
+
   transform:
-    scale(.85);
+    scale(.78);
 
   box-shadow:
-    0 35px 100px
-    rgba(8,10,40,.55),
+    0 40px 120px
+    rgba(9,11,43,.62),
     0 0 0 1px
-    rgba(255,255,255,.16);
+    rgba(255,255,255,.18);
 }
 
 #videoFrame.reveal{
   animation:
     videoReveal
-    .9s
-    ease
+    1.2s
+    cubic-bezier(.12,.8,.18,1)
     forwards;
 }
 
 @keyframes videoReveal{
 
-  to{
+  0%{
     opacity:1;
+
+    clip-path:
+      inset(
+        50% 0
+        50% 0
+        round 27px
+      );
+
+    transform:
+      scale(.78);
+  }
+
+  55%{
+    clip-path:
+      inset(
+        0 0
+        0 0
+        round 27px
+      );
+  }
+
+  100%{
+    opacity:1;
+
+    clip-path:
+      inset(
+        0 0
+        0 0
+        round 27px
+      );
 
     transform:
       scale(1);
   }
-
 }
+
 
 #entryTalk{
   width:100%;
@@ -561,13 +861,13 @@ a{
 
   object-fit:cover;
 
-  background:black;
+  background:#000;
 }
 
 
-/* =====================================================
-   NEXT CHAPTER
-===================================================== */
+/* =================================
+   AFTER VIDEO
+================================= */
 
 #nextChapter{
   position:absolute;
@@ -579,15 +879,15 @@ a{
   justify-content:center;
   align-items:center;
 
-  padding:28px;
-
   text-align:center;
 
   opacity:0;
   visibility:hidden;
 
+  padding:30px;
+
   transition:
-    opacity .7s ease;
+    opacity .8s ease;
 }
 
 #nextChapter.show{
@@ -596,8 +896,6 @@ a{
 }
 
 .nextSmall{
-  margin-bottom:17px;
-
   font-size:11px;
 
   letter-spacing:.28em;
@@ -605,6 +903,10 @@ a{
   text-transform:uppercase;
 
   color:#ffecc7;
+
+  opacity:.82;
+
+  margin-bottom:18px;
 }
 
 .nextTitle{
@@ -620,9 +922,9 @@ a{
       78px
     );
 
-  line-height:1.03;
-
   font-weight:400;
+
+  line-height:1.03;
 
   letter-spacing:-.04em;
 }
@@ -649,13 +951,13 @@ a{
   padding:
     15px 30px;
 
-  border:none;
-
   border-radius:999px;
 
   background:#fff0cf;
 
   color:#302f6c;
+
+  text-decoration:none;
 
   font-size:13px;
 
@@ -663,537 +965,65 @@ a{
 
   letter-spacing:.12em;
 
-  cursor:pointer;
-
   box-shadow:
     0 16px 45px
     rgba(25,18,70,.28);
+
+  transition:
+    transform .25s ease;
+}
+
+#photosButton:active{
+  transform:scale(.96);
 }
 
 
-/* =====================================================
-   PHOTO CHAPTER
-===================================================== */
-
-#photosChapter{
-  display:none;
-
-  min-height:100vh;
-
-  overflow-x:hidden;
-
-  background:
-    linear-gradient(
-      180deg,
-      #141c40 0%,
-      #30366f 26%,
-      #594580 57%,
-      #865779 80%,
-      #a66f87 100%
-    );
-}
-
-body.photosMode{
-  overflow-x:hidden;
-  overflow-y:auto;
-
-  background:#141c40;
-}
-
-body.photosMode #world,
-body.photosMode #gate{
-  display:none;
-}
-
-body.photosMode #photosChapter{
-  display:block;
-}
-
-
-/* =====================================================
-   MUSIC BUTTON
-===================================================== */
-
-#musicButton{
-  position:fixed;
-
-  top:
-    calc(
-      env(safe-area-inset-top)
-      +
-      14px
-    );
-
-  right:14px;
-
-  z-index:500;
-
-  width:44px;
-  height:44px;
-
-  border:none;
-
-  border-radius:50%;
-
-  background:
-    rgba(18,22,54,.88);
-
-  color:white;
-
-  font-size:18px;
-
-  cursor:pointer;
-
-  box-shadow:
-    0 8px 24px
-    rgba(0,0,0,.22);
-}
-
-
-/* =====================================================
-   PHOTO HERO
-===================================================== */
-
-.photosHero{
-  min-height:90svh;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:
-    70px 22px
-    50px;
-
-  text-align:center;
-}
-
-.photosHeroInner{
-  width:100%;
-  max-width:550px;
-}
-
-.photosMini{
-  font-size:10px;
-
-  letter-spacing:.32em;
-
-  color:#f0c4b6;
-
-  text-transform:uppercase;
-}
-
-.photosTitle{
-  margin-top:16px;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:
-    clamp(
-      56px,
-      16vw,
-      100px
-    );
-
-  line-height:.85;
-
-  font-weight:400;
-
-  letter-spacing:-.06em;
-}
-
-.photosTitle span{
-  display:block;
-
-  margin-top:7px;
-
-  color:#ffd4bd;
-
-  font-style:italic;
-}
-
-.photosText{
-  max-width:350px;
-
-  margin:
-    27px auto 0;
-
-  font-size:15px;
-
-  line-height:1.7;
-
-  color:
-    rgba(255,255,255,.7);
-}
-
-.photosScroll{
-  margin-top:42px;
-
-  font-size:9px;
-
-  letter-spacing:.25em;
-
-  color:
-    rgba(255,255,255,.42);
-
-  text-transform:uppercase;
-}
-
-
-/* =====================================================
-   STORY
-===================================================== */
-
-#photoStory{
-  width:100%;
-
-  max-width:650px;
-
-  margin:auto;
-
-  padding:
-    0 12px
-    75px;
-}
-
-.photoYear{
-  width:100%;
-
-  padding:
-    45px 0
-    60px;
-
-  content-visibility:auto;
-
-  contain-intrinsic-size:
-    650px;
-}
-
-.ageRow{
-  display:flex;
-  align-items:center;
-
-  gap:12px;
-
-  margin:
-    0 5px
-    13px;
-}
-
-.ageNumber{
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:39px;
-
-  color:#ffd5bc;
-}
-
-.ageLine{
-  flex:1;
-
-  height:1px;
-
-  background:
-    rgba(255,255,255,.15);
-}
-
-.ageText{
-  font-size:9px;
-
-  letter-spacing:.25em;
-
-  color:
-    rgba(255,255,255,.48);
-
-  text-transform:uppercase;
-}
-
-.photoCard{
-  width:100%;
-
-  padding:6px;
-
-  border-radius:22px;
-
-  overflow:hidden;
-
-  background:
-    rgba(255,255,255,.07);
-
-  border:
-    1px solid
-    rgba(255,255,255,.1);
-
-  box-shadow:
-    0 20px 50px
-    rgba(8,10,35,.20);
-}
-
-.photoCard img{
-  width:100%;
-  height:auto;
-
-  display:block;
-
-  border-radius:17px;
-
-  background:#272d61;
-}
-
-.photoYear:nth-child(odd)
-.photoCard{
-  transform:
-    rotate(-.4deg);
-}
-
-.photoYear:nth-child(even)
-.photoCard{
-  transform:
-    rotate(.4deg);
-}
-
-.photoCaption{
-  margin:
-    17px 7px
-    0;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:
-    clamp(
-      22px,
-      6vw,
-      29px
-    );
-
-  color:#ffe0cf;
-}
-
-
-/* =====================================================
-   BREAK TEXT
-===================================================== */
-
-.memoryBreak{
-  min-height:40svh;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:
-    40px 22px;
-
-  text-align:center;
-}
-
-.memoryBreak p{
-  max-width:400px;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:
-    clamp(
-      29px,
-      8vw,
-      45px
-    );
-
-  font-style:italic;
-
-  line-height:1.18;
-
-  color:#ffe0cf;
-}
-
-
-/* =====================================================
-   END PHOTOS
-===================================================== */
-
-.photosEnd{
-  min-height:90svh;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:
-    70px 24px;
-
-  text-align:center;
-
-  background:
-    linear-gradient(
-      160deg,
-      #171f48,
-      #49427f,
-      #8b5b80
-    );
-}
-
-.photosEndTitle{
-  margin-top:16px;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:
-    clamp(
-      43px,
-      12vw,
-      72px
-    );
-
-  font-weight:400;
-
-  line-height:.95;
-}
-
-.photosEndTitle span{
-  display:block;
-
-  color:#ffd5bd;
-
-  font-style:italic;
-}
-
-.photosEndText{
-  max-width:340px;
-
-  margin:
-    22px auto 0;
-
-  line-height:1.65;
-
-  font-size:14px;
-
-  color:
-    rgba(255,255,255,.68);
-}
-
-.gameButton{
-  display:inline-block;
-
-  margin-top:30px;
-
-  padding:
-    16px 29px;
-
-  border-radius:999px;
-
-  text-decoration:none;
-
-  color:#342f68;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff0d0,
-      #ffd3bd
-    );
-
-  font-size:12px;
-
-  font-weight:800;
-
-  letter-spacing:.14em;
-}
-
-
-/* =====================================================
+/* =================================
    MOBILE
-===================================================== */
+================================= */
 
 @media(max-width:600px){
+
+  #titleGroup{
+    width:95vw;
+  }
+
+  .twenty{
+    font-size:49vw;
+  }
+
+  .happy{
+    font-size:4vw;
+    letter-spacing:.22em;
+  }
+
+  .kami{
+    font-size:18vw;
+  }
 
   #videoFrame{
     width:84vw;
 
     max-height:
-      calc(100dvh - 90px);
+      calc(100dvh - 100px);
   }
 
-  .photosHero{
-    min-height:86svh;
-
-    padding:
-      65px 18px
-      45px;
-  }
-
-  #photoStory{
-    padding-left:10px;
-    padding-right:10px;
-  }
-
-  .photoYear{
-    padding:
-      35px 0
-      55px;
-  }
-
-  .ageNumber{
-    font-size:35px;
-  }
-
-  .photoCard{
-    border-radius:20px;
-  }
-
-  .photoCard img{
-    border-radius:15px;
-  }
-
-  .memoryBreak{
-    min-height:36svh;
-  }
-
-}
-
-
-/* =====================================================
-   DESKTOP PHOTOS
-===================================================== */
-
-@media(min-width:750px){
-
-  .photoCard,
-  .ageRow,
-  .photoCaption{
-    max-width:490px;
-
-    margin-left:auto;
-    margin-right:auto;
+  #videoLine.open{
+    width:84vw;
   }
 
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<!-- =====================================================
-     FIRST SCREEN
-===================================================== -->
+<!-- ============================
+     START
+============================ -->
 
 <section id="gate">
 
@@ -1213,1060 +1043,487 @@ body.photosMode #photosChapter{
 
 
 
-<!-- =====================================================
-     INTRO WORLD
-===================================================== -->
+<!-- ============================
+     WORLD
+============================ -->
 
 <main id="world">
 
 
-  <div id="blackout"></div>
+<div id="blackout"></div>
 
 
-  <div class="haze haze1"></div>
-  <div class="haze haze2"></div>
+<div class="haze haze1"></div>
+<div class="haze haze2"></div>
+
+
+<div class="light left"></div>
+<div class="light right"></div>
+
+
+<span class="spark" style="left:8%;top:18%;animation-delay:.2s"></span>
+<span class="spark" style="left:19%;top:67%;animation-delay:1.2s"></span>
+<span class="spark" style="left:28%;top:29%;animation-delay:2.1s"></span>
+<span class="spark" style="left:67%;top:18%;animation-delay:.7s"></span>
+<span class="spark" style="left:82%;top:65%;animation-delay:2.4s"></span>
+<span class="spark" style="left:91%;top:33%;animation-delay:1.3s"></span>
 
 
 
-  <!-- INTRO AUDIO/VIDEO -->
+<!-- INTRO VIDEO / SOUND ONLY -->
 
-  <video
-    id="introVideo"
-    playsinline
-    webkit-playsinline
-    preload="auto"
+<video
+  id="introVideo"
+  playsinline
+  webkit-playsinline
+  preload="auto"
+  style="
+    position:absolute;
+    width:1px;
+    height:1px;
+    opacity:0;
+    pointer-events:none;
+  "
+>
 
-    style="
-      position:absolute;
-      width:1px;
-      height:1px;
-      opacity:0;
-      pointer-events:none;
-    "
+<source
+  src="entry-video.mp4"
+  type="video/mp4"
+>
+
+</video>
+
+
+
+<!-- TITLE -->
+
+<section id="birthdayIntro">
+
+<div id="titleGroup">
+
+  <div class="titleHalo"></div>
+
+  <div class="streak s1"></div>
+  <div class="streak s2"></div>
+
+  <div class="twenty">
+    20
+  </div>
+
+  <div class="happy">
+    Happy Birthday
+  </div>
+
+  <div class="kami">
+    Kami
+  </div>
+
+</div>
+
+</section>
+
+
+
+<!-- AND NOW -->
+
+<section id="bridge">
+
+  <div class="bridgeText">
+    And now...
+  </div>
+
+</section>
+
+
+
+<!-- ENTRY TALK -->
+
+<section id="videoStage">
+
+<div class="videoBackground"></div>
+
+<div id="videoLine"></div>
+
+<div id="videoFrame">
+
+<video
+  id="entryTalk"
+  playsinline
+  webkit-playsinline
+  preload="metadata"
+>
+
+<source
+  src="entry-talk.mp4"
+  type="video/mp4"
+>
+
+</video>
+
+</div>
+
+</section>
+
+
+
+<!-- NEXT PAGE -->
+
+<section id="nextChapter">
+
+<div>
+
+  <div class="nextSmall">
+    Chapter One
+  </div>
+
+  <div class="nextTitle">
+    Let's look<br>
+    back a little.
+  </div>
+
+  <div class="nextText">
+    Before anything else, let's go through
+    a few moments from the years that made you, you.
+  </div>
+
+  <a
+    id="photosButton"
+    href="age-photos.html"
   >
+    SEE THE PHOTOS
+  </a>
 
-    <source
-      src="entry-video.mp4"
-      type="video/mp4"
-    >
+</div>
 
-  </video>
-
-
-
-  <!-- BIRTHDAY TITLE -->
-
-  <section id="birthdayIntro">
-
-    <div id="titleGroup">
-
-      <div class="twenty">
-        20
-      </div>
-
-      <div class="happy">
-        Happy Birthday
-      </div>
-
-      <div class="kami">
-        Kami
-      </div>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- AND NOW -->
-
-  <section id="bridge">
-
-    <div class="bridgeText">
-      And now...
-    </div>
-
-  </section>
-
-
-
-  <!-- TALK VIDEO -->
-
-  <section id="videoStage">
-
-    <div class="videoBackground"></div>
-
-
-    <div id="videoFrame">
-
-      <video
-        id="entryTalk"
-        playsinline
-        webkit-playsinline
-        preload="metadata"
-      >
-
-        <source
-          src="entry-talk.mp4"
-          type="video/mp4"
-        >
-
-      </video>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- CHAPTER ONE -->
-
-  <section id="nextChapter">
-
-    <div>
-
-      <div class="nextSmall">
-        Chapter One
-      </div>
-
-      <div class="nextTitle">
-        Let's look<br>
-        back a little.
-      </div>
-
-      <div class="nextText">
-
-        Before anything else,
-        let's go through a few moments
-        from the years that made you, you.
-
-      </div>
-
-
-      <button id="photosButton">
-
-        SEE THE PHOTOS
-
-      </button>
-
-    </div>
-
-  </section>
+</section>
 
 
 </main>
 
 
 
-<!-- =====================================================
-     MEMORY MUSIC
-===================================================== -->
-
-<audio
-  id="memoriesMusic"
-  loop
-  preload="metadata"
-  playsinline
->
-
-  <source
-    src="memories-song.mp3"
-    type="audio/mpeg"
-  >
-
-</audio>
-
-
-
-<!-- =====================================================
-     PHOTO CHAPTER
-===================================================== -->
-
-<section id="photosChapter">
-
-
-  <button
-    id="musicButton"
-    aria-label="Toggle music"
-  >
-    ♫
-  </button>
-
-
-
-  <!-- PHOTO HERO -->
-
-  <section class="photosHero">
-
-    <div class="photosHeroInner">
-
-      <div class="photosMini">
-        20 YEARS OF KAMI
-      </div>
-
-      <h1 class="photosTitle">
-
-        Once upon
-
-        <span>
-          a life.
-        </span>
-
-      </h1>
-
-      <p class="photosText">
-
-        Twenty years.
-        Twenty versions of you.
-
-        Some you remember.
-        Some you probably don't.
-
-      </p>
-
-      <div class="photosScroll">
-
-        SCROLL TO GO BACK IN TIME ↓
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-
-  <!-- GENERATED PHOTOS -->
-
-  <main id="photoStory"></main>
-
-
-
-  <!-- END -->
-
-  <section class="photosEnd">
-
-    <div>
-
-      <div class="photosMini">
-        END OF CHAPTER ONE
-      </div>
-
-      <h2 class="photosEndTitle">
-
-        Before the
-
-        <span>
-          big surprise...
-        </span>
-
-      </h2>
-
-      <p class="photosEndText">
-
-        You've survived twenty years of photos.
-
-        Now let's see if you can survive
-        one little game.
-
-      </p>
-
-      <a
-        href="game.html"
-        class="gameButton"
-      >
-        PLAY THE GAME
-      </a>
-
-    </div>
-
-  </section>
-
-
-</section>
-
-
-
 <script>
 
-/* =====================================================
-   ELEMENTS
-===================================================== */
-
 const gate =
-document.getElementById(
-  "gate"
-);
+document.getElementById("gate");
 
 const yesButton =
-document.getElementById(
-  "yesButton"
-);
+document.getElementById("yesButton");
 
 const blackout =
-document.getElementById(
-  "blackout"
-);
+document.getElementById("blackout");
 
 const introVideo =
-document.getElementById(
-  "introVideo"
-);
+document.getElementById("introVideo");
 
 const titleGroup =
-document.getElementById(
-  "titleGroup"
-);
+document.getElementById("titleGroup");
 
 const bridge =
-document.getElementById(
-  "bridge"
-);
+document.getElementById("bridge");
 
 const videoStage =
-document.getElementById(
-  "videoStage"
-);
+document.getElementById("videoStage");
+
+const videoLine =
+document.getElementById("videoLine");
 
 const videoFrame =
-document.getElementById(
-  "videoFrame"
-);
+document.getElementById("videoFrame");
 
 const entryTalk =
-document.getElementById(
-  "entryTalk"
-);
+document.getElementById("entryTalk");
 
 const nextChapter =
-document.getElementById(
-  "nextChapter"
-);
-
-const photosButton =
-document.getElementById(
-  "photosButton"
-);
-
-const memoriesMusic =
-document.getElementById(
-  "memoriesMusic"
-);
-
-const musicButton =
-document.getElementById(
-  "musicButton"
-);
+document.getElementById("nextChapter");
 
 
+let started = false;
+let introFinished = false;
 
-/* =====================================================
-   HELPERS
-===================================================== */
 
 function wait(ms){
 
-  return new Promise(
-    resolve =>
-    setTimeout(
-      resolve,
-      ms
-    )
-  );
+return new Promise(
+
+resolve =>
+
+setTimeout(
+resolve,
+ms
+)
+
+);
 
 }
 
 
-let started =
-false;
-
-let introFinished =
-false;
-
-
-
-/* =====================================================
+/* =========================
    YES
-===================================================== */
+========================= */
 
 yesButton.addEventListener(
+
 "click",
-async()=>{
+
+async ()=>{
 
 
-  if(started)
-  return;
+if(started) return;
+
+started = true;
 
 
-  started =
-  true;
+/* unlock intro sound */
+
+introVideo.currentTime = 0;
+introVideo.volume = 1;
+introVideo.muted = false;
+introVideo.loop = false;
 
 
-  introVideo.currentTime =
-  0;
+try{
 
-  introVideo.volume =
-  1;
-
-  introVideo.muted =
-  false;
-
-
-  /*
-    IMPORTANT:
-    Don't wait forever if mobile
-    refuses playback.
-  */
-
-  try{
-
-    introVideo.play();
-
-  }
-
-  catch(error){}
-
-
-  gate.classList.add(
-    "hide"
-  );
-
-
-  await wait(
-    400
-  );
-
-
-  blackout.classList.add(
-    "remove"
-  );
-
-
-  await wait(
-    250
-  );
-
-
-  titleGroup.classList.add(
-    "play"
-  );
+await introVideo.play();
 
 }
+
+catch(error){
+
+console.log(
+"Intro playback error:",
+error
+);
+
+}
+
+
+/* leave first screen */
+
+gate.classList.add(
+"hide"
+);
+
+
+await wait(450);
+
+
+/* reveal birthday world */
+
+blackout.classList.add(
+"remove"
+);
+
+
+await wait(300);
+
+
+titleGroup.classList.add(
+"play"
+);
+
+
+}
+
 );
 
 
 
-/* =====================================================
-   FINISH INTRO
-===================================================== */
+/* =========================
+   INTRO FINISHES
+========================= */
 
 async function finishIntro(){
 
 
-  if(introFinished)
-  return;
+if(introFinished)
+return;
 
 
-  introFinished =
-  true;
+introFinished = true;
 
 
-  titleGroup.classList.add(
-    "out"
-  );
+/* title flies away */
+
+titleGroup.classList.add(
+"out"
+);
 
 
-  await wait(
-    750
-  );
+await wait(850);
 
 
-  bridge.classList.add(
-    "show"
-  );
+/* AND NOW */
+
+bridge.classList.add(
+"show"
+);
 
 
-  await wait(
-    1300
-  );
+await wait(1500);
 
 
-  bridge.classList.remove(
-    "show"
-  );
+bridge.classList.remove(
+"show"
+);
 
 
-  await wait(
-    350
-  );
+await wait(400);
 
 
-  videoStage.classList.add(
-    "show"
-  );
+/* show video world */
+
+videoStage.classList.add(
+"show"
+);
 
 
-  await wait(
-    300
-  );
+await wait(450);
 
 
-  videoFrame.classList.add(
-    "reveal"
-  );
+/* light opens */
+
+videoLine.classList.add(
+"open"
+);
 
 
-  await wait(
-    300
-  );
+await wait(600);
 
 
-  entryTalk.currentTime =
-  0;
+/* reveal video */
 
-  entryTalk.volume =
-  1;
-
-  entryTalk.muted =
-  false;
+videoFrame.classList.add(
+"reveal"
+);
 
 
-  try{
+await wait(120);
 
-    await entryTalk.play();
 
-  }
+/* play video */
 
-  catch(error){
+entryTalk.currentTime = 0;
 
-    console.log(
-      "Talk video:",
-      error
-    );
+entryTalk.volume = 1;
 
-  }
+entryTalk.muted = false;
+
+entryTalk.loop = false;
+
+
+try{
+
+await entryTalk.play();
+
+}
+
+catch(error){
+
+console.log(
+"Entry talk playback error:",
+error
+);
+
+}
+
 
 }
 
 
 
-/* intro end */
-
 introVideo.addEventListener(
-  "ended",
-  finishIntro
+"ended",
+finishIntro
 );
 
 
-/*
-Fallback in case the video
-ended event has problems.
-*/
 
 introVideo.addEventListener(
+
 "timeupdate",
+
 ()=>{
 
-  if(
+if(
 
-    !introFinished
+!introFinished
 
-    &&
+&&
 
-    Number.isFinite(
-      introVideo.duration
-    )
+Number.isFinite(
+introVideo.duration
+)
 
-    &&
+&&
 
-    introVideo.duration > 0
+introVideo.duration > 0
 
-    &&
+&&
 
-    introVideo.currentTime
-    >=
-    introVideo.duration - .15
+introVideo.currentTime
+>=
+introVideo.duration - .12
 
-  ){
+){
 
-    finishIntro();
-
-  }
+finishIntro();
 
 }
+
+}
+
 );
 
 
 
-/* =====================================================
+/* =========================
    TALK FINISHES
-===================================================== */
+========================= */
 
 entryTalk.addEventListener(
+
 "ended",
-async()=>{
+
+async ()=>{
 
 
-  videoFrame.style.transition =
-  "opacity .6s ease, transform .6s ease";
+videoFrame.style.transition =
+"opacity .75s ease, transform .75s ease";
 
 
-  videoFrame.style.opacity =
-  "0";
+videoFrame.style.opacity =
+"0";
 
 
-  videoFrame.style.transform =
-  "scale(1.05)";
+videoFrame.style.transform =
+"scale(1.08)";
 
 
-  await wait(
-    650
-  );
+await wait(800);
 
 
-  videoStage.classList.remove(
-    "show"
-  );
-
-
-  await wait(
-    300
-  );
-
-
-  nextChapter.classList.add(
-    "show"
-  );
-
-}
+videoStage.classList.remove(
+"show"
 );
 
 
-
-/* =====================================================
-   PHOTOS
-
-   THIS IS THE IMPORTANT PART:
-   the click itself starts music.
-===================================================== */
-
-photosButton.addEventListener(
-"click",
-async()=>{
+await wait(400);
 
 
-  /*
-    This play() happens DIRECTLY
-    from the user's tap.
+/* Go to photo chapter teaser */
 
-    Because we do not open another
-    HTML page, mobile browsers
-    can allow the sound.
-  */
-
-  memoriesMusic.volume =
-  .35;
-
-
-  try{
-
-    await memoriesMusic.play();
-
-    musicButton.textContent =
-    "♫";
-
-  }
-
-  catch(error){
-
-    console.log(
-      "Memory music error:",
-      error
-    );
-
-    musicButton.textContent =
-    "♪";
-
-  }
-
-
-  /*
-    Switch to photo chapter
-  */
-
-  document.body.classList.add(
-    "photosMode"
-  );
-
-
-  window.scrollTo(
-    0,
-    0
-  );
-
-}
+nextChapter.classList.add(
+"show"
 );
 
 
-
-/* =====================================================
-   MUSIC BUTTON
-===================================================== */
-
-musicButton.addEventListener(
-"click",
-async()=>{
-
-
-  if(
-    memoriesMusic.paused
-  ){
-
-    try{
-
-      await memoriesMusic.play();
-
-      musicButton.textContent =
-      "♫";
-
-    }
-
-    catch(error){
-
-      console.log(
-        "Music play error:",
-        error
-      );
-
-    }
-
-  }
-
-  else{
-
-    memoriesMusic.pause();
-
-    musicButton.textContent =
-    "♪";
-
-  }
-
 }
+
 );
-
-
-
-memoriesMusic.addEventListener(
-"play",
-()=>{
-
-  musicButton.textContent =
-  "♫";
-
-}
-);
-
-
-memoriesMusic.addEventListener(
-"pause",
-()=>{
-
-  musicButton.textContent =
-  "♪";
-
-}
-);
-
-
-
-/* =====================================================
-   PHOTO DATA
-===================================================== */
-
-const photos = [
-
-  {
-    age:1,
-    file:"photos/age-01.jpeg",
-    caption:"The beginning."
-  },
-
-  {
-    age:2,
-    file:"photos/age-02.jpeg",
-    caption:""
-  },
-
-  {
-    age:3,
-    file:"photos/age-03.jpeg",
-    caption:""
-  },
-
-  {
-    age:4,
-    file:"photos/age-04.jpeg",
-    caption:""
-  },
-
-  {
-    age:5,
-    file:"photos/age-05.jpeg",
-    caption:""
-  },
-
-  {
-    age:6,
-    file:"photos/age-06.jpeg",
-    caption:""
-  },
-
-  {
-    age:7,
-    file:"photos/age-07.jpeg",
-    caption:""
-  },
-
-  {
-    age:8,
-    file:"photos/age-08.jpeg",
-    caption:""
-  },
-
-  {
-    age:9,
-    file:"photos/age-09.jpeg",
-    caption:""
-  },
-
-  {
-    age:10,
-    file:"photos/age-10.jpeg",
-    caption:"Double digits."
-  },
-
-  {
-    age:11,
-    file:"photos/age-11.jpeg",
-    caption:""
-  },
-
-  {
-    age:12,
-    file:"photos/age-12.jpeg",
-    caption:""
-  },
-
-  {
-    age:13,
-    file:"photos/age-13.jpeg",
-    caption:""
-  },
-
-  {
-    age:14,
-    file:"photos/age-14.jpeg",
-    caption:""
-  },
-
-  {
-    age:15,
-    file:"photos/age-15.jpeg",
-    caption:""
-  },
-
-  {
-    age:16,
-    file:"photos/age-16.jpeg",
-    caption:""
-  },
-
-  {
-    age:17,
-    file:"photos/age-17.jpeg",
-    caption:""
-  },
-
-  {
-    age:18,
-    file:"photos/age-18.jpeg",
-    caption:
-    "Officially grown up. Supposedly."
-  },
-
-  {
-    age:19,
-    file:"photos/age-19.jpeg",
-    caption:
-    "One last year before twenty."
-  },
-
-  {
-    age:20,
-    file:"photos/age-20.jpeg",
-    caption:
-    "And here we are."
-  }
-
-];
-
-
-
-/* =====================================================
-   CREATE PHOTO STORY
-===================================================== */
-
-const photoStory =
-document.getElementById(
-  "photoStory"
-);
-
-
-photos.forEach(
-(photo,index)=>{
-
-
-  const section =
-  document.createElement(
-    "section"
-  );
-
-
-  section.className =
-  "photoYear";
-
-
-  const loading =
-  index < 2
-  ?
-  "eager"
-  :
-  "lazy";
-
-
-  section.innerHTML = `
-
-    <div class="ageRow">
-
-      <div class="ageNumber">
-        ${photo.age}
-      </div>
-
-      <div class="ageLine"></div>
-
-      <div class="ageText">
-        AGE ${photo.age}
-      </div>
-
-    </div>
-
-
-    <div class="photoCard">
-
-      <img
-        src="${photo.file}"
-        alt="Kami age ${photo.age}"
-        loading="${loading}"
-        decoding="async"
-      >
-
-    </div>
-
-
-    ${
-      photo.caption
-
-      ?
-
-      `
-
-      <div class="photoCaption">
-        ${photo.caption}
-      </div>
-
-      `
-
-      :
-
-      ""
-    }
-
-  `;
-
-
-  photoStory.appendChild(
-    section
-  );
-
-
-
-  /* TEXT BREAKS */
-
-
-  if(
-    photo.age === 5
-  ){
-
-    addMemoryBreak(
-      "And somehow, you were already becoming you."
-    );
-
-  }
-
-
-  if(
-    photo.age === 10
-  ){
-
-    addMemoryBreak(
-      "Halfway to twenty."
-    );
-
-  }
-
-
-  if(
-    photo.age === 15
-  ){
-
-    addMemoryBreak(
-      "Somewhere along the way, childhood became memories."
-    );
-
-  }
-
-
-}
-);
-
-
-
-function addMemoryBreak(text){
-
-
-  const breakSection =
-  document.createElement(
-    "section"
-  );
-
-
-  breakSection.className =
-  "memoryBreak";
-
-
-  breakSection.innerHTML =
-  `<p>${text}</p>`;
-
-
-  photoStory.appendChild(
-    breakSection
-  );
-
-}
 
 </script>
 
 
 </body>
-
 </html>
