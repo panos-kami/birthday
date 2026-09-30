@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 
 <meta
@@ -33,7 +32,6 @@ button,
 a{
   -webkit-tap-highlight-color:transparent;
 }
-
 
 /* =================================
    FIRST SCREEN
@@ -452,9 +450,7 @@ a{
 }
 
 
-/* =================================
-   20
-================================= */
+/* 20 */
 
 .twenty{
   font-size:
@@ -494,9 +490,7 @@ a{
 }
 
 
-/* =================================
-   HAPPY BIRTHDAY
-================================= */
+/* HAPPY BIRTHDAY */
 
 .happy{
   margin-top:31px;
@@ -522,9 +516,7 @@ a{
 }
 
 
-/* =================================
-   KAMI
-================================= */
+/* KAMI */
 
 .kami{
   margin-top:10px;
@@ -555,9 +547,7 @@ a{
 }
 
 
-/* =================================
-   TITLE HALO
-================================= */
+/* LIGHT HALO AROUND TITLE */
 
 .titleHalo{
   position:absolute;
@@ -584,9 +574,7 @@ a{
 }
 
 
-/* =================================
-   LIGHT LINES
-================================= */
+/* LIGHT LINES */
 
 .streak{
   position:absolute;
@@ -629,9 +617,7 @@ a{
 }
 
 
-/* =================================
-   TITLE EXIT
-================================= */
+/* EXIT */
 
 #titleGroup.out{
   animation:
@@ -742,9 +728,7 @@ a{
 }
 
 
-/* =================================
-   VIDEO OPENING LINE
-================================= */
+/* FIRST LIGHT LINE */
 
 #videoLine{
   position:absolute;
@@ -787,9 +771,7 @@ a{
 }
 
 
-/* =================================
-   VIDEO FRAME
-================================= */
+/* VIDEO FRAME */
 
 #videoFrame{
   position:relative;
@@ -880,52 +862,6 @@ a{
   object-fit:cover;
 
   background:#000;
-}
-
-
-/* =================================
-   MOBILE VIDEO PLAY FALLBACK
-================================= */
-
-#videoPlayFallback{
-  position:absolute;
-  inset:0;
-
-  z-index:20;
-
-  display:none;
-  align-items:center;
-  justify-content:center;
-
-  background:
-    rgba(10,14,38,.38);
-
-  cursor:pointer;
-}
-
-#videoPlayFallback.show{
-  display:flex;
-}
-
-.playFallbackButton{
-  border:1px solid
-    rgba(255,255,255,.38);
-
-  background:
-    rgba(18,22,55,.78);
-
-  color:white;
-
-  border-radius:999px;
-
-  padding:
-    14px 24px;
-
-  font-size:12px;
-
-  font-weight:700;
-
-  letter-spacing:.13em;
 }
 
 
@@ -1125,48 +1061,22 @@ a{
 <div class="light right"></div>
 
 
-<span
-  class="spark"
-  style="left:8%;top:18%;animation-delay:.2s">
-</span>
-
-<span
-  class="spark"
-  style="left:19%;top:67%;animation-delay:1.2s">
-</span>
-
-<span
-  class="spark"
-  style="left:28%;top:29%;animation-delay:2.1s">
-</span>
-
-<span
-  class="spark"
-  style="left:67%;top:18%;animation-delay:.7s">
-</span>
-
-<span
-  class="spark"
-  style="left:82%;top:65%;animation-delay:2.4s">
-</span>
-
-<span
-  class="spark"
-  style="left:91%;top:33%;animation-delay:1.3s">
-</span>
+<span class="spark" style="left:8%;top:18%;animation-delay:.2s"></span>
+<span class="spark" style="left:19%;top:67%;animation-delay:1.2s"></span>
+<span class="spark" style="left:28%;top:29%;animation-delay:2.1s"></span>
+<span class="spark" style="left:67%;top:18%;animation-delay:.7s"></span>
+<span class="spark" style="left:82%;top:65%;animation-delay:2.4s"></span>
+<span class="spark" style="left:91%;top:33%;animation-delay:1.3s"></span>
 
 
 
-<!-- ============================
-     INTRO VIDEO / SOUND
-============================ -->
+<!-- INTRO VIDEO / SOUND ONLY -->
 
 <video
   id="introVideo"
   playsinline
   webkit-playsinline
   preload="auto"
-
   style="
     position:absolute;
     width:1px;
@@ -1176,18 +1086,16 @@ a{
   "
 >
 
-  <source
-    src="entry-video.mp4"
-    type="video/mp4"
-  >
+<source
+  src="entry-video.mp4"
+  type="video/mp4"
+>
 
 </video>
 
 
 
-<!-- ============================
-     TITLE
-============================ -->
+<!-- TITLE -->
 
 <section id="birthdayIntro">
 
@@ -1216,9 +1124,7 @@ a{
 
 
 
-<!-- ============================
-     AND NOW
-============================ -->
+<!-- AND NOW -->
 
 <section id="bridge">
 
@@ -1230,9 +1136,7 @@ a{
 
 
 
-<!-- ============================
-     ENTRY TALK
-============================ -->
+<!-- ENTRY TALK -->
 
 <section id="videoStage">
 
@@ -1242,33 +1146,19 @@ a{
 
 <div id="videoFrame">
 
-  <video
-    id="entryTalk"
-    playsinline
-    webkit-playsinline
-    preload="auto"
-  >
+<video
+  id="entryTalk"
+  playsinline
+  webkit-playsinline
+  preload="metadata"
+>
 
-    <source
-      src="entry-talk.mp4"
-      type="video/mp4"
-    >
+<source
+  src="entry-talk.mp4"
+  type="video/mp4"
+>
 
-  </video>
-
-
-  <!-- ONLY APPEARS IF MOBILE BLOCKS PLAYBACK -->
-
-  <div id="videoPlayFallback">
-
-    <button
-      class="playFallbackButton"
-      type="button"
-    >
-      TAP TO CONTINUE
-    </button>
-
-  </div>
+</video>
 
 </div>
 
@@ -1276,9 +1166,7 @@ a{
 
 
 
-<!-- ============================
-     NEXT PAGE
-============================ -->
+<!-- NEXT PAGE -->
 
 <section id="nextChapter">
 
@@ -1294,13 +1182,9 @@ a{
   </div>
 
   <div class="nextText">
-
-    Before anything else,
-    let's go through a few moments
-    from the years that made you, you.
-
+    Before anything else, let's go through
+    a few moments from the years that made you, you.
   </div>
-
 
   <a
     id="photosButton"
@@ -1320,299 +1204,123 @@ a{
 
 <script>
 
-/* =================================
-   ELEMENTS
-================================= */
-
 const gate =
-document.getElementById(
-  "gate"
-);
+document.getElementById("gate");
 
 const yesButton =
-document.getElementById(
-  "yesButton"
-);
+document.getElementById("yesButton");
 
 const blackout =
-document.getElementById(
-  "blackout"
-);
+document.getElementById("blackout");
 
 const introVideo =
-document.getElementById(
-  "introVideo"
-);
+document.getElementById("introVideo");
 
 const titleGroup =
-document.getElementById(
-  "titleGroup"
-);
+document.getElementById("titleGroup");
 
 const bridge =
-document.getElementById(
-  "bridge"
-);
+document.getElementById("bridge");
 
 const videoStage =
-document.getElementById(
-  "videoStage"
-);
+document.getElementById("videoStage");
 
 const videoLine =
-document.getElementById(
-  "videoLine"
-);
+document.getElementById("videoLine");
 
 const videoFrame =
-document.getElementById(
-  "videoFrame"
-);
+document.getElementById("videoFrame");
 
 const entryTalk =
-document.getElementById(
-  "entryTalk"
-);
-
-const videoPlayFallback =
-document.getElementById(
-  "videoPlayFallback"
-);
+document.getElementById("entryTalk");
 
 const nextChapter =
-document.getElementById(
-  "nextChapter"
-);
+document.getElementById("nextChapter");
 
 
-let started =
-false;
+let started = false;
+let introFinished = false;
 
-let introFinished =
-false;
-
-let talkFinished =
-false;
-
-let introFallbackTimer =
-null;
-
-
-
-/* =================================
-   WAIT
-================================= */
 
 function wait(ms){
 
-  return new Promise(
+return new Promise(
 
-    resolve =>
+resolve =>
 
-    setTimeout(
-      resolve,
-      ms
-    )
+setTimeout(
+resolve,
+ms
+)
 
-  );
-
-}
-
-
-
-/* =================================
-   PREPARE TALK VIDEO FOR MOBILE
-================================= */
-
-function primeTalkVideo(){
-
-  /*
-    IMPORTANT:
-
-    This function runs directly
-    from the YES tap.
-
-    We briefly start the SECOND
-    video muted, then stop it.
-
-    This prepares the media element
-    while we still have the user's
-    interaction.
-  */
-
-  entryTalk.muted =
-  true;
-
-  entryTalk.playsInline =
-  true;
-
-
-  const promise =
-  entryTalk.play();
-
-
-  if(
-    promise !== undefined
-  ){
-
-    promise
-    .then(()=>{
-
-      entryTalk.pause();
-
-      try{
-        entryTalk.currentTime =
-        0;
-      }
-      catch(error){}
-
-      entryTalk.muted =
-      false;
-
-    })
-
-    .catch(error=>{
-
-      console.log(
-        "Talk prime error:",
-        error
-      );
-
-      entryTalk.muted =
-      false;
-
-    });
-
-  }
+);
 
 }
 
 
-
-/* =================================
-   YES BUTTON
-================================= */
+/* =========================
+   YES
+========================= */
 
 yesButton.addEventListener(
 
 "click",
 
-()=>{
+async ()=>{
 
 
-  if(started)
-  return;
+if(started) return;
+
+started = true;
 
 
-  started =
-  true;
+/* unlock intro sound */
+
+introVideo.currentTime = 0;
+introVideo.volume = 1;
+introVideo.muted = false;
+introVideo.loop = false;
 
 
-  /*
-    1. PREPARE SECOND VIDEO
-       WHILE USER IS TAPPING
-  */
+try{
 
-  primeTalkVideo();
+await introVideo.play();
 
+}
 
-  /*
-    2. START ORIGINAL
-       ENTRY SOUND IMMEDIATELY
-  */
+catch(error){
 
-  introVideo.currentTime =
-  0;
+console.log(
+"Intro playback error:",
+error
+);
 
-  introVideo.volume =
-  1;
-
-  introVideo.muted =
-  false;
-
-  introVideo.loop =
-  false;
+}
 
 
-  const introPromise =
-  introVideo.play();
+/* leave first screen */
+
+gate.classList.add(
+"hide"
+);
 
 
-  if(
-    introPromise !== undefined
-  ){
-
-    introPromise.catch(
-
-      error=>{
-
-        console.log(
-          "Intro playback error:",
-          error
-        );
-
-      }
-
-    );
-
-  }
+await wait(450);
 
 
-  /*
-    3. ORIGINAL VISUAL FLOW
-  */
+/* reveal birthday world */
 
-  gate.classList.add(
-    "hide"
-  );
+blackout.classList.add(
+"remove"
+);
 
 
-  setTimeout(()=>{
-
-    blackout.classList.add(
-      "remove"
-    );
-
-  },450);
+await wait(300);
 
 
-  setTimeout(()=>{
-
-    titleGroup.classList.add(
-      "play"
-    );
-
-  },750);
-
-
-
-  /*
-    SAFETY ONLY.
-
-    Normally finishIntro()
-    runs when entry-video.mp4 ends.
-
-    If mobile fails to fire "ended",
-    the website will NEVER freeze
-    forever anymore.
-  */
-
-  introFallbackTimer =
-  setTimeout(()=>{
-
-    if(
-      !introFinished
-    ){
-
-      console.log(
-        "Intro fallback used"
-      );
-
-      finishIntro();
-
-    }
-
-  },10000);
+titleGroup.classList.add(
+"play"
+);
 
 
 }
@@ -1621,177 +1329,112 @@ yesButton.addEventListener(
 
 
 
-/* =================================
-   INTRO FINISH
-================================= */
+/* =========================
+   INTRO FINISHES
+========================= */
 
 async function finishIntro(){
 
 
-  if(
-    introFinished
-  )
-  return;
+if(introFinished)
+return;
 
 
-  introFinished =
-  true;
+introFinished = true;
 
 
-  if(
-    introFallbackTimer
-  ){
+/* title flies away */
 
-    clearTimeout(
-      introFallbackTimer
-    );
-
-  }
+titleGroup.classList.add(
+"out"
+);
 
 
-  /*
-    EXACT ORIGINAL SEQUENCE
-  */
-
-  titleGroup.classList.add(
-    "out"
-  );
+await wait(850);
 
 
-  await wait(
-    850
-  );
+/* AND NOW */
+
+bridge.classList.add(
+"show"
+);
 
 
-  bridge.classList.add(
-    "show"
-  );
+await wait(1500);
 
 
-  await wait(
-    1500
-  );
+bridge.classList.remove(
+"show"
+);
 
 
-  bridge.classList.remove(
-    "show"
-  );
+await wait(400);
 
 
-  await wait(
-    400
-  );
+/* show video world */
+
+videoStage.classList.add(
+"show"
+);
 
 
-  videoStage.classList.add(
-    "show"
-  );
+await wait(450);
 
 
-  await wait(
-    450
-  );
+/* light opens */
+
+videoLine.classList.add(
+"open"
+);
 
 
-  videoLine.classList.add(
-    "open"
-  );
+await wait(600);
 
 
-  await wait(
-    600
-  );
+/* reveal video */
+
+videoFrame.classList.add(
+"reveal"
+);
 
 
-  videoFrame.classList.add(
-    "reveal"
-  );
+await wait(120);
 
 
-  await wait(
-    120
-  );
+/* play video */
+
+entryTalk.currentTime = 0;
+
+entryTalk.volume = 1;
+
+entryTalk.muted = false;
+
+entryTalk.loop = false;
 
 
-  /*
-    NOW START TALK VIDEO
-  */
+try{
 
-  entryTalk.pause();
+await entryTalk.play();
 
-  try{
-    entryTalk.currentTime =
-    0;
-  }
-  catch(error){}
+}
 
+catch(error){
 
-  entryTalk.muted =
-  false;
+console.log(
+"Entry talk playback error:",
+error
+);
 
-  entryTalk.volume =
-  1;
-
-  entryTalk.loop =
-  false;
-
-
-  try{
-
-    await entryTalk.play();
-
-
-    /*
-      PLAYBACK WORKED:
-      no fallback button.
-    */
-
-    videoPlayFallback.classList.remove(
-      "show"
-    );
-
-
-  }
-
-  catch(error){
-
-
-    /*
-      MOBILE BLOCKED IT.
-
-      Instead of freezing forever,
-      show one tap directly
-      ON THE VIDEO.
-    */
-
-    console.log(
-      "Entry talk playback blocked:",
-      error
-    );
-
-
-    videoPlayFallback.classList.add(
-      "show"
-    );
-
-
-  }
+}
 
 
 }
 
 
 
-/* =================================
-   INTRO EVENTS
-================================= */
-
 introVideo.addEventListener(
-
 "ended",
-
 finishIntro
-
 );
 
 
@@ -1802,33 +1445,31 @@ introVideo.addEventListener(
 
 ()=>{
 
+if(
 
-  if(
+!introFinished
 
-    !introFinished
+&&
 
-    &&
+Number.isFinite(
+introVideo.duration
+)
 
-    Number.isFinite(
-      introVideo.duration
-    )
+&&
 
-    &&
+introVideo.duration > 0
 
-    introVideo.duration > 0
+&&
 
-    &&
+introVideo.currentTime
+>=
+introVideo.duration - .12
 
-    introVideo.currentTime
-    >=
-    introVideo.duration - .12
+){
 
-  ){
+finishIntro();
 
-    finishIntro();
-
-  }
-
+}
 
 }
 
@@ -1836,175 +1477,46 @@ introVideo.addEventListener(
 
 
 
-/* =================================
-   EXTRA SAFETY:
-   IF INTRO FILE HAS AN ERROR
-================================= */
-
-introVideo.addEventListener(
-
-"error",
-
-()=>{
-
-
-  console.log(
-    "entry-video.mp4 load error"
-  );
-
-
-  /*
-    Don't leave the site frozen.
-  */
-
-  setTimeout(()=>{
-
-    finishIntro();
-
-  },5200);
-
-
-}
-
-);
-
-
-
-/* =================================
-   TAP FALLBACK FOR TALK VIDEO
-================================= */
-
-videoPlayFallback.addEventListener(
-
-"click",
-
-async()=>{
-
-
-  try{
-
-    entryTalk.muted =
-    false;
-
-    entryTalk.volume =
-    1;
-
-
-    await entryTalk.play();
-
-
-    videoPlayFallback.classList.remove(
-      "show"
-    );
-
-
-  }
-
-  catch(error){
-
-    console.log(
-      "Manual talk playback error:",
-      error
-    );
-
-  }
-
-
-}
-
-);
-
-
-
-/* =================================
-   TALK FINISH
-================================= */
-
-async function finishTalk(){
-
-
-  if(
-    talkFinished
-  )
-  return;
-
-
-  talkFinished =
-  true;
-
-
-  videoPlayFallback.classList.remove(
-    "show"
-  );
-
-
-  videoFrame.style.transition =
-  "opacity .75s ease, transform .75s ease";
-
-
-  videoFrame.style.opacity =
-  "0";
-
-
-  videoFrame.style.transform =
-  "scale(1.08)";
-
-
-  await wait(
-    800
-  );
-
-
-  videoStage.classList.remove(
-    "show"
-  );
-
-
-  await wait(
-    400
-  );
-
-
-  /*
-    SAME ORIGINAL ENDING
-  */
-
-  nextChapter.classList.add(
-    "show"
-  );
-
-
-}
-
-
+/* =========================
+   TALK FINISHES
+========================= */
 
 entryTalk.addEventListener(
 
 "ended",
 
-finishTalk
+async ()=>{
 
+
+videoFrame.style.transition =
+"opacity .75s ease, transform .75s ease";
+
+
+videoFrame.style.opacity =
+"0";
+
+
+videoFrame.style.transform =
+"scale(1.08)";
+
+
+await wait(800);
+
+
+videoStage.classList.remove(
+"show"
 );
 
 
+await wait(400);
 
-/* =================================
-   VIDEO ERROR
-================================= */
 
-entryTalk.addEventListener(
+/* Go to photo chapter teaser */
 
-"error",
+nextChapter.classList.add(
+"show"
+);
 
-()=>{
-
-  console.log(
-    "entry-talk.mp4 load error"
-  );
-
-  videoPlayFallback.classList.add(
-    "show"
-  );
 
 }
 
