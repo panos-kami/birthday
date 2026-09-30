@@ -7,6 +7,7 @@
 <title>Kami Game</title>
 
 <style>
+
 *{
   box-sizing:border-box;
 }
@@ -16,7 +17,7 @@ body{
   min-height:100vh;
   font-family:Arial,sans-serif;
   color:white;
-  background:linear-gradient(145deg,#172250,#51458d,#a3678b);
+  background:linear-gradient(160deg,#182452,#4b478a,#9b688e);
 }
 
 section{
@@ -24,7 +25,7 @@ section{
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:25px 18px;
+  padding:24px 16px;
 }
 
 .box{
@@ -34,27 +35,24 @@ section{
 }
 
 .small{
-  font-size:11px;
+  font-size:10px;
   letter-spacing:4px;
-  color:#ffd3c2;
+  color:#ffd0c0;
 }
 
 h1{
-  font-family:Georgia,serif;
-  font-size:52px;
-  line-height:.95;
-  font-weight:400;
-  margin:15px 0;
+  margin:14px 0;
+  font:400 50px/.95 Georgia,serif;
 }
 
 h1 span{
-  color:#ffd4ba;
+  display:block;
+  color:#ffd5ba;
   font-style:italic;
 }
 
 p{
   color:rgba(255,255,255,.7);
-  line-height:1.5;
 }
 
 
@@ -69,43 +67,33 @@ p{
   grid-template-rows:repeat(3,1fr);
 
   gap:3px;
-
-  margin-top:25px;
-
   padding:6px;
+  margin-top:24px;
 
   border-radius:20px;
-
-  background:rgba(255,255,255,.12);
-
   overflow:hidden;
+
+  background:rgba(255,255,255,.10);
 }
 
 .piece{
-  background-image:url("Puzzle-Photo.jpeg");
+  background-image:url("puzzle-photo.jpeg");
   background-repeat:no-repeat;
 
   cursor:pointer;
-
-  border-radius:3px;
 
   transition:.2s;
 }
 
 .piece.selected{
-  transform:scale(.9);
-
-  box-shadow:
-    inset 0 0 0 4px #ffd8b7;
+  outline:4px solid #ffd8b6;
+  transform:scale(.92);
 }
 
 #status{
-  margin-top:18px;
-
-  font-family:Georgia,serif;
-  font-style:italic;
-
-  color:#ffd8c6;
+  margin-top:17px;
+  color:#ffd8c5;
+  font:italic 17px Georgia,serif;
 }
 
 
@@ -119,77 +107,85 @@ p{
   align-items:center;
   justify-content:center;
 
-  padding:25px;
+  padding:20px;
 
-  background:rgba(10,12,40,.8);
+  background:rgba(10,12,40,.85);
 
   z-index:10;
 }
 
 .popupBox{
-  max-width:360px;
+  width:100%;
+  max-width:350px;
 
-  padding:35px 25px;
-
-  text-align:center;
+  padding:32px 22px;
 
   border-radius:25px;
 
-  background:#4b4282;
+  background:#48427f;
+
+  text-align:center;
 }
 
 
-/* BUTTON */
+/* BUTTONS */
 
 button,
-.next{
+.nextButton{
   border:0;
+
+  border-radius:999px;
 
   padding:15px 25px;
 
-  margin-top:20px;
+  margin-top:18px;
 
-  border-radius:50px;
+  background:#ffe0c2;
 
-  background:#ffe2c4;
-
-  color:#39306b;
+  color:#362f6a;
 
   font-weight:bold;
 
   cursor:pointer;
 
   text-decoration:none;
+
+  display:inline-block;
 }
 
 
 /* REMEMBER */
 
-#remember{
+#rememberPage{
   display:none;
 }
 
 .photoBox{
-  margin-top:25px;
+  margin-top:24px;
 
-  padding:8px;
+  padding:7px;
 
-  border-radius:22px;
+  border-radius:20px;
 
-  background:rgba(255,255,255,.12);
+  overflow:hidden;
+
+  background:rgba(255,255,255,.1);
 }
 
 #rememberPhoto{
   width:100%;
+
   display:block;
 
-  border-radius:16px;
+  border-radius:15px;
 
   filter:blur(25px);
 
   transform:scale(1.1);
 
-  transition:1s;
+  transition:
+    filter 1s ease,
+    transform 1s ease;
 }
 
 input{
@@ -199,23 +195,27 @@ input{
 
   padding:15px;
 
-  border:1px solid rgba(255,255,255,.25);
-
   border-radius:15px;
 
-  background:rgba(255,255,255,.12);
+  border:
+    1px solid
+    rgba(255,255,255,.2);
 
-  color:white;
+  outline:none;
 
   text-align:center;
 
-  font-size:16px;
+  color:white;
 
-  outline:none;
+  background:
+    rgba(255,255,255,.1);
+
+  font-size:16px;
 }
 
 input::placeholder{
-  color:rgba(255,255,255,.5);
+  color:
+    rgba(255,255,255,.45);
 }
 
 #message{
@@ -223,17 +223,41 @@ input::placeholder{
 
   margin-top:15px;
 
-  color:#ffd5c2;
+  color:#ffd6c2;
 
-  font-family:Georgia,serif;
-  font-style:italic;
+  font:
+    italic
+    18px
+    Georgia,
+    serif;
 }
 
 
 /* FINAL */
 
-#final{
+#finalPage{
   display:none;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+  section{
+    padding:
+      22px
+      12px;
+  }
+
+  .box{
+    max-width:none;
+  }
+
+  h1{
+    font-size:44px;
+  }
+
 }
 
 </style>
@@ -274,7 +298,7 @@ input::placeholder{
 
 
 
-<!-- PUZZLE COMPLETE -->
+<!-- POPUP -->
 
 <div id="popup">
 
@@ -285,7 +309,7 @@ input::placeholder{
   </h1>
 
   <p>
-    But there is one more challenge.
+    One more challenge.
   </p>
 
   <button onclick="openRemember()">
@@ -300,7 +324,7 @@ input::placeholder{
 
 <!-- REMEMBER -->
 
-<section id="remember">
+<section id="rememberPage">
 
 <div class="box">
 
@@ -317,18 +341,21 @@ input::placeholder{
 
     <img
       id="rememberPhoto"
-      src="Remember-Photo.jpeg"
+      src="remember-photo.jpeg"
+      alt="Memory photo"
     >
 
   </div>
 
-  <p style="margin-top:25px">
+  <p style="margin-top:24px">
     Which country was this photo taken in?
   </p>
 
   <input
     id="answer"
+    type="text"
     placeholder="Type the country..."
+    autocomplete="off"
   >
 
   <button onclick="checkAnswer()">
@@ -345,7 +372,7 @@ input::placeholder{
 
 <!-- FINAL -->
 
-<section id="final">
+<section id="finalPage">
 
 <div class="box">
 
@@ -364,7 +391,7 @@ input::placeholder{
 
   <a
     href="mystery-gift.html"
-    class="next"
+    class="nextButton"
   >
     UNLOCK THE SURPRISE
   </a>
@@ -377,25 +404,48 @@ input::placeholder{
 
 <script>
 
-/* =====================
+/* =========================
    PUZZLE
-===================== */
+========================= */
 
 const puzzle =
 document.getElementById("puzzle");
 
+const statusText =
+document.getElementById("status");
+
 let pieces =
-[0,1,2,3,4,5,6,7,8,9,10,11];
+[
+  0,1,2,3,
+  4,5,6,7,
+  8,9,10,11
+];
 
 let selected = null;
 
 
-/* shuffle */
+/* SHUFFLE */
 
-pieces.sort(
-  ()=>Math.random()-.5
-);
+function shuffle(){
 
+  do{
+
+    pieces.sort(
+      ()=>Math.random()-.5
+    );
+
+  }
+  while(
+    pieces.every(
+      (value,index)=>
+      value===index
+    )
+  );
+
+}
+
+
+/* DRAW */
 
 function drawPuzzle(){
 
@@ -408,26 +458,36 @@ function drawPuzzle(){
     const div =
     document.createElement("div");
 
-    div.className="piece";
+
+    div.className=
+    "piece";
 
 
-    if(index===selected){
-      div.classList.add("selected");
+    if(
+      index===selected
+    ){
+
+      div.classList.add(
+        "selected"
+      );
+
     }
 
 
     const row =
-    Math.floor(piece/4);
+    Math.floor(
+      piece/4
+    );
 
     const col =
     piece%4;
 
 
-    div.style.backgroundSize =
+    div.style.backgroundSize=
     "400% 300%";
 
 
-    div.style.backgroundPosition =
+    div.style.backgroundPosition=
     `${col*33.333}% ${row*50}%`;
 
 
@@ -442,11 +502,18 @@ function drawPuzzle(){
 }
 
 
+/* SELECT + SWAP */
+
 function selectPiece(index){
 
-  if(selected===null){
+  if(
+    selected===null
+  ){
 
     selected=index;
+
+    statusText.textContent=
+    "Now choose another piece.";
 
     drawPuzzle();
 
@@ -455,9 +522,14 @@ function selectPiece(index){
   }
 
 
-  if(selected===index){
+  if(
+    selected===index
+  ){
 
     selected=null;
+
+    statusText.textContent=
+    "Choose two pieces to swap.";
 
     drawPuzzle();
 
@@ -479,6 +551,7 @@ function selectPiece(index){
 
   selected=null;
 
+
   drawPuzzle();
 
 
@@ -489,55 +562,72 @@ function selectPiece(index){
     )
   ){
 
-    document.getElementById("status")
-    .textContent="You did it!";
+    statusText.textContent=
+    "You did it!";
 
 
     setTimeout(
-      ()=>{
-        document.getElementById("popup")
-        .style.display="flex";
-      },
-      500
+    ()=>{
+
+      document
+      .getElementById("popup")
+      .style.display="flex";
+
+    },
+    500
     );
+
+  }
+
+  else{
+
+    statusText.textContent=
+    "Keep going...";
 
   }
 
 }
 
 
-drawPuzzle();
 
-
-
-/* =====================
-   NEXT CHALLENGE
-===================== */
+/* =========================
+   OPEN REMEMBER
+========================= */
 
 function openRemember(){
 
-  document.getElementById("popup")
+  document
+  .getElementById("popup")
   .style.display="none";
 
 
-  document.getElementById("puzzlePage")
+  document
+  .getElementById("puzzlePage")
   .style.display="none";
 
 
-  document.getElementById("remember")
+  document
+  .getElementById("rememberPage")
   .style.display="flex";
+
+
+  window.scrollTo(
+    0,
+    0
+  );
 
 }
 
 
 
-/* =====================
+/* =========================
    REMEMBER GAME
-===================== */
+========================= */
 
 let attempts=0;
 
-const blurLevels=[
+const blurLevels=
+[
   25,
   17,
   10,
@@ -549,13 +639,19 @@ const blurLevels=[
 function checkAnswer(){
 
   const input =
-  document.getElementById("answer");
+  document.getElementById(
+    "answer"
+  );
 
   const photo =
-  document.getElementById("rememberPhoto");
+  document.getElementById(
+    "rememberPhoto"
+  );
 
   const message =
-  document.getElementById("message");
+  document.getElementById(
+    "message"
+  );
 
 
   const answer =
@@ -564,13 +660,22 @@ function checkAnswer(){
   .toLowerCase();
 
 
-  if(!answer){
+  if(
+    answer===""
+  ){
+
+    message.textContent=
+    "Write something first 😭";
+
     return;
+
   }
 
 
   attempts++;
 
+
+  /* CORRECT */
 
   if(
     answer==="georgia"
@@ -580,14 +685,29 @@ function checkAnswer(){
     answer==="γεωργία"
   ){
 
-    photo.style.filter="blur(0px)";
-    photo.style.transform="scale(1)";
+    photo.style.filter=
+    "blur(0px)";
 
 
-    if(attempts===1){
+    photo.style.transform=
+    "scale(1)";
+
+
+    if(
+      attempts===1
+    ){
 
       message.textContent=
       "Okay, impressive. You knew it immediately.";
+
+    }
+
+    else if(
+      attempts===2
+    ){
+
+      message.textContent=
+      "Okay... at least you got it on the second try 😭";
 
     }
 
@@ -600,17 +720,25 @@ function checkAnswer(){
 
 
     setTimeout(
-      ()=>{
+    ()=>{
 
-        document.getElementById("remember")
-        .style.display="none";
+      document
+      .getElementById("rememberPage")
+      .style.display="none";
 
 
-        document.getElementById("final")
-        .style.display="flex";
+      document
+      .getElementById("finalPage")
+      .style.display="flex";
 
-      },
-      2200
+
+      window.scrollTo(
+        0,
+        0
+      );
+
+    },
+    2300
     );
 
 
@@ -619,6 +747,8 @@ function checkAnswer(){
   }
 
 
+  /* WRONG */
+
   const level =
   Math.min(
     attempts,
@@ -626,25 +756,31 @@ function checkAnswer(){
   );
 
 
-  photo.style.filter =
+  photo.style.filter=
   `blur(${blurLevels[level]}px)`;
 
 
-  if(attempts===1){
+  if(
+    attempts===1
+  ){
 
     message.textContent=
     "No... look again.";
 
   }
 
-  else if(attempts===2){
+  else if(
+    attempts===2
+  ){
 
     message.textContent=
     "Still no... I'll make it easier.";
 
   }
 
-  else if(attempts===3){
+  else if(
+    attempts===3
+  ){
 
     message.textContent=
     "Come on 😭 You know this one.";
@@ -670,17 +806,28 @@ document
 .getElementById("answer")
 .addEventListener(
 "keydown",
-e=>{
+event=>{
 
-  if(e.key==="Enter"){
+  if(
+    event.key==="Enter"
+  ){
+
     checkAnswer();
+
   }
 
 }
 );
 
-</script>
 
+
+/* START */
+
+shuffle();
+
+drawPuzzle();
+
+</script>
 
 </body>
 </html>
