@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 
 <meta
@@ -13,10 +11,6 @@
 <title>20 Years of Kami</title>
 
 <style>
-
-/* =====================================================
-   RESET
-===================================================== */
 
 *{
   margin:0;
@@ -30,13 +24,10 @@ html{
 }
 
 body{
+  margin:0;
   overflow-x:hidden;
 
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
+  font-family:Arial,Helvetica,sans-serif;
   color:white;
 
   background:
@@ -51,62 +42,47 @@ body{
 }
 
 
-/* =====================================================
-   BACKGROUND DECORATION
-===================================================== */
+/* BACKGROUND */
 
 body::before{
   content:"";
-
   position:fixed;
   inset:0;
 
   pointer-events:none;
+  z-index:-1;
 
   background:
     radial-gradient(
       circle at 15% 10%,
-      rgba(255,198,216,.12),
+      rgba(255,198,216,.10),
       transparent 30%
     ),
     radial-gradient(
       circle at 85% 25%,
-      rgba(140,150,255,.10),
+      rgba(140,150,255,.08),
       transparent 30%
     );
-
-  z-index:-1;
 }
 
 
-/* =====================================================
-   MUSIC BUTTON
-===================================================== */
+/* MUSIC BUTTON */
 
 #musicButton{
   position:fixed;
 
-  top:
-    calc(
-      env(safe-area-inset-top)
-      +
-      14px
-    );
-
+  top:calc(env(safe-area-inset-top) + 14px);
   right:14px;
 
-  z-index:999;
+  z-index:9999;
 
   width:44px;
   height:44px;
 
-  border:1px solid
-    rgba(255,255,255,.18);
-
+  border:none;
   border-radius:50%;
 
-  background:
-    rgba(20,23,55,.82);
+  background:rgba(20,23,55,.88);
 
   color:white;
 
@@ -116,17 +92,15 @@ body::before{
 
   box-shadow:
     0 8px 22px
-    rgba(0,0,0,.18);
+    rgba(0,0,0,.20);
 }
 
-#musicButton.playing{
-  color:#ffd6bd;
+#musicButton:active{
+  transform:scale(.94);
 }
 
 
-/* =====================================================
-   HERO
-===================================================== */
+/* HERO */
 
 .hero{
   min-height:92svh;
@@ -231,9 +205,7 @@ body::before{
 }
 
 
-/* =====================================================
-   STORY
-===================================================== */
+/* STORY */
 
 #story{
   width:100%;
@@ -248,9 +220,7 @@ body::before{
 }
 
 
-/* =====================================================
-   YEAR
-===================================================== */
+/* YEAR */
 
 .year{
   width:100%;
@@ -275,9 +245,7 @@ body::before{
 }
 
 
-/* =====================================================
-   AGE HEADER
-===================================================== */
+/* AGE */
 
 .ageRow{
   display:flex;
@@ -325,9 +293,7 @@ body::before{
 }
 
 
-/* =====================================================
-   PHOTO CARD
-===================================================== */
+/* PHOTO */
 
 .photoCard{
   width:100%;
@@ -352,6 +318,7 @@ body::before{
 
 .photoCard img{
   width:100%;
+  height:auto;
 
   display:block;
 
@@ -362,23 +329,16 @@ body::before{
   background:#272d61;
 }
 
-
-/* subtle movement */
-
-.year:nth-child(odd)
-.photoCard{
+.year:nth-child(odd) .photoCard{
   transform:rotate(-.45deg);
 }
 
-.year:nth-child(even)
-.photoCard{
+.year:nth-child(even) .photoCard{
   transform:rotate(.45deg);
 }
 
 
-/* =====================================================
-   CAPTION
-===================================================== */
+/* CAPTION */
 
 .caption{
   margin:
@@ -403,9 +363,7 @@ body::before{
 }
 
 
-/* =====================================================
-   MEMORY TEXT BETWEEN PHOTOS
-===================================================== */
+/* MEMORY BREAK */
 
 .memoryBreak{
   min-height:46svh;
@@ -443,23 +401,18 @@ body::before{
 }
 
 
-/* =====================================================
-   AGE 20 SPECIAL
-===================================================== */
+/* AGE 20 */
 
 .year.twenty{
   padding-top:65px;
 }
 
-.year.twenty
-.ageNumber{
+.year.twenty .ageNumber{
   font-size:50px;
-
   color:#ffebb3;
 }
 
-.year.twenty
-.photoCard{
+.year.twenty .photoCard{
   border:
     1px solid
     rgba(255,226,177,.27);
@@ -470,9 +423,7 @@ body::before{
 }
 
 
-/* =====================================================
-   END
-===================================================== */
+/* END */
 
 .end{
   min-height:90svh;
@@ -587,9 +538,7 @@ body::before{
 }
 
 
-/* =====================================================
-   MOBILE
-===================================================== */
+/* MOBILE */
 
 @media(max-width:600px){
 
@@ -597,7 +546,7 @@ body::before{
     min-height:88svh;
 
     padding:
-      65px 20px
+      65px 18px
       45px;
   }
 
@@ -611,8 +560,8 @@ body::before{
   }
 
   #story{
-    padding-left:11px;
-    padding-right:11px;
+    padding-left:10px;
+    padding-right:10px;
   }
 
   .year{
@@ -629,10 +578,7 @@ body::before{
 
   .photoCard img{
     width:100%;
-
     height:auto;
-
-    max-height:none;
 
     border-radius:15px;
   }
@@ -661,17 +607,10 @@ body::before{
       );
   }
 
-  #musicButton{
-    width:42px;
-    height:42px;
-  }
-
 }
 
 
-/* =====================================================
-   DESKTOP
-===================================================== */
+/* DESKTOP */
 
 @media(min-width:750px){
 
@@ -691,22 +630,19 @@ body::before{
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<!-- =====================================================
-     MUSIC
-===================================================== -->
+<!-- MUSIC -->
 
 <audio
   id="music"
   loop
-  preload="none"
   playsinline
+  preload="metadata"
 >
 
   <source
@@ -726,19 +662,15 @@ body::before{
 
 
 
-<!-- =====================================================
-     HERO
-===================================================== -->
+<!-- HERO -->
 
 <section class="hero">
 
 <div class="heroInner">
 
-
   <div class="heroSmall">
     20 YEARS OF KAMI
   </div>
-
 
   <h1 class="heroTitle">
 
@@ -750,7 +682,6 @@ body::before{
 
   </h1>
 
-
   <p class="heroText">
 
     Twenty years.
@@ -761,13 +692,9 @@ body::before{
 
   </p>
 
-
   <div class="scrollHint">
-
     scroll to go back in time ↓
-
   </div>
-
 
 </div>
 
@@ -775,27 +702,21 @@ body::before{
 
 
 
-<!-- =====================================================
-     STORY
-===================================================== -->
+<!-- STORY -->
 
 <main id="story"></main>
 
 
 
-<!-- =====================================================
-     END
-===================================================== -->
+<!-- END -->
 
 <section class="end">
 
 <div class="endInner">
 
-
   <div class="endSmall">
     END OF CHAPTER ONE
   </div>
-
 
   <div class="endTitle">
 
@@ -807,7 +728,6 @@ body::before{
 
   </div>
 
-
   <p class="endText">
 
     You've just survived
@@ -818,14 +738,12 @@ body::before{
 
   </p>
 
-
   <a
     href="game.html"
     class="gameButton"
   >
     PLAY THE GAME
   </a>
-
 
 </div>
 
@@ -835,9 +753,9 @@ body::before{
 
 <script>
 
-/* =====================================================
-   PHOTO DATA
-===================================================== */
+/* =========================
+   PHOTOS
+========================= */
 
 const photos = [
 
@@ -964,33 +882,22 @@ const photos = [
 ];
 
 
-
-/* =====================================================
-   BUILD STORY
-===================================================== */
-
 const story =
-document.getElementById(
-  "story"
-);
+document.getElementById("story");
 
 
 photos.forEach(
 (photo,index)=>{
 
   const year =
-  document.createElement(
-    "section"
-  );
+  document.createElement("section");
 
 
   year.className =
   "year";
 
 
-  if(
-    photo.age === 20
-  ){
+  if(photo.age===20){
 
     year.classList.add(
       "twenty"
@@ -998,11 +905,6 @@ photos.forEach(
 
   }
 
-
-  /*
-    First 2 images load immediately.
-    The rest load only when needed.
-  */
 
   const loadingType =
   index < 2
@@ -1055,24 +957,15 @@ photos.forEach(
       </div>
 
 
-
       ${
         photo.caption
-
         ?
-
         `
-
         <div class="caption">
-
           ${photo.caption}
-
         </div>
-
         `
-
         :
-
         ""
       }
 
@@ -1087,14 +980,7 @@ photos.forEach(
   );
 
 
-  /*
-    MEMORY BREAKS
-  */
-
-
-  if(
-    photo.age === 5
-  ){
+  if(photo.age===5){
 
     addBreak(
       "And somehow, you were already becoming you."
@@ -1103,9 +989,7 @@ photos.forEach(
   }
 
 
-  if(
-    photo.age === 10
-  ){
+  if(photo.age===10){
 
     addBreak(
       "Halfway to twenty."
@@ -1114,9 +998,7 @@ photos.forEach(
   }
 
 
-  if(
-    photo.age === 15
-  ){
+  if(photo.age===15){
 
     addBreak(
       "Somewhere along the way, childhood became memories."
@@ -1127,7 +1009,6 @@ photos.forEach(
 
 }
 );
-
 
 
 function addBreak(text){
@@ -1143,15 +1024,7 @@ function addBreak(text){
 
 
   section.innerHTML =
-  `
-
-    <p>
-
-      ${text}
-
-    </p>
-
-  `;
+  `<p>${text}</p>`;
 
 
   story.appendChild(
@@ -1162,9 +1035,9 @@ function addBreak(text){
 
 
 
-/* =====================================================
+/* =========================
    MUSIC
-===================================================== */
+========================= */
 
 const music =
 document.getElementById(
@@ -1177,182 +1050,47 @@ document.getElementById(
 );
 
 
-music.volume =
-0.30;
+music.volume = 0.35;
 
 
 
-function setMusicIcon(){
+/* TRY AUTOPLAY */
 
-  if(
-    music.paused
-  ){
-
-    musicButton.textContent =
-    "♪";
-
-    musicButton.classList.remove(
-      "playing"
-    );
-
-  }
-
-  else{
-
-    musicButton.textContent =
-    "♫";
-
-    musicButton.classList.add(
-      "playing"
-    );
-
-  }
-
-}
-
-
-
-/* =====================================================
-   TRY AUTOPLAY WHEN PAGE OPENS
-===================================================== */
-
-async function tryAutoplay(){
+window.addEventListener(
+"load",
+async()=>{
 
   try{
 
     await music.play();
 
-    setMusicIcon();
-
-    return true;
+    musicButton.textContent =
+    "♫";
 
   }
 
   catch(error){
 
-    setMusicIcon();
+    console.log(
+      "Autoplay blocked:",
+      error
+    );
 
-    return false;
+    musicButton.textContent =
+    "♪";
 
   }
-
-}
-
-
-
-/*
-Try as soon as page loads.
-Desktop will usually allow it.
-Some mobile browsers won't.
-*/
-
-window.addEventListener(
-"load",
-()=>{
-
-  tryAutoplay();
 
 }
 );
 
 
 
-/* =====================================================
-   MOBILE FALLBACK
-
-   If mobile blocks autoplay,
-   the FIRST touch anywhere
-   starts the music.
-
-   No extra start screen.
-===================================================== */
-
-let audioUnlocked =
-false;
-
-
-async function unlockAudio(){
-
-  if(
-    audioUnlocked
-  ){
-    return;
-  }
-
-
-  if(
-    music.paused
-  ){
-
-    try{
-
-      await music.play();
-
-      audioUnlocked =
-      true;
-
-      setMusicIcon();
-
-    }
-
-    catch(error){
-
-      /* Browser still blocked it */
-
-    }
-
-  }
-
-  else{
-
-    audioUnlocked =
-    true;
-
-  }
-
-}
-
-
-/*
-Pointerdown works well on modern
-mobile and desktop browsers.
-*/
-
-document.addEventListener(
-  "pointerdown",
-  unlockAudio,
-  {
-    once:true,
-    passive:true
-  }
-);
-
-
-/*
-Extra fallback for older mobile Safari.
-*/
-
-document.addEventListener(
-  "touchstart",
-  unlockAudio,
-  {
-    once:true,
-    passive:true
-  }
-);
-
-
-
-/* =====================================================
-   MUSIC BUTTON
-===================================================== */
+/* MUSIC BUTTON */
 
 musicButton.addEventListener(
 "click",
-async event=>{
-
-  event.stopPropagation();
-
+async()=>{
 
   if(
     music.paused
@@ -1362,16 +1100,20 @@ async event=>{
 
       await music.play();
 
-      audioUnlocked =
-      true;
+      musicButton.textContent =
+      "♫";
 
     }
 
     catch(error){
 
       console.log(
-        "Music could not start",
+        "Music error:",
         error
+      );
+
+      alert(
+        "Music could not start."
       );
 
     }
@@ -1382,32 +1124,106 @@ async event=>{
 
     music.pause();
 
+    musicButton.textContent =
+    "♪";
+
   }
-
-
-  setMusicIcon();
 
 }
 );
 
 
 
+/* =========================
+   FIRST MOBILE TOUCH
+========================= */
+
+let triedTouch = false;
+
+
+async function startFromTouch(){
+
+  if(triedTouch){
+    return;
+  }
+
+
+  triedTouch = true;
+
+
+  if(!music.paused){
+    return;
+  }
+
+
+  try{
+
+    await music.play();
+
+    musicButton.textContent =
+    "♫";
+
+  }
+
+  catch(error){
+
+    console.log(
+      "Mobile play blocked:",
+      error
+    );
+
+  }
+
+}
+
+
+document.addEventListener(
+  "touchstart",
+  startFromTouch,
+  {
+    once:true,
+    passive:true
+  }
+);
+
+
+document.addEventListener(
+  "pointerdown",
+  startFromTouch,
+  {
+    once:true,
+    passive:true
+  }
+);
+
+
+
+/* UPDATE ICON */
+
 music.addEventListener(
-  "play",
-  setMusicIcon
+"play",
+()=>{
+
+  musicButton.textContent =
+  "♫";
+
+}
 );
 
 
 music.addEventListener(
-  "pause",
-  setMusicIcon
+"pause",
+()=>{
+
+  musicButton.textContent =
+  "♪";
+
+}
 );
 
 
-/*
-If the MP3 itself has a problem,
-you'll see it in the browser console.
-*/
+
+/* AUDIO ERROR */
 
 music.addEventListener(
 "error",
@@ -1421,24 +1237,8 @@ music.addEventListener(
 }
 );
 
-
-
-/* =====================================================
-   STOP MUSIC WHEN LEAVING PAGE
-===================================================== */
-
-window.addEventListener(
-"pagehide",
-()=>{
-
-  music.pause();
-
-}
-);
-
 </script>
 
 
 </body>
-
 </html>
