@@ -865,6 +865,46 @@ a{
 }
 
 
+/* MOBILE SAFETY BUTTON */
+
+#talkFallback{
+  position:absolute;
+  inset:0;
+  z-index:15;
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  background:rgba(8,12,34,.38);
+}
+
+#talkFallback.show{
+  display:flex;
+}
+
+#talkFallback button{
+  padding:14px 24px;
+
+  border-radius:999px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.34);
+
+  background:
+    rgba(18,22,55,.86);
+
+  color:#fff;
+
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.12em;
+
+  cursor:pointer;
+}
+
+
 /* =================================
    AFTER VIDEO
 ================================= */
@@ -1150,7 +1190,7 @@ a{
   id="entryTalk"
   playsinline
   webkit-playsinline
-  preload="metadata"
+  preload="auto"
 >
 
 <source
@@ -1159,6 +1199,12 @@ a{
 >
 
 </video>
+
+<div id="talkFallback">
+  <button type="button">
+    TAP TO PLAY
+  </button>
+</div>
 
 </div>
 
@@ -1234,6 +1280,9 @@ document.getElementById("videoFrame");
 const entryTalk =
 document.getElementById("entryTalk");
 
+const talkFallback =
+document.getElementById("talkFallback");
+
 const nextChapter =
 document.getElementById("nextChapter");
 
@@ -1259,6 +1308,69 @@ ms
 
 
 /* =========================
+   PRIME TALK VIDEO FOR MOBILE
+========================= */
+
+function primeEntryTalk(){
+
+  try{
+
+    entryTalk.pause();
+    entryTalk.currentTime = 0;
+    entryTalk.muted = false;
+    entryTalk.volume = 0;
+    entryTalk.loop = false;
+
+    const primePromise = entryTalk.play();
+
+    if(primePromise){
+
+      primePromise
+      .then(()=>{
+
+        setTimeout(()=>{
+
+          entryTalk.pause();
+
+          try{
+            entryTalk.currentTime = 0;
+          }catch(error){}
+
+          entryTalk.volume = 1;
+
+        },80);
+
+      })
+      .catch(error=>{
+
+        console.log(
+          "Talk prime error:",
+          error
+        );
+
+        entryTalk.volume = 1;
+
+      });
+
+    }
+
+  }
+
+  catch(error){
+
+    console.log(
+      "Talk prime setup error:",
+      error
+    );
+
+    entryTalk.volume = 1;
+
+  }
+
+}
+
+
+/* =========================
    YES
 ========================= */
 
@@ -1272,6 +1384,11 @@ async ()=>{
 if(started) return;
 
 started = true;
+
+
+/* unlock the later talking video on the SAME user tap */
+
+primeEntryTalk();
 
 
 /* unlock intro sound */
@@ -1341,6 +1458,11 @@ return;
 
 
 introFinished = true;
+
+
+/* keep the 20 / Happy Birthday on screen a little longer */
+
+await wait(900);
 
 
 /* title flies away */
@@ -1416,6 +1538,10 @@ try{
 
 await entryTalk.play();
 
+talkFallback.classList.remove(
+"show"
+);
+
 }
 
 catch(error){
@@ -1423,6 +1549,10 @@ catch(error){
 console.log(
 "Entry talk playback error:",
 error
+);
+
+talkFallback.classList.add(
+"show"
 );
 
 }
@@ -1475,6 +1605,58 @@ finishIntro();
 
 );
 
+
+
+/* =========================
+   MANUAL MOBILE FALLBACK
+========================= */
+
+talkFallback.addEventListener(
+
+"click",
+
+async ()=>{
+
+  try{
+
+    entryTalk.muted = false;
+    entryTalk.volume = 1;
+
+    await entryTalk.play();
+
+    talkFallback.classList.remove(
+      "show"
+    );
+
+  }
+
+  catch(error){
+
+    console.log(
+      "Manual talk playback error:",
+      error
+    );
+
+  }
+
+}
+
+);
+
+
+entryTalk.addEventListener(
+
+"playing",
+
+()=>{
+
+  talkFallback.classList.remove(
+    "show"
+  );
+
+}
+
+);
 
 
 /* =========================
