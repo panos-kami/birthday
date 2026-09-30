@@ -2,78 +2,105 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
 <title>Kami</title>
-  
+
 <style>
+
 *{
-  box-sizing:border-box;
   margin:0;
   padding:0;
+  box-sizing:border-box;
 }
 
-html,body{
+html,
+body{
   width:100%;
   height:100%;
   overflow:hidden;
   font-family:Arial,Helvetica,sans-serif;
-}
-
-body{
   background:#10152f;
   color:white;
 }
 
-button{
-  font:inherit;
+button,
+a{
+  -webkit-tap-highlight-color:transparent;
 }
 
-/* =====================================
+/* =================================
    FIRST SCREEN
-===================================== */
+================================= */
 
 #gate{
   position:fixed;
   inset:0;
-  z-index:9999;
+  z-index:999;
 
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
 
   background:
-    radial-gradient(circle at 50% 35%,rgba(100,110,170,.15),transparent 28%),
-    linear-gradient(160deg,#10152f 0%,#171d3f 55%,#20274f 100%);
+    radial-gradient(
+      circle at 50% 28%,
+      rgba(88,101,166,.18),
+      transparent 32%
+    ),
+    linear-gradient(
+      155deg,
+      #0d1228 0%,
+      #151a38 58%,
+      #202750 100%
+    );
 
   transition:
-    opacity .7s ease,
+    opacity .8s ease,
     transform .8s ease,
-    visibility .7s ease;
+    visibility .8s;
 }
 
-#gate.leave{
+#gate.hide{
   opacity:0;
-  transform:scale(1.08);
   visibility:hidden;
+  transform:scale(1.07);
 }
 
 .gateInner{
   text-align:center;
-  padding:24px;
+  padding:30px;
 }
 
 .gateTitle{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(44px,11vw,86px);
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
   font-weight:400;
+
+  font-size:
+    clamp(
+      44px,
+      12vw,
+      82px
+    );
+
   letter-spacing:-.04em;
-  color:#f4f1ea;
+
+  color:#f2eee8;
 }
 
 #yesButton{
-  margin-top:30px;
+  margin-top:34px;
 
-  padding:14px 34px;
+  padding:
+    14px 39px;
 
   border-radius:999px;
 
@@ -84,38 +111,69 @@ button{
   background:
     rgba(255,255,255,.06);
 
-  color:#f4f1ea;
+  color:#f3efe8;
 
   font-size:14px;
-  letter-spacing:.16em;
+
+  letter-spacing:.2em;
 
   cursor:pointer;
 
-  transition:.25s;
+  backdrop-filter:
+    blur(10px);
+
+  transition:.25s ease;
 }
 
-#yesButton:hover{
-  background:#f4f1ea;
-  color:#141832;
+#yesButton:active{
+  transform:scale(.96);
 }
 
-/* =====================================
-   MAIN WORLD
-===================================== */
+
+/* =================================
+   BIRTHDAY WORLD
+================================= */
 
 #world{
   position:fixed;
   inset:0;
+
   overflow:hidden;
 
   perspective:1500px;
 
   background:
-    radial-gradient(circle at 50% 20%,rgba(255,221,166,.22),transparent 24%),
-    radial-gradient(circle at 15% 72%,rgba(236,133,192,.25),transparent 32%),
-    radial-gradient(circle at 85% 28%,rgba(105,124,235,.28),transparent 36%),
-    linear-gradient(145deg,#17265d 0%,#304f9b 36%,#6c58b3 68%,#c375a6 100%);
+    radial-gradient(
+      circle at 50% 18%,
+      rgba(255,225,166,.28),
+      transparent 24%
+    ),
+
+    radial-gradient(
+      circle at 13% 72%,
+      rgba(236,130,190,.26),
+      transparent 34%
+    ),
+
+    radial-gradient(
+      circle at 88% 27%,
+      rgba(110,127,245,.31),
+      transparent 38%
+    ),
+
+    linear-gradient(
+      150deg,
+      #17265e 0%,
+      #31519d 35%,
+      #705ab8 67%,
+      #c879a8 100%
+    );
 }
+
+
+/* =================================
+   OPENING DARKNESS
+================================= */
 
 #blackout{
   position:absolute;
@@ -123,167 +181,181 @@ button{
 
   z-index:100;
 
-  background:#11162f;
+  background:#10152e;
 
-  transition:opacity .9s ease;
+  opacity:1;
+
+  pointer-events:none;
+
+  transition:
+    opacity 1s ease;
 }
 
 #blackout.remove{
   opacity:0;
 }
 
-/* =====================================
-   BACKGROUND HAZE
-===================================== */
+
+/* =================================
+   MOVING HAZE
+================================= */
 
 .haze{
   position:absolute;
-  inset:-25%;
+  inset:-30%;
 
-  filter:blur(70px);
+  filter:blur(75px);
 
   opacity:.55;
 }
 
 .haze1{
   background:
-    radial-gradient(circle at 25% 42%,rgba(255,176,213,.62),transparent 31%);
+    radial-gradient(
+      circle at 25% 40%,
+      rgba(255,175,213,.62),
+      transparent 31%
+    );
 
   animation:
-    hazeA
-    11s
+    haze1
+    10s
     ease-in-out
     infinite alternate;
 }
 
 .haze2{
   background:
-    radial-gradient(circle at 75% 40%,rgba(110,130,255,.52),transparent 34%);
+    radial-gradient(
+      circle at 75% 39%,
+      rgba(108,132,255,.54),
+      transparent 34%
+    );
 
   animation:
-    hazeB
-    13s
+    haze2
+    12s
     ease-in-out
     infinite alternate;
 }
 
-@keyframes hazeA{
+@keyframes haze1{
   to{
     transform:
-      translate(7%,-4%)
-      scale(1.08);
+      translate(6%,-4%)
+      scale(1.09);
   }
 }
 
-@keyframes hazeB{
+@keyframes haze2{
   to{
     transform:
       translate(-5%,5%)
-      scale(1.1);
+      scale(1.12);
   }
 }
 
-/* =====================================
-   SEARCHLIGHTS
-===================================== */
+
+/* =================================
+   SEARCH LIGHTS
+================================= */
 
 .light{
   position:absolute;
-  bottom:-45%;
 
-  width:220px;
-  height:165%;
+  bottom:-50%;
 
-  transform-origin:bottom center;
+  width:200px;
+  height:170%;
+
+  transform-origin:
+    bottom center;
 
   background:
     linear-gradient(
       to top,
-      rgba(255,236,173,.34),
+      rgba(255,239,180,.32),
       transparent
     );
 
-  filter:blur(32px);
+  filter:blur(31px);
 
-  opacity:.8;
+  opacity:.72;
 
   z-index:2;
 }
 
-.light1{
-  left:-20px;
+.light.left{
+  left:-25px;
+
   animation:
-    moveLight1
-    4.2s
+    leftLight
+    4.1s
     ease-in-out
     infinite alternate;
 }
 
-.light2{
-  right:-20px;
+.light.right{
+  right:-25px;
+
   animation:
-    moveLight2
-    4.6s
+    rightLight
+    4.5s
     ease-in-out
     infinite alternate;
 }
 
-.light3{
-  left:42%;
-  opacity:.25;
-  animation:
-    moveLight3
-    5.2s
-    ease-in-out
-    infinite alternate;
+@keyframes leftLight{
+  from{
+    transform:rotate(25deg);
+  }
+
+  to{
+    transform:rotate(-7deg);
+  }
 }
 
-@keyframes moveLight1{
-  from{transform:rotate(25deg)}
-  to{transform:rotate(-5deg)}
+@keyframes rightLight{
+  from{
+    transform:rotate(-25deg);
+  }
+
+  to{
+    transform:rotate(8deg);
+  }
 }
 
-@keyframes moveLight2{
-  from{transform:rotate(-25deg)}
-  to{transform:rotate(8deg)}
-}
 
-@keyframes moveLight3{
-  from{transform:rotate(-7deg)}
-  to{transform:rotate(10deg)}
-}
-
-/* =====================================
-   SPARKS
-===================================== */
+/* =================================
+   SPARKLES
+================================= */
 
 .spark{
   position:absolute;
 
-  width:4px;
-  height:4px;
+  width:3px;
+  height:3px;
 
   border-radius:50%;
 
-  background:#fff4c5;
+  background:#fff3c0;
 
   box-shadow:
-    0 0 14px
-    4px
-    rgba(255,224,150,.48);
+    0 0 13px 4px
+    rgba(255,225,150,.48);
 
   opacity:0;
 
   animation:
-    twinkle
-    3.8s
+    sparkle
+    3.6s
     ease-in-out
     infinite;
 
   z-index:3;
 }
 
-@keyframes twinkle{
+@keyframes sparkle{
   0%,100%{
     opacity:0;
     transform:scale(.3);
@@ -291,13 +363,14 @@ button{
 
   50%{
     opacity:1;
-    transform:scale(1.2);
+    transform:scale(1.25);
   }
 }
 
-/* =====================================
+
+/* =================================
    BIRTHDAY TITLE
-===================================== */
+================================= */
 
 #birthdayIntro{
   position:absolute;
@@ -309,139 +382,141 @@ button{
   align-items:center;
   justify-content:center;
 
-  transform-style:preserve-3d;
+  text-align:center;
+
+  transform-style:
+    preserve-3d;
 }
 
-.titleGroup{
+#titleGroup{
   position:relative;
 
-  width:min(92vw,560px);
-  height:min(68vh,620px);
+  width:92vw;
 
   opacity:0;
 
   transform:
-    translateZ(-1500px)
+    translateZ(-1700px)
     scale(.08);
 
-  filter:blur(26px);
+  filter:
+    blur(30px);
 }
 
-.titleGroup.play{
+#titleGroup.play{
   animation:
-    groupArrival
-    5.2s
+    titleArrival
+    5.1s
     cubic-bezier(.12,.8,.18,1)
     forwards;
 }
 
-@keyframes groupArrival{
+@keyframes titleArrival{
+
   0%{
     opacity:0;
+
     transform:
-      translateZ(-1500px)
+      translateZ(-1700px)
       scale(.08);
-    filter:blur(26px);
+
+    filter:
+      blur(30px);
   }
 
-  15%{
+  16%{
     opacity:1;
   }
 
   72%{
     transform:
-      translateZ(80px)
-      scale(1.04);
-    filter:blur(0);
+      translateZ(90px)
+      scale(1.06);
+
+    filter:
+      blur(0);
   }
 
   100%{
     opacity:1;
+
     transform:
       translateZ(0)
       scale(1);
-    filter:blur(0);
+
+    filter:
+      blur(0);
   }
 }
 
-/* 20 AS DESIGN ELEMENT */
+
+/* 20 */
 
 .twenty{
-  position:absolute;
+  font-size:
+    clamp(
+      155px,
+      47vw,
+      320px
+    );
 
-  left:-3%;
-  top:50%;
-
-  transform:
-    translateY(-50%)
-    rotate(-7deg);
-
-  font-size:clamp(170px,45vw,330px);
+  line-height:.69;
 
   font-weight:900;
 
-  letter-spacing:-.12em;
-
-  line-height:.7;
+  letter-spacing:-.1em;
 
   background:
     linear-gradient(
       180deg,
-      #fff9df 0%,
-      #ffe19f 36%,
-      #dca03e 68%,
-      #fff2c3 100%
+      #fffbea 0%,
+      #ffe2a0 34%,
+      #dca13f 68%,
+      #fff1bd 100%
     );
 
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 
-  opacity:.92;
-
   filter:
     drop-shadow(
-      0 18px 26px
-      rgba(25,16,70,.4)
+      0 18px 28px
+      rgba(25,18,70,.45)
     )
     drop-shadow(
-      0 0 28px
-      rgba(255,223,146,.18)
+      0 0 25px
+      rgba(255,225,150,.20)
     );
 }
 
-/* MAIN TEXT */
 
-.words{
-  position:absolute;
-
-  right:4%;
-  top:50%;
-
-  transform:
-    translateY(-50%);
-
-  width:66%;
-
-  text-align:right;
-
-  z-index:4;
-}
+/* HAPPY BIRTHDAY */
 
 .happy{
-  font-size:clamp(17px,4.3vw,26px);
+  margin-top:31px;
 
-  letter-spacing:.22em;
-
-  text-transform:uppercase;
-
-  color:#fff1cf;
+  font-size:
+    clamp(
+      15px,
+      4vw,
+      27px
+    );
 
   font-weight:800;
 
+  letter-spacing:.27em;
+
+  text-transform:uppercase;
+
+  color:#fff0cd;
+
   text-shadow:
-    0 8px 24px
-    rgba(20,15,65,.35);
+    0 9px 25px
+    rgba(25,18,70,.36);
 }
+
+
+/* KAMI */
 
 .kami{
   margin-top:10px;
@@ -453,89 +528,98 @@ button{
 
   font-style:italic;
 
-  font-size:clamp(62px,16vw,108px);
+  font-size:
+    clamp(
+      58px,
+      17vw,
+      112px
+    );
 
-  line-height:.9;
+  line-height:.94;
 
-  color:white;
+  color:#fff;
 
   text-shadow:
-    0 14px 38px
-    rgba(20,15,65,.35),
-    0 0 24px
-    rgba(255,228,180,.15);
+    0 13px 36px
+    rgba(25,17,75,.38),
+    0 0 25px
+    rgba(255,226,175,.14);
 }
 
-/* EXTRA GLOW AROUND LETTERS */
 
-.wordGlow{
+/* LIGHT HALO AROUND TITLE */
+
+.titleHalo{
   position:absolute;
 
-  right:-10%;
-  top:45%;
+  left:50%;
+  top:50%;
 
-  width:75%;
-  height:42%;
+  width:95vw;
+  height:70vh;
 
   transform:
-    translateY(-50%);
+    translate(-50%,-50%);
 
   background:
     radial-gradient(
       ellipse,
-      rgba(255,225,170,.27),
-      transparent 65%
+      rgba(255,227,169,.22),
+      transparent 60%
     );
 
-  filter:blur(24px);
+  filter:blur(30px);
 
-  z-index:1;
+  z-index:-1;
 }
 
-/* LIGHT STREAKS AROUND TEXT */
+
+/* LIGHT LINES */
 
 .streak{
   position:absolute;
 
-  height:2px;
+  left:50%;
+
+  height:1px;
 
   background:
     linear-gradient(
       90deg,
       transparent,
-      rgba(255,245,205,.9),
+      rgba(255,246,212,.85),
       transparent
     );
 
-  filter:blur(.5px);
+  transform-origin:center;
 
-  opacity:.8;
+  opacity:.7;
 }
 
-.streak.one{
-  width:65%;
-  top:35%;
-  left:22%;
-  transform:rotate(-8deg);
+.streak.s1{
+  width:82vw;
+
+  top:36%;
+
+  transform:
+    translateX(-50%)
+    rotate(-5deg);
 }
 
-.streak.two{
-  width:55%;
-  top:64%;
-  left:36%;
-  transform:rotate(7deg);
+.streak.s2{
+  width:72vw;
+
+  top:66%;
+
+  transform:
+    translateX(-50%)
+    rotate(5deg);
 }
 
-.streak.three{
-  width:42%;
-  top:48%;
-  left:48%;
-  transform:rotate(-2deg);
-}
 
-/* TITLE EXIT */
+/* EXIT */
 
-.titleGroup.out{
+#titleGroup.out{
   animation:
     titleOut
     .85s
@@ -549,29 +633,33 @@ button{
 
     transform:
       translateZ(300px)
-      scale(1.16);
+      scale(1.17);
 
-    filter:blur(15px);
+    filter:
+      blur(16px);
   }
 }
 
-/* =====================================
+
+/* =================================
    AND NOW
-===================================== */
+================================= */
 
 #bridge{
   position:absolute;
   inset:0;
 
-  z-index:20;
+  z-index:30;
 
-  display:grid;
-  place-items:center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 
   opacity:0;
   visibility:hidden;
 
-  transition:.45s ease;
+  transition:
+    opacity .45s ease;
 }
 
 #bridge.show{
@@ -587,18 +675,24 @@ button{
 
   font-style:italic;
 
-  font-size:clamp(40px,11vw,72px);
+  font-size:
+    clamp(
+      42px,
+      12vw,
+      74px
+    );
 
   color:#fff0d5;
 
   text-shadow:
-    0 12px 34px
-    rgba(20,15,70,.38);
+    0 13px 36px
+    rgba(20,15,70,.4);
 }
 
-/* =====================================
-   VIDEO REVEAL
-===================================== */
+
+/* =================================
+   VIDEO
+================================= */
 
 #videoStage{
   position:absolute;
@@ -607,40 +701,34 @@ button{
   z-index:40;
 
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
 
   opacity:0;
   visibility:hidden;
 
-  transition:opacity .5s ease;
+  transition:
+    opacity .5s ease;
 }
 
-#videoStage.active{
+#videoStage.show{
   opacity:1;
   visibility:visible;
 }
 
-.videoDark{
+.videoBackground{
   position:absolute;
   inset:0;
 
   background:
-    rgba(14,17,48,.68);
+    rgba(13,17,47,.66);
 
   backdrop-filter:
     blur(16px);
-
-  opacity:0;
-
-  transition:.7s ease;
 }
 
-#videoStage.active .videoDark{
-  opacity:1;
-}
 
-/* LIGHT LINE */
+/* FIRST LIGHT LINE */
 
 #videoLine{
   position:absolute;
@@ -648,52 +736,54 @@ button{
   width:2px;
   height:3px;
 
-  background:#fff5cf;
+  background:#fff2c7;
 
   box-shadow:
-    0 0 25px
-    8px
-    rgba(255,230,174,.5);
+    0 0 28px 9px
+    rgba(255,229,171,.50);
 
   opacity:0;
 }
 
 #videoLine.open{
   animation:
-    lineOpen
+    openLine
     .65s
     ease
     forwards;
 }
 
-@keyframes lineOpen{
-  0%{
-    opacity:0;
+@keyframes openLine{
+
+  from{
     width:2px;
+    opacity:0;
   }
 
   20%{
     opacity:1;
   }
 
-  100%{
+  to{
+    width:84vw;
     opacity:1;
-    width:min(78vw,390px);
   }
 }
 
-/* VIDEO */
+
+/* VIDEO FRAME */
 
 #videoFrame{
   position:relative;
 
-  width:min(78vw,390px);
+  width:84vw;
+  max-width:400px;
 
   aspect-ratio:9/16;
 
   overflow:hidden;
 
-  border-radius:28px;
+  border-radius:27px;
 
   opacity:0;
 
@@ -701,16 +791,15 @@ button{
     inset(
       50% 0
       50% 0
-      round 28px
+      round 27px
     );
 
   transform:
-    scale(.78)
-    translateZ(-220px);
+    scale(.78);
 
   box-shadow:
-    0 38px 110px
-    rgba(10,12,45,.6),
+    0 40px 120px
+    rgba(9,11,43,.62),
     0 0 0 1px
     rgba(255,255,255,.18);
 }
@@ -718,12 +807,13 @@ button{
 #videoFrame.reveal{
   animation:
     videoReveal
-    1.25s
-    cubic-bezier(.14,.8,.18,1)
+    1.2s
+    cubic-bezier(.12,.8,.18,1)
     forwards;
 }
 
 @keyframes videoReveal{
+
   0%{
     opacity:1;
 
@@ -731,12 +821,11 @@ button{
       inset(
         50% 0
         50% 0
-        round 28px
+        round 27px
       );
 
     transform:
-      scale(.78)
-      translateZ(-220px);
+      scale(.78);
   }
 
   55%{
@@ -744,7 +833,7 @@ button{
       inset(
         0 0
         0 0
-        round 28px
+        round 27px
       );
   }
 
@@ -755,16 +844,16 @@ button{
       inset(
         0 0
         0 0
-        round 28px
+        round 27px
       );
 
     transform:
-      scale(1)
-      translateZ(0);
+      scale(1);
   }
 }
 
-#videoFrame video{
+
+#entryTalk{
   width:100%;
   height:100%;
 
@@ -775,121 +864,152 @@ button{
   background:#000;
 }
 
-/* FLASH */
 
-#flash{
+/* =================================
+   AFTER VIDEO
+================================= */
+
+#nextChapter{
   position:absolute;
   inset:0;
 
-  z-index:60;
+  z-index:70;
 
-  background:white;
-
-  opacity:0;
-
-  pointer-events:none;
-}
-
-#flash.fire{
-  animation:
-    flash
-    .5s
-    ease;
-}
-
-@keyframes flash{
-  0%{opacity:0}
-  30%{opacity:.5}
-  100%{opacity:0}
-}
-
-/* =====================================
-   FINAL
-===================================== */
-
-#end{
-  position:absolute;
-  inset:0;
-
-  z-index:80;
-
-  display:grid;
-  place-items:center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
 
   text-align:center;
 
   opacity:0;
   visibility:hidden;
 
-  transition:.8s ease;
+  padding:30px;
+
+  transition:
+    opacity .8s ease;
 }
 
-#end.show{
+#nextChapter.show{
   opacity:1;
   visibility:visible;
 }
 
-.endSmall{
+.nextSmall{
   font-size:11px;
 
-  letter-spacing:.32em;
+  letter-spacing:.28em;
 
   text-transform:uppercase;
 
-  color:#fff0ce;
+  color:#ffecc7;
+
+  opacity:.82;
 
   margin-bottom:18px;
 }
 
-.endBig{
-  font-size:clamp(58px,15vw,110px);
+.nextTitle{
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
 
-  line-height:.86;
+  font-size:
+    clamp(
+      42px,
+      11vw,
+      78px
+    );
 
-  font-weight:900;
+  font-weight:400;
 
-  letter-spacing:-.06em;
+  line-height:1.03;
+
+  letter-spacing:-.04em;
 }
 
-/* =====================================
+.nextText{
+  max-width:330px;
+
+  margin:
+    19px auto 0;
+
+  color:
+    rgba(255,255,255,.76);
+
+  font-size:15px;
+
+  line-height:1.6;
+}
+
+#photosButton{
+  display:inline-block;
+
+  margin-top:31px;
+
+  padding:
+    15px 30px;
+
+  border-radius:999px;
+
+  background:#fff0cf;
+
+  color:#302f6c;
+
+  text-decoration:none;
+
+  font-size:13px;
+
+  font-weight:800;
+
+  letter-spacing:.12em;
+
+  box-shadow:
+    0 16px 45px
+    rgba(25,18,70,.28);
+
+  transition:
+    transform .25s ease;
+}
+
+#photosButton:active{
+  transform:scale(.96);
+}
+
+
+/* =================================
    MOBILE
-===================================== */
+================================= */
 
 @media(max-width:600px){
 
-  .titleGroup{
-    width:94vw;
-    height:64vh;
+  #titleGroup{
+    width:95vw;
   }
 
   .twenty{
-    left:-8%;
-    top:53%;
-
-    font-size:55vw;
-  }
-
-  .words{
-    right:5%;
-    width:68%;
+    font-size:49vw;
   }
 
   .happy{
     font-size:4vw;
-    letter-spacing:.17em;
+    letter-spacing:.22em;
   }
 
   .kami{
-    font-size:17vw;
+    font-size:18vw;
   }
 
   #videoFrame{
-    width:82vw;
-    max-height:76vh;
+    width:84vw;
+
+    max-height:
+      calc(100dvh - 100px);
   }
 
   #videoLine.open{
-    width:82vw;
+    width:84vw;
   }
 
 }
@@ -897,9 +1017,13 @@ button{
 </style>
 </head>
 
+
 <body>
 
-<!-- FIRST SCREEN -->
+
+<!-- ============================
+     START
+============================ -->
 
 <section id="gate">
 
@@ -918,139 +1042,164 @@ button{
 </section>
 
 
-<!-- MAIN WORLD -->
 
-<div id="world">
+<!-- ============================
+     WORLD
+============================ -->
 
-  <div id="blackout"></div>
-
-  <div class="haze haze1"></div>
-  <div class="haze haze2"></div>
-
-  <div class="light light1"></div>
-  <div class="light light2"></div>
-  <div class="light light3"></div>
-
-  <span class="spark" style="left:8%;top:18%;animation-delay:.2s"></span>
-  <span class="spark" style="left:18%;top:63%;animation-delay:1.1s"></span>
-  <span class="spark" style="left:29%;top:27%;animation-delay:2.1s"></span>
-  <span class="spark" style="left:67%;top:18%;animation-delay:.7s"></span>
-  <span class="spark" style="left:81%;top:64%;animation-delay:2.5s"></span>
-  <span class="spark" style="left:92%;top:32%;animation-delay:1.3s"></span>
+<main id="world">
 
 
-  <!-- HIDDEN INTRO VIDEO / SOUND -->
-
-  <video
-    id="introVideo"
-    playsinline
-    preload="auto"
-    style="
-      position:absolute;
-      width:1px;
-      height:1px;
-      opacity:0;
-      pointer-events:none;
-    "
-  >
-    <source src="entry-video.mp4" type="video/mp4">
-  </video>
+<div id="blackout"></div>
 
 
-  <!-- BIRTHDAY INTRO -->
-
-  <section id="birthdayIntro">
-
-    <div class="titleGroup" id="titleGroup">
-
-      <div class="twenty">
-        20
-      </div>
-
-      <div class="wordGlow"></div>
-
-      <div class="streak one"></div>
-      <div class="streak two"></div>
-      <div class="streak three"></div>
-
-      <div class="words">
-
-        <div class="happy">
-          Happy Birthday
-        </div>
-
-        <div class="kami">
-          Kami
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
+<div class="haze haze1"></div>
+<div class="haze haze2"></div>
 
 
-  <!-- AND NOW -->
-
-  <section id="bridge">
-
-    <div class="bridgeText">
-      And now...
-    </div>
-
-  </section>
+<div class="light left"></div>
+<div class="light right"></div>
 
 
-  <!-- VIDEO -->
-
-  <section id="videoStage">
-
-    <div class="videoDark"></div>
-
-    <div id="videoLine"></div>
-
-    <div id="videoFrame">
-
-      <video
-        id="entryTalk"
-        playsinline
-        preload="auto"
-      >
-
-        <source
-          src="entry-talk.mp4"
-          type="video/mp4"
-        >
-
-      </video>
-
-    </div>
-
-  </section>
+<span class="spark" style="left:8%;top:18%;animation-delay:.2s"></span>
+<span class="spark" style="left:19%;top:67%;animation-delay:1.2s"></span>
+<span class="spark" style="left:28%;top:29%;animation-delay:2.1s"></span>
+<span class="spark" style="left:67%;top:18%;animation-delay:.7s"></span>
+<span class="spark" style="left:82%;top:65%;animation-delay:2.4s"></span>
+<span class="spark" style="left:91%;top:33%;animation-delay:1.3s"></span>
 
 
-  <div id="flash"></div>
+
+<!-- INTRO VIDEO / SOUND ONLY -->
+
+<video
+  id="introVideo"
+  playsinline
+  webkit-playsinline
+  preload="auto"
+  style="
+    position:absolute;
+    width:1px;
+    height:1px;
+    opacity:0;
+    pointer-events:none;
+  "
+>
+
+<source
+  src="entry-video.mp4"
+  type="video/mp4"
+>
+
+</video>
 
 
-  <!-- FINAL -->
 
-  <section id="end">
+<!-- TITLE -->
 
-    <div>
+<section id="birthdayIntro">
 
-      <div class="endSmall">
-        This is only the beginning
-      </div>
+<div id="titleGroup">
 
-      <div class="endBig">
-        Ready,<br>Kami?
-      </div>
+  <div class="titleHalo"></div>
 
-    </div>
+  <div class="streak s1"></div>
+  <div class="streak s2"></div>
 
-  </section>
+  <div class="twenty">
+    20
+  </div>
+
+  <div class="happy">
+    Happy Birthday
+  </div>
+
+  <div class="kami">
+    Kami
+  </div>
 
 </div>
+
+</section>
+
+
+
+<!-- AND NOW -->
+
+<section id="bridge">
+
+  <div class="bridgeText">
+    And now...
+  </div>
+
+</section>
+
+
+
+<!-- ENTRY TALK -->
+
+<section id="videoStage">
+
+<div class="videoBackground"></div>
+
+<div id="videoLine"></div>
+
+<div id="videoFrame">
+
+<video
+  id="entryTalk"
+  playsinline
+  webkit-playsinline
+  preload="metadata"
+>
+
+<source
+  src="entry-talk.mp4"
+  type="video/mp4"
+>
+
+</video>
+
+</div>
+
+</section>
+
+
+
+<!-- NEXT PAGE -->
+
+<section id="nextChapter">
+
+<div>
+
+  <div class="nextSmall">
+    Chapter One
+  </div>
+
+  <div class="nextTitle">
+    Let's look<br>
+    back a little.
+  </div>
+
+  <div class="nextText">
+    Before anything else, let's go through
+    a few moments from the years that made you, you.
+  </div>
+
+  <a
+    id="photosButton"
+    href="age-photos.html"
+  >
+    SEE THE PHOTOS
+  </a>
+
+</div>
+
+</section>
+
+
+</main>
+
 
 
 <script>
@@ -1085,11 +1234,8 @@ document.getElementById("videoFrame");
 const entryTalk =
 document.getElementById("entryTalk");
 
-const flash =
-document.getElementById("flash");
-
-const end =
-document.getElementById("end");
+const nextChapter =
+document.getElementById("nextChapter");
 
 
 let started = false;
@@ -1098,128 +1244,192 @@ let introFinished = false;
 
 function wait(ms){
 
-  return new Promise(
-    resolve =>
-      setTimeout(resolve,ms)
-  );
+return new Promise(
+
+resolve =>
+
+setTimeout(
+resolve,
+ms
+)
+
+);
 
 }
 
 
-/* YES BUTTON */
+/* =========================
+   YES
+========================= */
 
 yesButton.addEventListener(
+
 "click",
+
 async ()=>{
 
-  if(started) return;
 
-  started = true;
+if(started) return;
 
-
-  introVideo.currentTime = 0;
-  introVideo.volume = 1;
-  introVideo.muted = false;
-  introVideo.loop = false;
+started = true;
 
 
-  try{
+/* unlock intro sound */
 
-    await introVideo.play();
-
-  }
-
-  catch(error){
-
-    console.log(error);
-
-  }
+introVideo.currentTime = 0;
+introVideo.volume = 1;
+introVideo.muted = false;
+introVideo.loop = false;
 
 
-  gate.classList.add("leave");
+try{
+
+await introVideo.play();
+
+}
+
+catch(error){
+
+console.log(
+"Intro playback error:",
+error
+);
+
+}
 
 
-  await wait(500);
+/* leave first screen */
+
+gate.classList.add(
+"hide"
+);
 
 
-  blackout.classList.add("remove");
+await wait(450);
 
 
-  await wait(250);
+/* reveal birthday world */
+
+blackout.classList.add(
+"remove"
+);
 
 
-  titleGroup.classList.add("play");
-
-});
+await wait(300);
 
 
-/* INTRO ENDS */
+titleGroup.classList.add(
+"play"
+);
+
+
+}
+
+);
+
+
+
+/* =========================
+   INTRO FINISHES
+========================= */
 
 async function finishIntro(){
 
-  if(introFinished) return;
 
-  introFinished = true;
-
-
-  titleGroup.classList.add("out");
+if(introFinished)
+return;
 
 
-  await wait(850);
+introFinished = true;
 
 
-  bridge.classList.add("show");
+/* title flies away */
+
+titleGroup.classList.add(
+"out"
+);
 
 
-  await wait(1500);
+await wait(850);
 
 
-  bridge.classList.remove("show");
+/* AND NOW */
+
+bridge.classList.add(
+"show"
+);
 
 
-  await wait(450);
+await wait(1500);
 
 
-  videoStage.classList.add("active");
+bridge.classList.remove(
+"show"
+);
 
 
-  await wait(450);
+await wait(400);
 
 
-  videoLine.classList.add("open");
+/* show video world */
+
+videoStage.classList.add(
+"show"
+);
 
 
-  await wait(600);
+await wait(450);
 
 
-  flash.classList.add("fire");
+/* light opens */
+
+videoLine.classList.add(
+"open"
+);
 
 
-  await wait(100);
+await wait(600);
 
 
-  videoFrame.classList.add("reveal");
+/* reveal video */
+
+videoFrame.classList.add(
+"reveal"
+);
 
 
-  entryTalk.currentTime = 0;
-  entryTalk.volume = 1;
-  entryTalk.muted = false;
-  entryTalk.loop = false;
+await wait(120);
 
 
-  try{
+/* play video */
 
-    await entryTalk.play();
+entryTalk.currentTime = 0;
 
-  }
+entryTalk.volume = 1;
 
-  catch(error){
+entryTalk.muted = false;
 
-    console.log(error);
+entryTalk.loop = false;
 
-  }
+
+try{
+
+await entryTalk.play();
 
 }
+
+catch(error){
+
+console.log(
+"Entry talk playback error:",
+error
+);
+
+}
+
+
+}
+
 
 
 introVideo.addEventListener(
@@ -1228,67 +1438,92 @@ finishIntro
 );
 
 
-/* safety */
 
 introVideo.addEventListener(
+
 "timeupdate",
+
 ()=>{
 
-  if(
-    !introFinished
-    &&
-    Number.isFinite(introVideo.duration)
-    &&
-    introVideo.duration > 0
-    &&
-    introVideo.currentTime
-    >=
-    introVideo.duration - .12
-  ){
+if(
 
-    finishIntro();
+!introFinished
 
-  }
+&&
 
-});
+Number.isFinite(
+introVideo.duration
+)
+
+&&
+
+introVideo.duration > 0
+
+&&
+
+introVideo.currentTime
+>=
+introVideo.duration - .12
+
+){
+
+finishIntro();
+
+}
+
+}
+
+);
 
 
-/* ENTRY TALK ENDS */
+
+/* =========================
+   TALK FINISHES
+========================= */
 
 entryTalk.addEventListener(
+
 "ended",
+
 async ()=>{
 
-  videoFrame.style.transition =
-    "opacity .8s ease, transform .8s ease";
+
+videoFrame.style.transition =
+"opacity .75s ease, transform .75s ease";
 
 
-  videoFrame.style.opacity =
-    "0";
+videoFrame.style.opacity =
+"0";
 
 
-  videoFrame.style.transform =
-    "scale(1.08)";
+videoFrame.style.transform =
+"scale(1.08)";
 
 
-  await wait(850);
+await wait(800);
 
 
-  videoStage.classList.remove(
-    "active"
-  );
+videoStage.classList.remove(
+"show"
+);
 
 
-  await wait(350);
+await wait(400);
 
 
-  end.classList.add(
-    "show"
-  );
+/* Go to photo chapter teaser */
 
-});
+nextChapter.classList.add(
+"show"
+);
+
+
+}
+
+);
 
 </script>
+
 
 </body>
 </html>
