@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 
 <meta
@@ -9,7 +8,7 @@
   content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 >
 
-<title>Kami — 20 Years</title>
+<title>20 Years of Kami</title>
 
 <style>
 
@@ -17,6 +16,7 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
 }
 
 html{
@@ -24,205 +24,116 @@ html{
 }
 
 body{
+  margin:0;
   overflow-x:hidden;
+
   font-family:Arial,Helvetica,sans-serif;
-  color:#fff;
-  background:#151c44;
-}
-
-
-/* ======================================
-   BACKGROUND
-====================================== */
-
-.pageBackground{
-  position:fixed;
-  inset:0;
-  z-index:-10;
+  color:white;
 
   background:
-    radial-gradient(
-      circle at 18% 12%,
-      rgba(255,174,204,.28),
-      transparent 34%
-    ),
-    radial-gradient(
-      circle at 85% 32%,
-      rgba(115,133,255,.28),
-      transparent 38%
-    ),
-    radial-gradient(
-      circle at 50% 84%,
-      rgba(255,213,160,.17),
-      transparent 38%
-    ),
     linear-gradient(
       180deg,
-      #172250 0%,
-      #403d85 34%,
-      #735093 65%,
-      #9b617f 100%
+      #141c40 0%,
+      #30366f 25%,
+      #594580 55%,
+      #865779 78%,
+      #a66f87 100%
     );
 }
 
-.haze{
+
+/* BACKGROUND */
+
+body::before{
+  content:"";
   position:fixed;
-  width:90vw;
-  height:90vw;
-  border-radius:50%;
-  filter:blur(80px);
-  opacity:.22;
-  z-index:-8;
+  inset:0;
+
   pointer-events:none;
-}
+  z-index:-1;
 
-.haze.one{
-  background:#ff9dcc;
-  top:-20vw;
-  left:-25vw;
-  animation:floatOne 12s ease-in-out infinite alternate;
-}
-
-.haze.two{
-  background:#8892ff;
-  right:-30vw;
-  top:45vh;
-  animation:floatTwo 14s ease-in-out infinite alternate;
-}
-
-@keyframes floatOne{
-  to{
-    transform:
-      translate(15vw,8vh)
-      scale(1.12);
-  }
-}
-
-@keyframes floatTwo{
-  to{
-    transform:
-      translate(-12vw,-8vh)
-      scale(1.15);
-  }
+  background:
+    radial-gradient(
+      circle at 15% 10%,
+      rgba(255,198,216,.10),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 25%,
+      rgba(140,150,255,.08),
+      transparent 30%
+    );
 }
 
 
-/* ======================================
-   MUSIC BUTTON
-====================================== */
+/* MUSIC BUTTON */
 
 #musicButton{
   position:fixed;
 
-  top:
-    calc(
-      env(safe-area-inset-top)
-      +
-      16px
-    );
+  top:calc(env(safe-area-inset-top) + 14px);
+  right:14px;
 
-  right:16px;
-
-  z-index:100;
+  z-index:9999;
 
   width:44px;
   height:44px;
 
+  border:none;
   border-radius:50%;
 
-  border:
-    1px solid
-    rgba(255,255,255,.20);
-
-  background:
-    rgba(20,24,61,.52);
+  background:rgba(20,23,55,.88);
 
   color:white;
 
   font-size:18px;
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  backdrop-filter:blur(15px);
-
   cursor:pointer;
 
   box-shadow:
-    0 10px 30px
-    rgba(10,12,40,.25);
+    0 8px 22px
+    rgba(0,0,0,.20);
+}
+
+#musicButton:active{
+  transform:scale(.94);
 }
 
 
-/* ======================================
-   HERO
-====================================== */
+/* HERO */
 
 .hero{
-  min-height:100svh;
+  min-height:92svh;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  text-align:center;
-
   padding:
-    70px 25px;
+    70px 22px
+    50px;
 
-  position:relative;
-
-  overflow:hidden;
-}
-
-.hero::after{
-  content:"";
-
-  position:absolute;
-
-  width:380px;
-  height:380px;
-
-  border-radius:50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(255,224,176,.27),
-      transparent 68%
-    );
-
-  filter:blur(20px);
-
-  left:50%;
-  top:42%;
-
-  transform:
-    translate(-50%,-50%);
+  text-align:center;
 }
 
 .heroInner{
-  position:relative;
-
-  z-index:3;
-
-  max-width:600px;
+  width:100%;
+  max-width:570px;
 }
 
-.heroTop{
-  font-size:11px;
+.heroSmall{
+  font-size:10px;
 
   letter-spacing:.34em;
 
   text-transform:uppercase;
 
-  color:#f5d9ca;
-
-  margin-bottom:20px;
+  color:#f0c4b6;
 }
 
 .heroTitle{
+  margin-top:17px;
+
   font-family:
     Georgia,
     "Times New Roman",
@@ -230,32 +141,30 @@ body{
 
   font-size:
     clamp(
-      60px,
-      18vw,
-      115px
+      56px,
+      16vw,
+      100px
     );
 
-  font-weight:400;
+  line-height:.84;
 
   letter-spacing:-.06em;
 
-  line-height:.82;
-
-  text-shadow:
-    0 18px 50px
-    rgba(10,12,40,.35);
+  font-weight:400;
 }
 
-.heroTitle em{
+.heroTitle span{
   display:block;
 
-  font-weight:400;
+  margin-top:7px;
 
-  color:#ffd8c0;
+  color:#ffd5bd;
+
+  font-style:italic;
 }
 
 .heroText{
-  max-width:390px;
+  max-width:350px;
 
   margin:
     28px auto 0;
@@ -265,332 +174,176 @@ body{
   line-height:1.7;
 
   color:
-    rgba(255,255,255,.74);
+    rgba(255,255,255,.70);
 }
 
-.scrollText{
-  margin-top:48px;
+.scrollHint{
+  margin-top:45px;
 
-  font-size:10px;
+  font-size:9px;
 
-  letter-spacing:.28em;
+  letter-spacing:.25em;
 
   text-transform:uppercase;
 
   color:
-    rgba(255,255,255,.55);
+    rgba(255,255,255,.40);
 
   animation:
-    floatScroll
+    floating
     1.8s
     ease-in-out
     infinite;
 }
 
-@keyframes floatScroll{
+@keyframes floating{
+
   50%{
-    transform:
-      translateY(8px);
+    transform:translateY(7px);
   }
+
 }
 
 
-/* ======================================
-   CHAPTER
-====================================== */
+/* STORY */
 
-.chapter{
-  text-align:center;
+#story{
+  width:100%;
 
-  padding:
-    80px 25px
-    35px;
-}
-
-.chapterNumber{
-  font-size:10px;
-
-  letter-spacing:.3em;
-
-  text-transform:uppercase;
-
-  color:#efc9bc;
-}
-
-.chapterTitle{
-  margin-top:12px;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:
-    clamp(
-      36px,
-      11vw,
-      70px
-    );
-
-  font-weight:400;
-
-  letter-spacing:-.04em;
-}
-
-
-/* ======================================
-   TIMELINE
-====================================== */
-
-.timeline{
-  width:min(100%,760px);
+  max-width:650px;
 
   margin:auto;
 
   padding:
-    20px 18px
-    110px;
-
-  position:relative;
-}
-
-.timelineLine{
-  position:absolute;
-
-  left:31px;
-
-  top:30px;
-  bottom:90px;
-
-  width:1px;
-
-  background:
-    linear-gradient(
-      to bottom,
-      transparent,
-      rgba(255,255,255,.25) 5%,
-      rgba(255,255,255,.25) 95%,
-      transparent
-    );
+    0 14px
+    80px;
 }
 
 
-/* ======================================
-   AGE ITEM
-====================================== */
+/* YEAR */
 
-.age{
-  position:relative;
+.year{
+  width:100%;
 
-  display:grid;
+  min-height:90svh;
 
-  grid-template-columns:
-    58px 1fr;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-  gap:7px;
+  padding:
+    45px 0;
 
-  margin-bottom:78px;
+  content-visibility:auto;
 
-  opacity:0;
-
-  transform:
-    translateY(50px)
-    scale(.97);
-
-  transition:
-    opacity .9s ease,
-    transform .9s
-    cubic-bezier(.16,.8,.2,1);
+  contain-intrinsic-size:
+    700px;
 }
 
-.age.visible{
-  opacity:1;
-
-  transform:
-    translateY(0)
-    scale(1);
+.yearInner{
+  width:100%;
 }
 
-.age:nth-child(odd)
-.photoCard{
-  transform:
-    rotate(-1.8deg);
-}
 
-.age:nth-child(even)
-.photoCard{
-  transform:
-    rotate(1.7deg);
+/* AGE */
+
+.ageRow{
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  margin:
+    0 5px
+    13px;
 }
 
 .ageNumber{
-  width:46px;
-  height:46px;
-
-  margin-top:18px;
-
-  border-radius:50%;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
   font-family:
     Georgia,
     "Times New Roman",
     serif;
 
-  font-size:17px;
+  font-size:40px;
 
-  color:#30264c;
+  line-height:1;
+
+  color:#ffd5bc;
+}
+
+.ageLine{
+  height:1px;
+
+  flex:1;
 
   background:
-    linear-gradient(
-      145deg,
-      #fff1cd,
-      #ffd2b8
-    );
-
-  box-shadow:
-    0 10px 30px
-    rgba(10,12,40,.25);
-
-  z-index:4;
+    rgba(255,255,255,.15);
 }
 
+.ageText{
+  font-size:9px;
 
-/* ======================================
-   PHOTO CARD
-====================================== */
-
-.photoCard{
-  position:relative;
-
-  padding:11px;
-
-  border-radius:24px;
-
-  background:
-    rgba(255,255,255,.10);
-
-  border:
-    1px solid
-    rgba(255,255,255,.20);
-
-  backdrop-filter:
-    blur(17px);
-
-  box-shadow:
-    0 24px 65px
-    rgba(8,10,38,.28);
-
-  transition:
-    transform .35s ease;
-}
-
-.photoWrap{
-  width:100%;
-
-  aspect-ratio:4/5;
-
-  border-radius:18px;
-
-  overflow:hidden;
-
-  position:relative;
-
-  background:
-    linear-gradient(
-      145deg,
-      rgba(255,255,255,.20),
-      rgba(255,255,255,.07)
-    );
-}
-
-.photoWrap img{
-  width:100%;
-  height:100%;
-
-  object-fit:cover;
-
-  display:block;
-}
-
-.placeholder{
-  position:absolute;
-
-  inset:0;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  text-align:center;
-
-  padding:20px;
-
-  font-size:11px;
-
-  letter-spacing:.15em;
-
-  text-transform:uppercase;
+  letter-spacing:.25em;
 
   color:
     rgba(255,255,255,.48);
-}
-
-
-/* ======================================
-   CARD TEXT
-====================================== */
-
-.photoInfo{
-  padding:
-    15px 5px
-    5px;
-}
-
-.photoAge{
-  font-size:10px;
-
-  letter-spacing:.23em;
 
   text-transform:uppercase;
-
-  color:#f2c6b8;
-}
-
-.photoCaption{
-  margin-top:7px;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:23px;
-
-  font-weight:400;
-
-  line-height:1.1;
-
-  color:#fff;
 }
 
 
-/* ======================================
-   MEMORY QUOTES
-====================================== */
+/* PHOTO */
 
-.memoryQuote{
+.photoCard{
+  width:100%;
+
+  padding:6px;
+
+  overflow:hidden;
+
+  border-radius:23px;
+
+  background:
+    rgba(255,255,255,.075);
+
+  border:
+    1px solid
+    rgba(255,255,255,.10);
+
+  box-shadow:
+    0 22px 55px
+    rgba(8,10,35,.20);
+}
+
+.photoCard img{
+  width:100%;
+  height:auto;
+
+  display:block;
+
+  border-radius:18px;
+
+  object-fit:cover;
+
+  background:#272d61;
+}
+
+.year:nth-child(odd) .photoCard{
+  transform:rotate(-.45deg);
+}
+
+.year:nth-child(even) .photoCard{
+  transform:rotate(.45deg);
+}
+
+
+/* CAPTION */
+
+.caption{
   margin:
-    15px 15px
-    95px 72px;
-
-  padding:
-    30px 22px;
-
-  text-align:center;
+    17px 7px
+    0;
 
   font-family:
     Georgia,
@@ -599,122 +352,118 @@ body{
 
   font-size:
     clamp(
-      25px,
-      7vw,
-      40px
+      22px,
+      6.3vw,
+      30px
     );
 
-  font-style:italic;
+  line-height:1.15;
 
-  line-height:1.25;
-
-  color:#ffe2d0;
-
-  opacity:0;
-
-  transform:
-    translateY(30px);
-
-  transition:
-    .8s ease;
-}
-
-.memoryQuote.visible{
-  opacity:1;
-
-  transform:
-    translateY(0);
+  color:#ffe0cf;
 }
 
 
-/* ======================================
-   AGE 20
-====================================== */
+/* MEMORY BREAK */
 
-.age.final{
-  margin-top:40px;
-}
-
-.age.final .ageNumber{
-  width:54px;
-  height:54px;
-
-  margin-left:-4px;
-
-  font-size:20px;
-
-  background:
-    linear-gradient(
-      145deg,
-      #fff4c8,
-      #ffbf99
-    );
-
-  box-shadow:
-    0 0 30px
-    rgba(255,209,160,.28);
-}
-
-.age.final .photoCard{
-  border:
-    1px solid
-    rgba(255,220,175,.45);
-
-  box-shadow:
-    0 35px 90px
-    rgba(13,12,48,.38);
-}
-
-
-/* ======================================
-   END
-====================================== */
-
-.memoryEnd{
-  min-height:85svh;
+.memoryBreak{
+  min-height:46svh;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
+  padding:
+    45px 22px;
+
   text-align:center;
+}
+
+.memoryBreak p{
+  max-width:400px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      30px,
+      8vw,
+      46px
+    );
+
+  line-height:1.17;
+
+  font-style:italic;
+
+  color:#ffe0cf;
+}
+
+
+/* AGE 20 */
+
+.year.twenty{
+  padding-top:65px;
+}
+
+.year.twenty .ageNumber{
+  font-size:50px;
+  color:#ffebb3;
+}
+
+.year.twenty .photoCard{
+  border:
+    1px solid
+    rgba(255,226,177,.27);
+
+  box-shadow:
+    0 28px 65px
+    rgba(6,8,30,.27);
+}
+
+
+/* END */
+
+.end{
+  min-height:90svh;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
   padding:
-    80px 26px;
+    70px 24px;
 
-  position:relative;
+  text-align:center;
 
   background:
-    radial-gradient(
-      circle at 50% 20%,
-      rgba(255,211,165,.23),
-      transparent 28%
-    ),
     linear-gradient(
-      155deg,
-      rgba(18,27,67,.7),
-      rgba(71,60,136,.82),
-      rgba(139,81,115,.88)
+      160deg,
+      #171f48,
+      #49427f,
+      #8b5b80
     );
 }
 
-.memoryEndInner{
-  max-width:520px;
+.endInner{
+  width:100%;
+  max-width:450px;
 }
 
 .endSmall{
   font-size:10px;
 
-  letter-spacing:.31em;
+  letter-spacing:.3em;
+
+  color:#f1c7b9;
 
   text-transform:uppercase;
-
-  color:#f4cabb;
-
-  margin-bottom:18px;
 }
 
 .endTitle{
+  margin-top:17px;
+
   font-family:
     Georgia,
     "Times New Roman",
@@ -722,48 +471,60 @@ body{
 
   font-size:
     clamp(
-      42px,
+      43px,
       12vw,
-      78px
+      72px
     );
 
   font-weight:400;
 
-  line-height:.98;
+  line-height:.94;
 
   letter-spacing:-.045em;
 }
 
-.endText{
-  margin:
-    22px auto 0;
+.endTitle span{
+  display:block;
 
+  color:#ffd5bd;
+
+  font-style:italic;
+}
+
+.endText{
   max-width:340px;
 
-  font-size:15px;
+  margin:
+    23px auto 0;
 
   line-height:1.65;
 
   color:
-    rgba(255,255,255,.73);
+    rgba(255,255,255,.68);
+
+  font-size:14px;
 }
 
 .gameButton{
-  display:inline-flex;
+  display:inline-block;
 
-  align-items:center;
-  justify-content:center;
-
-  margin-top:34px;
-
-  min-width:180px;
+  margin-top:30px;
 
   padding:
-    16px 28px;
+    16px 29px;
 
   border-radius:999px;
 
   text-decoration:none;
+
+  color:#342f68;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff0d0,
+      #ffd3bd
+    );
 
   font-size:12px;
 
@@ -771,109 +532,99 @@ body{
 
   letter-spacing:.14em;
 
-  color:#342d6e;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff3d4,
-      #ffd8c4
-    );
-
   box-shadow:
-    0 18px 50px
-    rgba(12,13,45,.28);
-
-  transition:
-    transform .25s ease;
-}
-
-.gameButton:active{
-  transform:
-    scale(.95);
+    0 16px 40px
+    rgba(7,9,35,.22);
 }
 
 
-/* ======================================
-   DESKTOP
-====================================== */
-
-@media(min-width:760px){
-
-  .timelineLine{
-    left:50%;
-  }
-
-  .age{
-    grid-template-columns:
-      1fr 72px 1fr;
-
-    align-items:center;
-  }
-
-  .ageNumber{
-    grid-column:2;
-
-    margin:
-      0 auto;
-  }
-
-  .age:nth-child(odd)
-  .photoCard{
-    grid-column:1;
-    grid-row:1;
-
-    margin-right:12px;
-  }
-
-  .age:nth-child(even)
-  .photoCard{
-    grid-column:3;
-    grid-row:1;
-
-    margin-left:12px;
-  }
-
-  .memoryQuote{
-    margin:
-      20px auto
-      100px;
-
-    max-width:600px;
-  }
-
-}
-
-
-/* ======================================
-   MOBILE
-====================================== */
+/* MOBILE */
 
 @media(max-width:600px){
 
   .hero{
-    min-height:100svh;
+    min-height:88svh;
+
+    padding:
+      65px 18px
+      45px;
   }
 
-  .timeline{
-    padding-left:15px;
-    padding-right:15px;
+  .heroTitle{
+    font-size:
+      clamp(
+        55px,
+        17vw,
+        78px
+      );
   }
 
-  .timelineLine{
-    left:31px;
+  #story{
+    padding-left:10px;
+    padding-right:10px;
+  }
+
+  .year{
+    min-height:auto;
+
+    padding:
+      38px 0
+      58px;
   }
 
   .photoCard{
-    border-radius:23px;
+    border-radius:20px;
   }
 
-  .photoWrap{
-    border-radius:17px;
+  .photoCard img{
+    width:100%;
+    height:auto;
+
+    border-radius:15px;
   }
 
-  .age{
-    margin-bottom:68px;
+  .ageNumber{
+    font-size:35px;
+  }
+
+  .caption{
+    font-size:23px;
+  }
+
+  .memoryBreak{
+    min-height:38svh;
+
+    padding:
+      35px 18px;
+  }
+
+  .memoryBreak p{
+    font-size:
+      clamp(
+        28px,
+        8.5vw,
+        40px
+      );
+  }
+
+}
+
+
+/* DESKTOP */
+
+@media(min-width:750px){
+
+  .photoCard,
+  .ageRow,
+  .caption{
+    max-width:490px;
+
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .ageRow{
+    margin-bottom:13px;
   }
 
 }
@@ -885,25 +636,20 @@ body{
 <body>
 
 
-<div class="pageBackground"></div>
-
-<div class="haze one"></div>
-<div class="haze two"></div>
-
-
-<!-- ======================================
-     MUSIC
-====================================== -->
+<!-- MUSIC -->
 
 <audio
-  id="memoryMusic"
+  id="music"
   loop
-  preload="auto"
+  playsinline
+  preload="metadata"
 >
+
   <source
     src="memories-song.mp3"
     type="audio/mpeg"
   >
+
 </audio>
 
 
@@ -911,44 +657,44 @@ body{
   id="musicButton"
   aria-label="Toggle music"
 >
-♫
+  ♪
 </button>
 
 
 
-<!-- ======================================
-     HERO
-====================================== -->
+<!-- HERO -->
 
 <section class="hero">
 
 <div class="heroInner">
 
-<div class="heroTop">
-20 YEARS OF KAMI
-</div>
+  <div class="heroSmall">
+    20 YEARS OF KAMI
+  </div>
 
-<h1 class="heroTitle">
+  <h1 class="heroTitle">
 
-Once upon
-<em>a life.</em>
+    Once upon
 
-</h1>
+    <span>
+      a life.
+    </span>
 
-<p class="heroText">
+  </h1>
 
-Twenty years.
-Twenty versions of you.
-Some you remember,
-some you probably don't.
+  <p class="heroText">
 
-</p>
+    Twenty years.
+    Twenty versions of you.
 
-<div class="scrollText">
+    Some you remember.
+    Some you probably don't.
 
-scroll to go back in time ↓
+  </p>
 
-</div>
+  <div class="scrollHint">
+    scroll to go back in time ↓
+  </div>
 
 </div>
 
@@ -956,765 +702,48 @@ scroll to go back in time ↓
 
 
 
-<!-- ======================================
-     CHAPTER
-====================================== -->
+<!-- STORY -->
 
-<section class="chapter">
+<main id="story"></main>
 
-<div class="chapterNumber">
-Chapter One
-</div>
 
-<h2 class="chapterTitle">
 
-Where it all started.
+<!-- END -->
 
-</h2>
+<section class="end">
 
-</section>
+<div class="endInner">
 
+  <div class="endSmall">
+    END OF CHAPTER ONE
+  </div>
 
+  <div class="endTitle">
 
-<!-- ======================================
-     TIMELINE
-====================================== -->
+    Before the
 
-<section class="timeline">
+    <span>
+      big surprise...
+    </span>
 
-<div class="timelineLine"></div>
+  </div>
 
+  <p class="endText">
 
-<!-- AGE 1 -->
+    You've just survived
+    twenty years of photos.
 
-<article class="age">
+    Now let's see if you can survive
+    one little game.
 
-<div class="ageNumber">
-1
-</div>
+  </p>
 
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<!--
-<img
-src="photos/age-01.jpg"
-alt="Kami at age 1"
->
--->
-
-<div class="placeholder">
-AGE 1 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 1
-</div>
-
-<div class="photoCaption">
-The beginning.
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<!-- AGE 2 -->
-
-<article class="age">
-
-<div class="ageNumber">
-2
-</div>
-
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<div class="placeholder">
-AGE 2 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 2
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<!-- AGE 3 -->
-
-<article class="age">
-
-<div class="ageNumber">
-3
-</div>
-
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<div class="placeholder">
-AGE 3 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 3
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<!-- AGE 4 -->
-
-<article class="age">
-
-<div class="ageNumber">
-4
-</div>
-
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<div class="placeholder">
-AGE 4 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 4
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<div class="memoryQuote">
-
-we have many photos
-wait for the memories.
-
-</div>
-
-
-
-<!-- AGE 5 -->
-
-<article class="age">
-
-<div class="ageNumber">
-5
-</div>
-
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<div class="placeholder">
-AGE 5 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 5
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<!-- AGE 6 -->
-
-<article class="age">
-
-<div class="ageNumber">
-6
-</div>
-
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<div class="placeholder">
-AGE 6 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 6
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<!-- AGE 7 -->
-
-<article class="age">
-
-<div class="ageNumber">
-7
-</div>
-
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<div class="placeholder">
-AGE 7 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 7
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<!-- AGE 8 -->
-
-<article class="age">
-
-<div class="ageNumber">
-8
-</div>
-
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<div class="placeholder">
-AGE 8 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 8
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<!-- AGE 9 -->
-
-<article class="age">
-
-<div class="ageNumber">
-9
-</div>
-
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<div class="placeholder">
-AGE 9 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 9
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<!-- AGE 10 -->
-
-<article class="age">
-
-<div class="ageNumber">
-10
-</div>
-
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<div class="placeholder">
-AGE 10 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 10
-</div>
-
-<div class="photoCaption">
-Double digits.
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<div class="memoryQuote">
-
-Halfway to twenty.
-
-</div>
-
-
-
-<!-- AGE 11 -->
-
-<article class="age">
-
-<div class="ageNumber">
-11
-</div>
-
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<div class="placeholder">
-AGE 11 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 11
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<!-- AGE 12 -->
-
-<article class="age">
-
-<div class="ageNumber">
-12
-</div>
-
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<div class="placeholder">
-AGE 12 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 12
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<!-- AGE 13 -->
-
-<article class="age">
-
-<div class="ageNumber">
-13
-</div>
-
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<div class="placeholder">
-AGE 13 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 13
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<!-- AGE 14 -->
-
-<article class="age">
-
-<div class="ageNumber">
-14
-</div>
-
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<div class="placeholder">
-AGE 14 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 14
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<!-- AGE 15 -->
-
-<article class="age">
-
-<div class="ageNumber">
-15
-</div>
-
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<div class="placeholder">
-AGE 15 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 15
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<div class="memoryQuote">
-
-Somewhere along the way,
-childhood became memories.
-
-</div>
-
-
-
-<!-- AGE 16 -->
-
-<article class="age">
-
-<div class="ageNumber">
-16
-</div>
-
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<div class="placeholder">
-AGE 16 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 16
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<!-- AGE 17 -->
-
-<article class="age">
-
-<div class="ageNumber">
-17
-</div>
-
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<div class="placeholder">
-AGE 17 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 17
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<!-- AGE 18 -->
-
-<article class="age">
-
-<div class="ageNumber">
-18
-</div>
-
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<div class="placeholder">
-AGE 18 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 18
-</div>
-
-<div class="photoCaption">
-Officially you became...
-a dangerous driver!
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<!-- AGE 19 -->
-
-<article class="age">
-
-<div class="ageNumber">
-19
-</div>
-
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<div class="placeholder">
-AGE 19 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 19
-</div>
-
-<div class="photoCaption">
-One last year.
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-
-<!-- AGE 20 -->
-
-<article class="age final">
-
-<div class="ageNumber">
-20
-</div>
-
-<div class="photoCard">
-
-<div class="photoWrap">
-
-<div class="placeholder">
-AGE 20 PHOTO
-</div>
-
-</div>
-
-<div class="photoInfo">
-
-<div class="photoAge">
-AGE 20
-</div>
-
-<div class="photoCaption">
-And here we are.
-</div>
-
-</div>
-
-</div>
-
-</article>
-
-
-</section>
-
-
-
-<!-- ======================================
-     END / GAME
-====================================== -->
-
-<section class="memoryEnd">
-
-<div class="memoryEndInner">
-
-<div class="endSmall">
-END OF CHAPTER ONE
-</div>
-
-<h2 class="endTitle">
-Before the
-big surprise...
-</h2>
-
-<p class="endText">
-
-You've just survived
-twenty years of photos.
-
-Now let's see if you can survive
-one little game.
-
-</p>
-
-<a
-href="game.html"
-class="gameButton"
->
-PLAY THE GAME
-</a>
+  <a
+    href="game.html"
+    class="gameButton"
+  >
+    PLAY THE GAME
+  </a>
 
 </div>
 
@@ -1724,87 +753,317 @@ PLAY THE GAME
 
 <script>
 
-/* =====================================
-   SCROLL REVEALS
-===================================== */
+/* =========================
+   PHOTOS
+========================= */
 
-const revealItems =
-document.querySelectorAll(
-".age, .memoryQuote"
+const photos = [
+
+  {
+    age:1,
+    file:"photos/age-01.jpeg",
+    caption:"The beginning."
+  },
+
+  {
+    age:2,
+    file:"photos/age-02.jpeg",
+    caption:""
+  },
+
+  {
+    age:3,
+    file:"photos/age-03.jpeg",
+    caption:""
+  },
+
+  {
+    age:4,
+    file:"photos/age-04.jpeg",
+    caption:""
+  },
+
+  {
+    age:5,
+    file:"photos/age-05.jpeg",
+    caption:""
+  },
+
+  {
+    age:6,
+    file:"photos/age-06.jpeg",
+    caption:""
+  },
+
+  {
+    age:7,
+    file:"photos/age-07.jpeg",
+    caption:""
+  },
+
+  {
+    age:8,
+    file:"photos/age-08.jpeg",
+    caption:""
+  },
+
+  {
+    age:9,
+    file:"photos/age-09.jpeg",
+    caption:""
+  },
+
+  {
+    age:10,
+    file:"photos/age-10.jpeg",
+    caption:"Double digits."
+  },
+
+  {
+    age:11,
+    file:"photos/age-11.jpeg",
+    caption:""
+  },
+
+  {
+    age:12,
+    file:"photos/age-12.jpeg",
+    caption:""
+  },
+
+  {
+    age:13,
+    file:"photos/age-13.jpeg",
+    caption:""
+  },
+
+  {
+    age:14,
+    file:"photos/age-14.jpeg",
+    caption:""
+  },
+
+  {
+    age:15,
+    file:"photos/age-15.jpeg",
+    caption:""
+  },
+
+  {
+    age:16,
+    file:"photos/age-16.jpeg",
+    caption:""
+  },
+
+  {
+    age:17,
+    file:"photos/age-17.jpeg",
+    caption:""
+  },
+
+  {
+    age:18,
+    file:"photos/age-18.jpeg",
+    caption:"Officially grown up. Supposedly."
+  },
+
+  {
+    age:19,
+    file:"photos/age-19.jpeg",
+    caption:"One last year before twenty."
+  },
+
+  {
+    age:20,
+    file:"photos/age-20.jpeg",
+    caption:"And here we are."
+  }
+
+];
+
+
+const story =
+document.getElementById("story");
+
+
+photos.forEach(
+(photo,index)=>{
+
+  const year =
+  document.createElement("section");
+
+
+  year.className =
+  "year";
+
+
+  if(photo.age===20){
+
+    year.classList.add(
+      "twenty"
+    );
+
+  }
+
+
+  const loadingType =
+  index < 2
+  ?
+  "eager"
+  :
+  "lazy";
+
+
+  year.innerHTML = `
+
+    <div class="yearInner">
+
+
+      <div class="ageRow">
+
+
+        <div class="ageNumber">
+
+          ${photo.age}
+
+        </div>
+
+
+        <div class="ageLine"></div>
+
+
+        <div class="ageText">
+
+          AGE ${photo.age}
+
+        </div>
+
+
+      </div>
+
+
+
+      <div class="photoCard">
+
+
+        <img
+          src="${photo.file}"
+          alt="Kami age ${photo.age}"
+          loading="${loadingType}"
+          decoding="async"
+        >
+
+
+      </div>
+
+
+      ${
+        photo.caption
+        ?
+        `
+        <div class="caption">
+          ${photo.caption}
+        </div>
+        `
+        :
+        ""
+      }
+
+
+    </div>
+
+  `;
+
+
+  story.appendChild(
+    year
+  );
+
+
+  if(photo.age===5){
+
+    addBreak(
+      "we have many photos
+      so just admire them."
+    );
+
+  }
+
+
+  if(photo.age===10){
+
+    addBreak(
+      "Halfway to twenty."
+    );
+
+  }
+
+
+  if(photo.age===15){
+
+    addBreak(
+      "Somewhere along the way, childhood became memories."
+    );
+
+  }
+
+
+}
 );
 
-const observer =
-new IntersectionObserver(
 
-(entries)=>{
+function addBreak(text){
 
-entries.forEach(
+  const section =
+  document.createElement(
+    "section"
+  );
 
-entry=>{
 
-if(
-entry.isIntersecting
-){
+  section.className =
+  "memoryBreak";
 
-entry.target
-.classList
-.add("visible");
+
+  section.innerHTML =
+  `<p>${text}</p>`;
+
+
+  story.appendChild(
+    section
+  );
 
 }
 
-}
-
-);
-
-},
-
-{
-threshold:.14
-}
-
-);
-
-revealItems.forEach(
-item =>
-observer.observe(item)
-);
 
 
-
-/* =====================================
+/* =========================
    MUSIC
-===================================== */
+========================= */
 
 const music =
 document.getElementById(
-"memoryMusic"
+  "music"
 );
 
 const musicButton =
 document.getElementById(
-"musicButton"
+  "musicButton"
 );
 
-let musicPlaying = false;
+
+music.volume = 0.35;
 
 
-/*
-Try to start music
-when the page loads
-*/
+
+/* TRY AUTOPLAY */
 
 window.addEventListener(
 "load",
-async ()=>{
-
-  music.loop = true;
-  music.volume = .35;
+async()=>{
 
   try{
 
     await music.play();
-
-    musicPlaying = true;
 
     musicButton.textContent =
     "♫";
@@ -1813,7 +1072,10 @@ async ()=>{
 
   catch(error){
 
-    musicPlaying = false;
+    console.log(
+      "Autoplay blocked:",
+      error
+    );
 
     musicButton.textContent =
     "♪";
@@ -1824,13 +1086,12 @@ async ()=>{
 );
 
 
-/*
-Manual toggle
-*/
+
+/* MUSIC BUTTON */
 
 musicButton.addEventListener(
 "click",
-async ()=>{
+async()=>{
 
   if(
     music.paused
@@ -1840,22 +1101,29 @@ async ()=>{
 
       await music.play();
 
-      musicPlaying = true;
-
       musicButton.textContent =
       "♫";
 
     }
 
-    catch(error){}
+    catch(error){
+
+      console.log(
+        "Music error:",
+        error
+      );
+
+      alert(
+        "Music could not start."
+      );
+
+    }
 
   }
 
   else{
 
     music.pause();
-
-    musicPlaying = false;
 
     musicButton.textContent =
     "♪";
@@ -1865,7 +1133,113 @@ async ()=>{
 }
 );
 
+
+
+/* =========================
+   FIRST MOBILE TOUCH
+========================= */
+
+let triedTouch = false;
+
+
+async function startFromTouch(){
+
+  if(triedTouch){
+    return;
+  }
+
+
+  triedTouch = true;
+
+
+  if(!music.paused){
+    return;
+  }
+
+
+  try{
+
+    await music.play();
+
+    musicButton.textContent =
+    "♫";
+
+  }
+
+  catch(error){
+
+    console.log(
+      "Mobile play blocked:",
+      error
+    );
+
+  }
+
+}
+
+
+document.addEventListener(
+  "touchstart",
+  startFromTouch,
+  {
+    once:true,
+    passive:true
+  }
+);
+
+
+document.addEventListener(
+  "pointerdown",
+  startFromTouch,
+  {
+    once:true,
+    passive:true
+  }
+);
+
+
+
+/* UPDATE ICON */
+
+music.addEventListener(
+"play",
+()=>{
+
+  musicButton.textContent =
+  "♫";
+
+}
+);
+
+
+music.addEventListener(
+"pause",
+()=>{
+
+  musicButton.textContent =
+  "♪";
+
+}
+);
+
+
+
+/* AUDIO ERROR */
+
+music.addEventListener(
+"error",
+()=>{
+
+  console.log(
+    "Audio error:",
+    music.error
+  );
+
+}
+);
+
 </script>
+
 
 </body>
 </html>
