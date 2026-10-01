@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
@@ -10,19 +9,14 @@
   content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 >
 
-<title>20 Years of Kami</title>
+<title>Kami — 20 Years</title>
 
 <style>
-
-/* =========================================
-   RESET
-========================================= */
 
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
 }
 
 html{
@@ -31,169 +25,91 @@ html{
 
 body{
   overflow-x:hidden;
-
-  font-family:
-    Arial,
-    Helvetica,
-    sans-serif;
-
-  color:white;
-
-  background:
-    linear-gradient(
-      180deg,
-      #141c40 0%,
-      #30366f 25%,
-      #594580 55%,
-      #865779 78%,
-      #a66f87 100%
-    );
+  font-family:Arial,Helvetica,sans-serif;
+  color:#fff;
+  background:#151c44;
 }
 
 
-/* =========================================
-   START MUSIC SCREEN
-========================================= */
+/* ======================================
+   BACKGROUND
+====================================== */
 
-#startScreen{
+.pageBackground{
   position:fixed;
   inset:0;
-
-  z-index:9999;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:25px;
-
-  text-align:center;
+  z-index:-10;
 
   background:
     radial-gradient(
-      circle at 50% 25%,
-      rgba(255,214,190,.15),
-      transparent 35%
+      circle at 18% 12%,
+      rgba(255,174,204,.28),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 85% 32%,
+      rgba(115,133,255,.28),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 50% 84%,
+      rgba(255,213,160,.17),
+      transparent 38%
     ),
     linear-gradient(
-      160deg,
-      #11182f,
-      #292c60,
-      #634675
+      180deg,
+      #172250 0%,
+      #403d85 34%,
+      #735093 65%,
+      #9b617f 100%
     );
-
-  transition:
-    opacity .7s ease,
-    visibility .7s ease;
 }
 
-#startScreen.hide{
-  opacity:0;
-  visibility:hidden;
+.haze{
+  position:fixed;
+  width:90vw;
+  height:90vw;
+  border-radius:50%;
+  filter:blur(80px);
+  opacity:.22;
+  z-index:-8;
   pointer-events:none;
 }
 
-.startInner{
-  width:100%;
-  max-width:450px;
+.haze.one{
+  background:#ff9dcc;
+  top:-20vw;
+  left:-25vw;
+  animation:floatOne 12s ease-in-out infinite alternate;
 }
 
-.startSmall{
-  font-size:10px;
-
-  letter-spacing:.32em;
-
-  text-transform:uppercase;
-
-  color:#ffd2bc;
+.haze.two{
+  background:#8892ff;
+  right:-30vw;
+  top:45vh;
+  animation:floatTwo 14s ease-in-out infinite alternate;
 }
 
-.startTitle{
-  margin-top:18px;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:
-    clamp(
-      48px,
-      14vw,
-      78px
-    );
-
-  font-weight:400;
-
-  line-height:.96;
-
-  letter-spacing:-.045em;
+@keyframes floatOne{
+  to{
+    transform:
+      translate(15vw,8vh)
+      scale(1.12);
+  }
 }
 
-.startTitle span{
-  display:block;
-
-  margin-top:7px;
-
-  color:#ffd6bd;
-
-  font-style:italic;
-}
-
-.startText{
-  max-width:320px;
-
-  margin:
-    21px auto 0;
-
-  font-size:14px;
-
-  line-height:1.65;
-
-  color:
-    rgba(255,255,255,.66);
-}
-
-#startButton{
-  margin-top:29px;
-
-  padding:
-    16px 28px;
-
-  border:none;
-
-  border-radius:999px;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff0cf,
-      #ffd0ba
-    );
-
-  color:#322f67;
-
-  font-size:12px;
-
-  font-weight:900;
-
-  letter-spacing:.14em;
-
-  cursor:pointer;
-
-  box-shadow:
-    0 16px 45px
-    rgba(5,8,30,.25);
-}
-
-#startButton:active{
-  transform:scale(.96);
+@keyframes floatTwo{
+  to{
+    transform:
+      translate(-12vw,-8vh)
+      scale(1.15);
+  }
 }
 
 
-/* =========================================
+/* ======================================
    MUSIC BUTTON
-========================================= */
+====================================== */
 
 #musicButton{
   position:fixed;
@@ -201,75 +117,112 @@ body{
   top:
     calc(
       env(safe-area-inset-top)
-      + 14px
+      +
+      16px
     );
 
-  right:14px;
+  right:16px;
 
-  z-index:900;
+  z-index:100;
 
   width:44px;
   height:44px;
 
-  border:none;
-
   border-radius:50%;
 
+  border:
+    1px solid
+    rgba(255,255,255,.20);
+
   background:
-    rgba(18,22,54,.88);
+    rgba(20,24,61,.52);
 
   color:white;
 
   font-size:18px;
 
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  backdrop-filter:blur(15px);
+
   cursor:pointer;
 
   box-shadow:
-    0 8px 24px
-    rgba(0,0,0,.22);
-}
-
-#musicButton:active{
-  transform:scale(.94);
+    0 10px 30px
+    rgba(10,12,40,.25);
 }
 
 
-/* =========================================
+/* ======================================
    HERO
-========================================= */
+====================================== */
 
 .hero{
-  min-height:92svh;
+  min-height:100svh;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  padding:
-    70px 22px
-    50px;
-
   text-align:center;
+
+  padding:
+    70px 25px;
+
+  position:relative;
+
+  overflow:hidden;
+}
+
+.hero::after{
+  content:"";
+
+  position:absolute;
+
+  width:380px;
+  height:380px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,224,176,.27),
+      transparent 68%
+    );
+
+  filter:blur(20px);
+
+  left:50%;
+  top:42%;
+
+  transform:
+    translate(-50%,-50%);
 }
 
 .heroInner{
-  width:100%;
-  max-width:570px;
+  position:relative;
+
+  z-index:3;
+
+  max-width:600px;
 }
 
-.heroSmall{
-  font-size:10px;
+.heroTop{
+  font-size:11px;
 
   letter-spacing:.34em;
 
   text-transform:uppercase;
 
-  color:#f0c4b6;
+  color:#f5d9ca;
+
+  margin-bottom:20px;
 }
 
 .heroTitle{
-  margin-top:17px;
-
   font-family:
     Georgia,
     "Times New Roman",
@@ -277,30 +230,32 @@ body{
 
   font-size:
     clamp(
-      56px,
-      16vw,
-      100px
+      60px,
+      18vw,
+      115px
     );
 
-  line-height:.84;
+  font-weight:400;
 
   letter-spacing:-.06em;
 
-  font-weight:400;
+  line-height:.82;
+
+  text-shadow:
+    0 18px 50px
+    rgba(10,12,40,.35);
 }
 
-.heroTitle span{
+.heroTitle em{
   display:block;
 
-  margin-top:7px;
+  font-weight:400;
 
-  color:#ffd5bd;
-
-  font-style:italic;
+  color:#ffd8c0;
 }
 
 .heroText{
-  max-width:350px;
+  max-width:390px;
 
   margin:
     28px auto 0;
@@ -310,308 +265,456 @@ body{
   line-height:1.7;
 
   color:
-    rgba(255,255,255,.70);
+    rgba(255,255,255,.74);
 }
 
-.scrollHint{
-  margin-top:45px;
+.scrollText{
+  margin-top:48px;
 
-  font-size:9px;
+  font-size:10px;
 
-  letter-spacing:.25em;
+  letter-spacing:.28em;
 
   text-transform:uppercase;
 
   color:
-    rgba(255,255,255,.40);
+    rgba(255,255,255,.55);
 
   animation:
-    floating
+    floatScroll
     1.8s
     ease-in-out
     infinite;
 }
 
-@keyframes floating{
-
+@keyframes floatScroll{
   50%{
-    transform:translateY(7px);
+    transform:
+      translateY(8px);
   }
-
 }
 
 
-/* =========================================
-   STORY
-========================================= */
+/* ======================================
+   CHAPTER
+====================================== */
 
-#story{
-  width:100%;
+.chapter{
+  text-align:center;
 
-  max-width:650px;
+  padding:
+    80px 25px
+    35px;
+}
+
+.chapterNumber{
+  font-size:10px;
+
+  letter-spacing:.3em;
+
+  text-transform:uppercase;
+
+  color:#efc9bc;
+}
+
+.chapterTitle{
+  margin-top:12px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      36px,
+      11vw,
+      70px
+    );
+
+  font-weight:400;
+
+  letter-spacing:-.04em;
+}
+
+
+/* ======================================
+   TIMELINE
+====================================== */
+
+.timeline{
+  width:min(100%,760px);
 
   margin:auto;
 
   padding:
-    0 12px
-    80px;
+    20px 18px
+    110px;
+
+  position:relative;
 }
 
+.timelineLine{
+  position:absolute;
 
-/* =========================================
-   YEAR
-========================================= */
+  left:31px;
 
-.year{
-  width:100%;
+  top:30px;
+  bottom:90px;
 
-  padding:
-    42px 0
-    60px;
-
-  content-visibility:auto;
-
-  contain-intrinsic-size:
-    700px;
-}
-
-.yearInner{
-  width:100%;
-}
-
-
-/* =========================================
-   AGE
-========================================= */
-
-.ageRow{
-  display:flex;
-
-  align-items:center;
-
-  gap:12px;
-
-  margin:
-    0 5px
-    13px;
-}
-
-.ageNumber{
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:40px;
-
-  line-height:1;
-
-  color:#ffd5bc;
-}
-
-.ageLine{
-  height:1px;
-
-  flex:1;
-
-  background:
-    rgba(255,255,255,.15);
-}
-
-.ageText{
-  font-size:9px;
-
-  letter-spacing:.25em;
-
-  color:
-    rgba(255,255,255,.48);
-
-  text-transform:uppercase;
-}
-
-
-/* =========================================
-   PHOTO CARD
-========================================= */
-
-.photoCard{
-  width:100%;
-
-  padding:6px;
-
-  overflow:hidden;
-
-  border-radius:23px;
-
-  background:
-    rgba(255,255,255,.075);
-
-  border:
-    1px solid
-    rgba(255,255,255,.10);
-
-  box-shadow:
-    0 22px 55px
-    rgba(8,10,35,.20);
-}
-
-.photoCard img{
-  width:100%;
-  height:auto;
-
-  display:block;
-
-  border-radius:18px;
-
-  background:#272d61;
-}
-
-.year:nth-child(odd)
-.photoCard{
-  transform:rotate(-.45deg);
-}
-
-.year:nth-child(even)
-.photoCard{
-  transform:rotate(.45deg);
-}
-
-
-/* =========================================
-   CAPTION
-========================================= */
-
-.caption{
-  margin:
-    17px 7px
-    0;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:
-    clamp(
-      22px,
-      6.3vw,
-      30px
-    );
-
-  line-height:1.15;
-
-  color:#ffe0cf;
-}
-
-
-/* =========================================
-   MEMORY BREAK
-========================================= */
-
-.memoryBreak{
-  min-height:43svh;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:
-    45px 22px;
-
-  text-align:center;
-}
-
-.memoryBreak p{
-  max-width:400px;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:
-    clamp(
-      30px,
-      8vw,
-      46px
-    );
-
-  line-height:1.17;
-
-  font-style:italic;
-
-  color:#ffe0cf;
-}
-
-
-/* =========================================
-   AGE 20
-========================================= */
-
-.year.twenty{
-  padding-top:65px;
-}
-
-.year.twenty .ageNumber{
-  font-size:50px;
-
-  color:#ffebb3;
-}
-
-.year.twenty .photoCard{
-  border:
-    1px solid
-    rgba(255,226,177,.27);
-
-  box-shadow:
-    0 28px 65px
-    rgba(6,8,30,.27);
-}
-
-
-/* =========================================
-   END
-========================================= */
-
-.end{
-  min-height:90svh;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:
-    70px 24px;
-
-  text-align:center;
+  width:1px;
 
   background:
     linear-gradient(
-      160deg,
-      #171f48,
-      #49427f,
-      #8b5b80
+      to bottom,
+      transparent,
+      rgba(255,255,255,.25) 5%,
+      rgba(255,255,255,.25) 95%,
+      transparent
     );
 }
 
-.endInner{
+
+/* ======================================
+   AGE ITEM
+====================================== */
+
+.age{
+  position:relative;
+
+  display:grid;
+
+  grid-template-columns:
+    58px 1fr;
+
+  gap:7px;
+
+  margin-bottom:78px;
+
+  opacity:0;
+
+  transform:
+    translateY(50px)
+    scale(.97);
+
+  transition:
+    opacity .9s ease,
+    transform .9s
+    cubic-bezier(.16,.8,.2,1);
+}
+
+.age.visible{
+  opacity:1;
+
+  transform:
+    translateY(0)
+    scale(1);
+}
+
+.age:nth-child(odd)
+.photoCard{
+  transform:
+    rotate(-1.8deg);
+}
+
+.age:nth-child(even)
+.photoCard{
+  transform:
+    rotate(1.7deg);
+}
+
+.ageNumber{
+  width:46px;
+  height:46px;
+
+  margin-top:18px;
+
+  border-radius:50%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:17px;
+
+  color:#30264c;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff1cd,
+      #ffd2b8
+    );
+
+  box-shadow:
+    0 10px 30px
+    rgba(10,12,40,.25);
+
+  z-index:4;
+}
+
+
+/* ======================================
+   PHOTO CARD
+====================================== */
+
+.photoCard{
+  position:relative;
+
+  padding:11px;
+
+  border-radius:24px;
+
+  background:
+    rgba(255,255,255,.10);
+
+  border:
+    1px solid
+    rgba(255,255,255,.20);
+
+  backdrop-filter:
+    blur(17px);
+
+  box-shadow:
+    0 24px 65px
+    rgba(8,10,38,.28);
+
+  transition:
+    transform .35s ease;
+}
+
+.photoWrap{
   width:100%;
-  max-width:450px;
+
+  aspect-ratio:4/5;
+
+  border-radius:18px;
+
+  overflow:hidden;
+
+  position:relative;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.20),
+      rgba(255,255,255,.07)
+    );
+}
+
+.photoWrap img{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  display:block;
+}
+
+.placeholder{
+  position:absolute;
+
+  inset:0;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  padding:20px;
+
+  font-size:11px;
+
+  letter-spacing:.15em;
+
+  text-transform:uppercase;
+
+  color:
+    rgba(255,255,255,.48);
+}
+
+
+/* ======================================
+   CARD TEXT
+====================================== */
+
+.photoInfo{
+  padding:
+    15px 5px
+    5px;
+}
+
+.photoAge{
+  font-size:10px;
+
+  letter-spacing:.23em;
+
+  text-transform:uppercase;
+
+  color:#f2c6b8;
+}
+
+.photoCaption{
+  margin-top:7px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:23px;
+
+  font-weight:400;
+
+  line-height:1.1;
+
+  color:#fff;
+}
+
+
+/* ======================================
+   MEMORY QUOTES
+====================================== */
+
+.memoryQuote{
+  margin:
+    15px 15px
+    95px 72px;
+
+  padding:
+    30px 22px;
+
+  text-align:center;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      25px,
+      7vw,
+      40px
+    );
+
+  font-style:italic;
+
+  line-height:1.25;
+
+  color:#ffe2d0;
+
+  opacity:0;
+
+  transform:
+    translateY(30px);
+
+  transition:
+    .8s ease;
+}
+
+.memoryQuote.visible{
+  opacity:1;
+
+  transform:
+    translateY(0);
+}
+
+
+/* ======================================
+   AGE 20
+====================================== */
+
+.age.final{
+  margin-top:40px;
+}
+
+.age.final .ageNumber{
+  width:54px;
+  height:54px;
+
+  margin-left:-4px;
+
+  font-size:20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff4c8,
+      #ffbf99
+    );
+
+  box-shadow:
+    0 0 30px
+    rgba(255,209,160,.28);
+}
+
+.age.final .photoCard{
+  border:
+    1px solid
+    rgba(255,220,175,.45);
+
+  box-shadow:
+    0 35px 90px
+    rgba(13,12,48,.38);
+}
+
+
+/* ======================================
+   END
+====================================== */
+
+.memoryEnd{
+  min-height:85svh;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  padding:
+    80px 26px;
+
+  position:relative;
+
+  background:
+    radial-gradient(
+      circle at 50% 20%,
+      rgba(255,211,165,.23),
+      transparent 28%
+    ),
+    linear-gradient(
+      155deg,
+      rgba(18,27,67,.7),
+      rgba(71,60,136,.82),
+      rgba(139,81,115,.88)
+    );
+}
+
+.memoryEndInner{
+  max-width:520px;
 }
 
 .endSmall{
   font-size:10px;
 
-  letter-spacing:.3em;
-
-  color:#f1c7b9;
+  letter-spacing:.31em;
 
   text-transform:uppercase;
+
+  color:#f4cabb;
+
+  margin-bottom:18px;
 }
 
 .endTitle{
-  margin-top:17px;
-
   font-family:
     Georgia,
     "Times New Roman",
@@ -619,60 +722,48 @@ body{
 
   font-size:
     clamp(
-      43px,
+      42px,
       12vw,
-      72px
+      78px
     );
 
   font-weight:400;
 
-  line-height:.94;
+  line-height:.98;
 
   letter-spacing:-.045em;
 }
 
-.endTitle span{
-  display:block;
-
-  color:#ffd5bd;
-
-  font-style:italic;
-}
-
 .endText{
+  margin:
+    22px auto 0;
+
   max-width:340px;
 
-  margin:
-    23px auto 0;
+  font-size:15px;
 
   line-height:1.65;
 
   color:
-    rgba(255,255,255,.68);
-
-  font-size:14px;
+    rgba(255,255,255,.73);
 }
 
 .gameButton{
-  display:inline-block;
+  display:inline-flex;
 
-  margin-top:30px;
+  align-items:center;
+  justify-content:center;
+
+  margin-top:34px;
+
+  min-width:180px;
 
   padding:
-    16px 29px;
+    16px 28px;
 
   border-radius:999px;
 
   text-decoration:none;
-
-  color:#342f68;
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff0d0,
-      #ffd3bd
-    );
 
   font-size:12px;
 
@@ -680,222 +771,184 @@ body{
 
   letter-spacing:.14em;
 
+  color:#342d6e;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff3d4,
+      #ffd8c4
+    );
+
   box-shadow:
-    0 16px 40px
-    rgba(7,9,35,.22);
+    0 18px 50px
+    rgba(12,13,45,.28);
+
+  transition:
+    transform .25s ease;
+}
+
+.gameButton:active{
+  transform:
+    scale(.95);
 }
 
 
-/* =========================================
+/* ======================================
+   DESKTOP
+====================================== */
+
+@media(min-width:760px){
+
+  .timelineLine{
+    left:50%;
+  }
+
+  .age{
+    grid-template-columns:
+      1fr 72px 1fr;
+
+    align-items:center;
+  }
+
+  .ageNumber{
+    grid-column:2;
+
+    margin:
+      0 auto;
+  }
+
+  .age:nth-child(odd)
+  .photoCard{
+    grid-column:1;
+    grid-row:1;
+
+    margin-right:12px;
+  }
+
+  .age:nth-child(even)
+  .photoCard{
+    grid-column:3;
+    grid-row:1;
+
+    margin-left:12px;
+  }
+
+  .memoryQuote{
+    margin:
+      20px auto
+      100px;
+
+    max-width:600px;
+  }
+
+}
+
+
+/* ======================================
    MOBILE
-========================================= */
+====================================== */
 
 @media(max-width:600px){
 
   .hero{
-    min-height:88svh;
-
-    padding:
-      65px 18px
-      45px;
+    min-height:100svh;
   }
 
-  .heroTitle{
-    font-size:
-      clamp(
-        55px,
-        17vw,
-        78px
-      );
+  .timeline{
+    padding-left:15px;
+    padding-right:15px;
   }
 
-  #story{
-    padding-left:10px;
-    padding-right:10px;
-  }
-
-  .year{
-    padding:
-      36px 0
-      56px;
+  .timelineLine{
+    left:31px;
   }
 
   .photoCard{
-    border-radius:20px;
+    border-radius:23px;
   }
 
-  .photoCard img{
-    border-radius:15px;
+  .photoWrap{
+    border-radius:17px;
   }
 
-  .ageNumber{
-    font-size:35px;
-  }
-
-  .caption{
-    font-size:23px;
-  }
-
-  .memoryBreak{
-    min-height:37svh;
-
-    padding:
-      35px 18px;
-  }
-
-  .memoryBreak p{
-    font-size:
-      clamp(
-        28px,
-        8.5vw,
-        40px
-      );
-  }
-
-}
-
-
-/* =========================================
-   DESKTOP
-========================================= */
-
-@media(min-width:750px){
-
-  .photoCard,
-  .ageRow,
-  .caption{
-    max-width:490px;
-
-    margin-left:auto;
-    margin-right:auto;
-  }
-
-  .ageRow{
-    margin-bottom:13px;
+  .age{
+    margin-bottom:68px;
   }
 
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<!-- =========================================
+<div class="pageBackground"></div>
+
+<div class="haze one"></div>
+<div class="haze two"></div>
+
+
+<!-- ======================================
      MUSIC
-========================================= -->
+====================================== -->
 
 <audio
-  id="music"
+  id="memoryMusic"
   loop
-  playsinline
   preload="auto"
 >
-
   <source
     src="memories-song.mp3"
     type="audio/mpeg"
   >
-
 </audio>
 
-
-
-<!-- =========================================
-     START SCREEN
-========================================= -->
-
-<section id="startScreen">
-
-  <div class="startInner">
-
-    <div class="startSmall">
-      CHAPTER ONE
-    </div>
-
-    <h1 class="startTitle">
-
-      Ready to go
-
-      <span>
-        back in time?
-      </span>
-
-    </h1>
-
-    <p class="startText">
-
-      Twenty years.
-      Twenty little versions of you.
-
-    </p>
-
-    <button
-      id="startButton"
-      type="button"
-    >
-      START THE MEMORIES
-    </button>
-
-  </div>
-
-</section>
-
-
-
-<!-- =========================================
-     MUSIC BUTTON
-========================================= -->
 
 <button
   id="musicButton"
   aria-label="Toggle music"
 >
-  ♪
+♫
 </button>
 
 
 
-<!-- =========================================
+<!-- ======================================
      HERO
-========================================= -->
+====================================== -->
 
 <section class="hero">
 
 <div class="heroInner">
 
-  <div class="heroSmall">
-    20 YEARS OF KAMI
-  </div>
+<div class="heroTop">
+20 YEARS OF KAMI
+</div>
 
-  <h1 class="heroTitle">
+<h1 class="heroTitle">
 
-    Once upon
+Once upon
+<em>a life.</em>
 
-    <span>
-      a life.
-    </span>
+</h1>
 
-  </h1>
+<p class="heroText">
 
-  <p class="heroText">
+Twenty years.
+Twenty versions of you.
+Some you remember,
+some you probably don't.
 
-    Twenty years.
-    Twenty versions of you.
+</p>
 
-    Some you remember.
-    Some you probably don't.
+<div class="scrollText">
 
-  </p>
+scroll to go back in time ↓
 
-  <div class="scrollHint">
-
-    scroll to go back in time ↓
-
-  </div>
+</div>
 
 </div>
 
@@ -903,52 +956,765 @@ body{
 
 
 
-<!-- =========================================
-     STORY
-========================================= -->
+<!-- ======================================
+     CHAPTER
+====================================== -->
 
-<main id="story"></main>
+<section class="chapter">
+
+<div class="chapterNumber">
+Chapter One
+</div>
+
+<h2 class="chapterTitle">
+
+Where it all started.
+
+</h2>
+
+</section>
 
 
 
-<!-- =========================================
-     END
-========================================= -->
+<!-- ======================================
+     TIMELINE
+====================================== -->
 
-<section class="end">
+<section class="timeline">
 
-<div class="endInner">
+<div class="timelineLine"></div>
 
-  <div class="endSmall">
-    END OF CHAPTER ONE
-  </div>
 
-  <div class="endTitle">
+<!-- AGE 1 -->
 
-    Before the
+<article class="age">
 
-    <span>
-      big surprise...
-    </span>
+<div class="ageNumber">
+1
+</div>
 
-  </div>
+<div class="photoCard">
 
-  <p class="endText">
+<div class="photoWrap">
 
-    You've just survived
-    twenty years of photos.
+<!--
+<img
+src="photos/age-01.jpg"
+alt="Kami at age 1"
+>
+-->
 
-    Now let's see if you can survive
-    one little game.
+<div class="placeholder">
+AGE 1 PHOTO
+</div>
 
-  </p>
+</div>
 
-  <a
-    href="game.html"
-    class="gameButton"
-  >
-    PLAY THE GAME
-  </a>
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 1
+</div>
+
+<div class="photoCaption">
+The beginning.
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<!-- AGE 2 -->
+
+<article class="age">
+
+<div class="ageNumber">
+2
+</div>
+
+<div class="photoCard">
+
+<div class="photoWrap">
+
+<div class="placeholder">
+AGE 2 PHOTO
+</div>
+
+</div>
+
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 2
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<!-- AGE 3 -->
+
+<article class="age">
+
+<div class="ageNumber">
+3
+</div>
+
+<div class="photoCard">
+
+<div class="photoWrap">
+
+<div class="placeholder">
+AGE 3 PHOTO
+</div>
+
+</div>
+
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 3
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<!-- AGE 4 -->
+
+<article class="age">
+
+<div class="ageNumber">
+4
+</div>
+
+<div class="photoCard">
+
+<div class="photoWrap">
+
+<div class="placeholder">
+AGE 4 PHOTO
+</div>
+
+</div>
+
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 4
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<div class="memoryQuote">
+
+we have many photos
+wait for the memories.
+
+</div>
+
+
+
+<!-- AGE 5 -->
+
+<article class="age">
+
+<div class="ageNumber">
+5
+</div>
+
+<div class="photoCard">
+
+<div class="photoWrap">
+
+<div class="placeholder">
+AGE 5 PHOTO
+</div>
+
+</div>
+
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 5
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<!-- AGE 6 -->
+
+<article class="age">
+
+<div class="ageNumber">
+6
+</div>
+
+<div class="photoCard">
+
+<div class="photoWrap">
+
+<div class="placeholder">
+AGE 6 PHOTO
+</div>
+
+</div>
+
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 6
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<!-- AGE 7 -->
+
+<article class="age">
+
+<div class="ageNumber">
+7
+</div>
+
+<div class="photoCard">
+
+<div class="photoWrap">
+
+<div class="placeholder">
+AGE 7 PHOTO
+</div>
+
+</div>
+
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 7
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<!-- AGE 8 -->
+
+<article class="age">
+
+<div class="ageNumber">
+8
+</div>
+
+<div class="photoCard">
+
+<div class="photoWrap">
+
+<div class="placeholder">
+AGE 8 PHOTO
+</div>
+
+</div>
+
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 8
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<!-- AGE 9 -->
+
+<article class="age">
+
+<div class="ageNumber">
+9
+</div>
+
+<div class="photoCard">
+
+<div class="photoWrap">
+
+<div class="placeholder">
+AGE 9 PHOTO
+</div>
+
+</div>
+
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 9
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<!-- AGE 10 -->
+
+<article class="age">
+
+<div class="ageNumber">
+10
+</div>
+
+<div class="photoCard">
+
+<div class="photoWrap">
+
+<div class="placeholder">
+AGE 10 PHOTO
+</div>
+
+</div>
+
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 10
+</div>
+
+<div class="photoCaption">
+Double digits.
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<div class="memoryQuote">
+
+Halfway to twenty.
+
+</div>
+
+
+
+<!-- AGE 11 -->
+
+<article class="age">
+
+<div class="ageNumber">
+11
+</div>
+
+<div class="photoCard">
+
+<div class="photoWrap">
+
+<div class="placeholder">
+AGE 11 PHOTO
+</div>
+
+</div>
+
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 11
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<!-- AGE 12 -->
+
+<article class="age">
+
+<div class="ageNumber">
+12
+</div>
+
+<div class="photoCard">
+
+<div class="photoWrap">
+
+<div class="placeholder">
+AGE 12 PHOTO
+</div>
+
+</div>
+
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 12
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<!-- AGE 13 -->
+
+<article class="age">
+
+<div class="ageNumber">
+13
+</div>
+
+<div class="photoCard">
+
+<div class="photoWrap">
+
+<div class="placeholder">
+AGE 13 PHOTO
+</div>
+
+</div>
+
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 13
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<!-- AGE 14 -->
+
+<article class="age">
+
+<div class="ageNumber">
+14
+</div>
+
+<div class="photoCard">
+
+<div class="photoWrap">
+
+<div class="placeholder">
+AGE 14 PHOTO
+</div>
+
+</div>
+
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 14
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<!-- AGE 15 -->
+
+<article class="age">
+
+<div class="ageNumber">
+15
+</div>
+
+<div class="photoCard">
+
+<div class="photoWrap">
+
+<div class="placeholder">
+AGE 15 PHOTO
+</div>
+
+</div>
+
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 15
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<div class="memoryQuote">
+
+Somewhere along the way,
+childhood became memories.
+
+</div>
+
+
+
+<!-- AGE 16 -->
+
+<article class="age">
+
+<div class="ageNumber">
+16
+</div>
+
+<div class="photoCard">
+
+<div class="photoWrap">
+
+<div class="placeholder">
+AGE 16 PHOTO
+</div>
+
+</div>
+
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 16
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<!-- AGE 17 -->
+
+<article class="age">
+
+<div class="ageNumber">
+17
+</div>
+
+<div class="photoCard">
+
+<div class="photoWrap">
+
+<div class="placeholder">
+AGE 17 PHOTO
+</div>
+
+</div>
+
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 17
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<!-- AGE 18 -->
+
+<article class="age">
+
+<div class="ageNumber">
+18
+</div>
+
+<div class="photoCard">
+
+<div class="photoWrap">
+
+<div class="placeholder">
+AGE 18 PHOTO
+</div>
+
+</div>
+
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 18
+</div>
+
+<div class="photoCaption">
+Officially you became...
+a dangerous driver!
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<!-- AGE 19 -->
+
+<article class="age">
+
+<div class="ageNumber">
+19
+</div>
+
+<div class="photoCard">
+
+<div class="photoWrap">
+
+<div class="placeholder">
+AGE 19 PHOTO
+</div>
+
+</div>
+
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 19
+</div>
+
+<div class="photoCaption">
+One last year.
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+
+<!-- AGE 20 -->
+
+<article class="age final">
+
+<div class="ageNumber">
+20
+</div>
+
+<div class="photoCard">
+
+<div class="photoWrap">
+
+<div class="placeholder">
+AGE 20 PHOTO
+</div>
+
+</div>
+
+<div class="photoInfo">
+
+<div class="photoAge">
+AGE 20
+</div>
+
+<div class="photoCaption">
+And here we are.
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+</section>
+
+
+
+<!-- ======================================
+     END / GAME
+====================================== -->
+
+<section class="memoryEnd">
+
+<div class="memoryEndInner">
+
+<div class="endSmall">
+END OF CHAPTER ONE
+</div>
+
+<h2 class="endTitle">
+Before the
+big surprise...
+</h2>
+
+<p class="endText">
+
+You've just survived
+twenty years of photos.
+
+Now let's see if you can survive
+one little game.
+
+</p>
+
+<a
+href="game.html"
+class="gameButton"
+>
+PLAY THE GAME
+</a>
 
 </div>
 
@@ -958,417 +1724,113 @@ body{
 
 <script>
 
-/* =========================================
-   PHOTOS
-========================================= */
+/* =====================================
+   SCROLL REVEALS
+===================================== */
 
-const photos = [
-
-  {
-    age:1,
-    file:"photos/age-01.jpeg",
-    caption:"The beginning."
-  },
-
-  {
-    age:2,
-    file:"photos/age-02.jpeg",
-    caption:""
-  },
-
-  {
-    age:3,
-    file:"photos/age-03.jpeg",
-    caption:""
-  },
-
-  {
-    age:4,
-    file:"photos/age-04.jpeg",
-    caption:""
-  },
-
-  {
-    age:5,
-    file:"photos/age-05.jpeg",
-    caption:""
-  },
-
-  {
-    age:6,
-    file:"photos/age-06.jpeg",
-    caption:""
-  },
-
-  {
-    age:7,
-    file:"photos/age-07.jpeg",
-    caption:""
-  },
-
-  {
-    age:8,
-    file:"photos/age-08.jpeg",
-    caption:""
-  },
-
-  {
-    age:9,
-    file:"photos/age-09.jpeg",
-    caption:""
-  },
-
-  {
-    age:10,
-    file:"photos/age-10.jpeg",
-    caption:"Double digits."
-  },
-
-  {
-    age:11,
-    file:"photos/age-11.jpeg",
-    caption:""
-  },
-
-  {
-    age:12,
-    file:"photos/age-12.jpeg",
-    caption:""
-  },
-
-  {
-    age:13,
-    file:"photos/age-13.jpeg",
-    caption:""
-  },
-
-  {
-    age:14,
-    file:"photos/age-14.jpeg",
-    caption:""
-  },
-
-  {
-    age:15,
-    file:"photos/age-15.jpeg",
-    caption:""
-  },
-
-  {
-    age:16,
-    file:"photos/age-16.jpeg",
-    caption:""
-  },
-
-  {
-    age:17,
-    file:"photos/age-17.jpeg",
-    caption:""
-  },
-
-  {
-    age:18,
-    file:"photos/age-18.jpeg",
-    caption:"And then... you became a dangerous driver."
-  },
-
-  {
-    age:19,
-    file:"photos/age-19.jpeg",
-    caption:"One last year before twenty."
-  },
-
-  {
-    age:20,
-    file:"photos/age-20.jpeg",
-    caption:"And here we are."
-  }
-
-];
-
-
-
-/* =========================================
-   BUILD STORY
-========================================= */
-
-const story =
-document.getElementById(
-  "story"
+const revealItems =
+document.querySelectorAll(
+".age, .memoryQuote"
 );
 
+const observer =
+new IntersectionObserver(
 
-photos.forEach(
-(photo,index)=>{
+(entries)=>{
 
+entries.forEach(
 
-  const year =
-  document.createElement(
-    "section"
-  );
+entry=>{
 
+if(
+entry.isIntersecting
+){
 
-  year.className =
-  "year";
-
-
-  if(
-    photo.age === 20
-  ){
-
-    year.classList.add(
-      "twenty"
-    );
-
-  }
-
-
-  const loadingType =
-  index < 2
-  ?
-  "eager"
-  :
-  "lazy";
-
-
-  year.innerHTML = `
-
-    <div class="yearInner">
-
-
-      <div class="ageRow">
-
-        <div class="ageNumber">
-          ${photo.age}
-        </div>
-
-        <div class="ageLine"></div>
-
-        <div class="ageText">
-          AGE ${photo.age}
-        </div>
-
-      </div>
-
-
-      <div class="photoCard">
-
-        <img
-          src="${photo.file}"
-          alt="Kami age ${photo.age}"
-          loading="${loadingType}"
-          decoding="async"
-        >
-
-      </div>
-
-
-      ${
-        photo.caption
-
-        ?
-
-        `
-
-        <div class="caption">
-          ${photo.caption}
-        </div>
-
-        `
-
-        :
-
-        ""
-      }
-
-
-    </div>
-
-  `;
-
-
-  story.appendChild(
-    year
-  );
-
-
-
-  /* AGE 5 */
-
-  if(
-    photo.age === 5
-  ){
-
-    addBreak(
-      "Five years old and already stealing the show."
-    );
-
-  }
-
-
-
-  /* AGE 10 */
-
-  if(
-    photo.age === 10
-  ){
-
-    addBreak(
-      "Halfway to twenty."
-    );
-
-  }
-
-
-
-  /* AGE 15 */
-
-  if(
-    photo.age === 15
-  ){
-
-    addBreak(
-      "Somewhere along the way, childhood became memories."
-    );
-
-  }
-
+entry.target
+.classList
+.add("visible");
 
 }
+
+}
+
+);
+
+},
+
+{
+threshold:.14
+}
+
+);
+
+revealItems.forEach(
+item =>
+observer.observe(item)
 );
 
 
 
-function addBreak(text){
-
-  const section =
-  document.createElement(
-    "section"
-  );
-
-
-  section.className =
-  "memoryBreak";
-
-
-  section.innerHTML =
-  `<p>${text}</p>`;
-
-
-  story.appendChild(
-    section
-  );
-
-}
-
-
-
-/* =========================================
+/* =====================================
    MUSIC
-========================================= */
+===================================== */
 
 const music =
 document.getElementById(
-  "music"
+"memoryMusic"
 );
-
-
-const startScreen =
-document.getElementById(
-  "startScreen"
-);
-
-
-const startButton =
-document.getElementById(
-  "startButton"
-);
-
 
 const musicButton =
 document.getElementById(
-  "musicButton"
+"musicButton"
 );
 
-
-music.volume =
-0.35;
+let musicPlaying = false;
 
 
+/*
+Try to start music
+when the page loads
+*/
 
-/* =========================================
-   START MEMORIES
+window.addEventListener(
+"load",
+async ()=>{
 
-   THIS IS A REAL USER TAP,
-   SO MOBILE ALLOWS AUDIO.
-========================================= */
-
-startButton.addEventListener(
-"click",
-async()=>{
-
+  music.loop = true;
+  music.volume = .35;
 
   try{
 
-    music.currentTime =
-    0;
-
-
     await music.play();
 
+    musicPlaying = true;
 
     musicButton.textContent =
     "♫";
-
 
   }
 
   catch(error){
 
-    console.log(
-      "Music playback error:",
-      error
-    );
-
+    musicPlaying = false;
 
     musicButton.textContent =
     "♪";
 
   }
 
-
-  startScreen.classList.add(
-    "hide"
-  );
-
-
-  setTimeout(()=>{
-
-    startScreen.style.display =
-    "none";
-
-  },750);
-
-
-  window.scrollTo(
-    0,
-    0
-  );
-
-
 }
 );
 
 
-
-/* =========================================
-   MUSIC BUTTON
-========================================= */
+/*
+Manual toggle
+*/
 
 musicButton.addEventListener(
 "click",
-async()=>{
-
+async ()=>{
 
   if(
     music.paused
@@ -1378,20 +1840,14 @@ async()=>{
 
       await music.play();
 
+      musicPlaying = true;
 
       musicButton.textContent =
       "♫";
 
     }
 
-    catch(error){
-
-      console.log(
-        "Music error:",
-        error
-      );
-
-    }
+    catch(error){}
 
   }
 
@@ -1399,56 +1855,17 @@ async()=>{
 
     music.pause();
 
+    musicPlaying = false;
 
     musicButton.textContent =
     "♪";
 
   }
 
-
-}
-);
-
-
-
-music.addEventListener(
-"play",
-()=>{
-
-  musicButton.textContent =
-  "♫";
-
-}
-);
-
-
-music.addEventListener(
-"pause",
-()=>{
-
-  musicButton.textContent =
-  "♪";
-
-}
-);
-
-
-
-music.addEventListener(
-"error",
-()=>{
-
-  console.log(
-    "Audio file error:",
-    music.error
-  );
-
 }
 );
 
 </script>
 
-
 </body>
-
 </html>
