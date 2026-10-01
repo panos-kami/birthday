@@ -1,0 +1,2181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>Mystery Gift</title>
+
+<style>
+
+/* =====================================
+   RESET
+===================================== */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+  width:100%;
+  min-height:100%;
+}
+
+body{
+  min-height:100svh;
+
+  overflow-x:hidden;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  color:white;
+
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(240,137,190,.20),
+      transparent 33%
+    ),
+
+    radial-gradient(
+      circle at 85% 25%,
+      rgba(103,121,240,.22),
+      transparent 35%
+    ),
+
+    linear-gradient(
+      155deg,
+      #111831 0%,
+      #25295d 35%,
+      #56427a 67%,
+      #925a7b 100%
+    );
+}
+
+
+/* =====================================
+   BACKGROUND
+===================================== */
+
+.backgroundGlow{
+  position:fixed;
+  inset:0;
+
+  pointer-events:none;
+
+  overflow:hidden;
+
+  z-index:0;
+}
+
+.orb{
+  position:absolute;
+
+  border-radius:50%;
+
+  filter:blur(70px);
+
+  opacity:.26;
+}
+
+.orb.one{
+  width:240px;
+  height:240px;
+
+  background:#ff9fc8;
+
+  left:-100px;
+  top:12%;
+}
+
+.orb.two{
+  width:290px;
+  height:290px;
+
+  background:#7788ff;
+
+  right:-140px;
+  top:42%;
+}
+
+.orb.three{
+  width:250px;
+  height:250px;
+
+  background:#ffd49d;
+
+  left:18%;
+  bottom:-150px;
+
+  opacity:.13;
+}
+
+
+/* =====================================
+   MAIN
+===================================== */
+
+#app{
+  position:relative;
+
+  z-index:2;
+
+  min-height:100svh;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:
+    calc(env(safe-area-inset-top) + 30px)
+    20px
+    calc(env(safe-area-inset-bottom) + 30px);
+}
+
+
+/* =====================================
+   CARD
+===================================== */
+
+.card{
+  width:100%;
+  max-width:520px;
+
+  padding:
+    36px 24px;
+
+  border-radius:30px;
+
+  text-align:center;
+
+  background:
+    rgba(18,22,53,.58);
+
+  border:
+    1px solid
+    rgba(255,255,255,.11);
+
+  box-shadow:
+    0 30px 90px
+    rgba(5,8,30,.32);
+
+  transition:
+    opacity .45s ease,
+    transform .45s ease;
+}
+
+.card.fadeOut{
+  opacity:0;
+
+  transform:
+    scale(.97)
+    translateY(10px);
+}
+
+
+/* =====================================
+   TOP LABEL
+===================================== */
+
+.chapter{
+  font-size:10px;
+
+  letter-spacing:.32em;
+
+  text-transform:uppercase;
+
+  color:#ffd7be;
+
+  opacity:.85;
+}
+
+
+/* =====================================
+   TITLE
+===================================== */
+
+.title{
+  margin-top:18px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      43px,
+      12vw,
+      70px
+    );
+
+  font-weight:400;
+
+  line-height:.96;
+
+  letter-spacing:-.045em;
+}
+
+.title span{
+  display:block;
+
+  margin-top:7px;
+
+  color:#ffd2bc;
+
+  font-style:italic;
+}
+
+
+/* =====================================
+   SUBTEXT
+===================================== */
+
+.subtitle{
+  max-width:370px;
+
+  margin:
+    22px auto 0;
+
+  color:
+    rgba(255,255,255,.70);
+
+  line-height:1.65;
+
+  font-size:14px;
+}
+
+
+/* =====================================
+   PROGRESS
+===================================== */
+
+.progress{
+  display:flex;
+
+  justify-content:center;
+
+  gap:8px;
+
+  margin-top:28px;
+}
+
+.dot{
+  width:7px;
+  height:7px;
+
+  border-radius:50%;
+
+  background:
+    rgba(255,255,255,.18);
+
+  transition:.3s ease;
+}
+
+.dot.done{
+  background:#ffd6bd;
+}
+
+.dot.current{
+  width:23px;
+
+  border-radius:20px;
+
+  background:#fff0cd;
+}
+
+
+/* =====================================
+   INPUT
+===================================== */
+
+.guessArea{
+  margin-top:32px;
+}
+
+.guessInput{
+  width:100%;
+
+  padding:
+    16px 18px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.16);
+
+  border-radius:18px;
+
+  outline:none;
+
+  background:
+    rgba(255,255,255,.07);
+
+  color:white;
+
+  font-size:16px;
+
+  text-align:center;
+}
+
+.guessInput::placeholder{
+  color:
+    rgba(255,255,255,.36);
+}
+
+.guessInput:focus{
+  border-color:
+    rgba(255,226,190,.50);
+}
+
+
+/* =====================================
+   BUTTON
+===================================== */
+
+.mainButton{
+  width:100%;
+
+  margin-top:13px;
+
+  padding:
+    16px 20px;
+
+  border:none;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff0cf,
+      #ffd1bd
+    );
+
+  color:#322f67;
+
+  font-size:12px;
+
+  font-weight:900;
+
+  letter-spacing:.13em;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 14px 36px
+    rgba(8,10,40,.22);
+
+  transition:
+    transform .2s ease;
+}
+
+.mainButton:active{
+  transform:scale(.97);
+}
+
+
+/* =====================================
+   MESSAGE
+===================================== */
+
+#message{
+  min-height:48px;
+
+  margin-top:20px;
+
+  color:#ffe4d2;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:17px;
+
+  line-height:1.45;
+
+  opacity:0;
+
+  transform:
+    translateY(5px);
+
+  transition:
+    opacity .3s ease,
+    transform .3s ease;
+}
+
+#message.show{
+  opacity:1;
+
+  transform:
+    translateY(0);
+}
+
+
+/* =====================================
+   ATTEMPTS
+===================================== */
+
+.attempts{
+  margin-top:13px;
+
+  font-size:10px;
+
+  letter-spacing:.16em;
+
+  text-transform:uppercase;
+
+  color:
+    rgba(255,255,255,.35);
+}
+
+
+/* =====================================
+   REVEAL
+===================================== */
+
+#revealScreen{
+  display:none;
+
+  width:100%;
+
+  max-width:520px;
+
+  text-align:center;
+}
+
+#revealScreen.show{
+  display:block;
+
+  animation:
+    revealScreen
+    .65s
+    ease
+    forwards;
+}
+
+@keyframes revealScreen{
+
+  from{
+    opacity:0;
+
+    transform:
+      scale(.96);
+  }
+
+  to{
+    opacity:1;
+
+    transform:
+      scale(1);
+  }
+
+}
+
+.revealSmall{
+  font-size:10px;
+
+  letter-spacing:.3em;
+
+  text-transform:uppercase;
+
+  color:#ffd6bd;
+}
+
+.revealName{
+  margin-top:12px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      44px,
+      13vw,
+      74px
+    );
+
+  font-weight:400;
+
+  color:white;
+
+  line-height:1;
+}
+
+.revealHint{
+  margin-top:14px;
+
+  color:
+    rgba(255,255,255,.63);
+
+  font-size:13px;
+
+  letter-spacing:.04em;
+}
+
+
+/* =====================================
+   VIDEO STAGE
+===================================== */
+
+.videoStage{
+  width:100%;
+
+  margin-top:28px;
+
+  opacity:0;
+
+  transform:
+    translateY(18px)
+    scale(.97);
+
+  transition:
+    opacity .75s ease,
+    transform .75s ease;
+}
+
+.videoStage.show{
+  opacity:1;
+
+  transform:
+    translateY(0)
+    scale(1);
+}
+
+.videoFrame{
+  width:100%;
+
+  max-width:390px;
+
+  margin:auto;
+
+  overflow:hidden;
+
+  border-radius:26px;
+
+  background:#05060c;
+
+  border:
+    1px solid
+    rgba(255,255,255,.14);
+
+  box-shadow:
+    0 30px 90px
+    rgba(5,7,30,.40);
+}
+
+#wishVideo{
+  width:100%;
+
+  max-height:68svh;
+
+  display:block;
+
+  object-fit:contain;
+
+  background:#000;
+}
+
+
+/* =====================================
+   VIDEO STATUS
+===================================== */
+
+.videoStatus{
+  margin-top:16px;
+
+  min-height:20px;
+
+  font-size:11px;
+
+  letter-spacing:.15em;
+
+  text-transform:uppercase;
+
+  color:
+    rgba(255,255,255,.43);
+}
+
+
+/* =====================================
+   NEXT BUTTON
+===================================== */
+
+#nextButton{
+  display:none;
+
+  width:100%;
+
+  max-width:320px;
+
+  margin:
+    23px auto 0;
+
+  padding:
+    16px 25px;
+
+  border:none;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff2d5,
+      #ffd0ba
+    );
+
+  color:#312e66;
+
+  font-size:12px;
+
+  font-weight:900;
+
+  letter-spacing:.14em;
+
+  cursor:pointer;
+
+  animation:
+    nextAppear
+    .6s
+    ease
+    forwards;
+}
+
+@keyframes nextAppear{
+
+  from{
+    opacity:0;
+
+    transform:
+      translateY(8px);
+  }
+
+  to{
+    opacity:1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+
+/* =====================================
+   MOBILE PLAY FALLBACK
+===================================== */
+
+#manualPlay{
+  display:none;
+
+  width:100%;
+
+  max-width:300px;
+
+  margin:
+    18px auto 0;
+
+  padding:
+    15px 20px;
+
+  border-radius:999px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.20);
+
+  background:
+    rgba(255,255,255,.08);
+
+  color:white;
+
+  font-size:11px;
+
+  font-weight:800;
+
+  letter-spacing:.12em;
+
+  cursor:pointer;
+}
+
+#manualPlay.show{
+  display:block;
+}
+
+
+/* =====================================
+   FINAL
+===================================== */
+
+#finalScreen{
+  display:none;
+
+  width:100%;
+
+  max-width:520px;
+
+  padding:
+    40px 25px;
+
+  text-align:center;
+}
+
+#finalScreen.show{
+  display:block;
+
+  animation:
+    finalIn
+    1s
+    ease
+    forwards;
+}
+
+@keyframes finalIn{
+
+  from{
+    opacity:0;
+
+    transform:
+      translateY(15px);
+  }
+
+  to{
+    opacity:1;
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+.finalSmall{
+  font-size:10px;
+
+  letter-spacing:.3em;
+
+  color:#ffd8bd;
+
+  text-transform:uppercase;
+}
+
+.finalTitle{
+  margin-top:18px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      43px,
+      12vw,
+      70px
+    );
+
+  font-weight:400;
+
+  line-height:1.05;
+}
+
+.finalTitle span{
+  display:block;
+
+  margin-top:7px;
+
+  color:#ffd2bd;
+
+  font-style:italic;
+}
+
+.finalText{
+  max-width:350px;
+
+  margin:
+    24px auto 0;
+
+  color:
+    rgba(255,255,255,.69);
+
+  line-height:1.7;
+
+  font-size:14px;
+}
+
+.finalButton{
+  display:inline-block;
+
+  margin-top:30px;
+
+  padding:
+    16px 30px;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff0cf,
+      #ffd1bd
+    );
+
+  color:#322f67;
+
+  text-decoration:none;
+
+  font-size:12px;
+
+  font-weight:900;
+
+  letter-spacing:.14em;
+}
+
+
+/* =====================================
+   MOBILE
+===================================== */
+
+@media(max-width:600px){
+
+  #app{
+    padding:
+      calc(env(safe-area-inset-top) + 22px)
+      14px
+      calc(env(safe-area-inset-bottom) + 22px);
+  }
+
+  .card{
+    padding:
+      31px 19px;
+
+    border-radius:25px;
+  }
+
+  .title{
+    font-size:
+      clamp(
+        43px,
+        13vw,
+        62px
+      );
+  }
+
+  .videoFrame{
+    border-radius:22px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="backgroundGlow">
+
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+
+</div>
+
+
+
+<main id="app">
+
+
+<!-- =====================================
+     QUESTION
+===================================== -->
+
+<section
+  class="card"
+  id="questionCard"
+>
+
+  <div class="chapter">
+    Mystery Gift
+  </div>
+
+
+  <h1 class="title">
+
+    Who would you
+
+    <span>
+      choose?
+    </span>
+
+  </h1>
+
+
+  <p class="subtitle">
+
+    If you could have anyone here
+    with you on your birthday right now...
+
+    who would it be?
+
+  </p>
+
+
+  <div
+    class="progress"
+    id="progress"
+  ></div>
+
+
+  <div class="guessArea">
+
+    <input
+      id="guessInput"
+      class="guessInput"
+      type="text"
+      autocomplete="off"
+      spellcheck="false"
+      placeholder="Type a name..."
+    >
+
+    <button
+      id="guessButton"
+      class="mainButton"
+      type="button"
+    >
+
+      THAT'S MY GUESS
+
+    </button>
+
+  </div>
+
+
+  <div id="message"></div>
+
+
+  <div
+    class="attempts"
+    id="attempts"
+  >
+    TWO GUESSES. CHOOSE WISELY.
+  </div>
+
+</section>
+
+
+
+<!-- =====================================
+     VIDEO REVEAL
+===================================== -->
+
+<section id="revealScreen">
+
+  <div class="revealSmall">
+    A LITTLE SOMETHING FROM
+  </div>
+
+  <div
+    class="revealName"
+    id="revealName"
+  ></div>
+
+  <div class="revealHint">
+    Maybe they prepared something for you...
+  </div>
+
+
+  <div
+    class="videoStage"
+    id="videoStage"
+  >
+
+    <div class="videoFrame">
+
+      <video
+        id="wishVideo"
+        playsinline
+        webkit-playsinline
+        preload="auto"
+      ></video>
+
+    </div>
+
+
+    <div
+      class="videoStatus"
+      id="videoStatus"
+    >
+      A MESSAGE JUST FOR YOU
+    </div>
+
+
+    <button
+      id="manualPlay"
+      type="button"
+    >
+      TAP TO PLAY THE MESSAGE
+    </button>
+
+
+    <button
+      id="nextButton"
+      type="button"
+    >
+      NEXT →
+    </button>
+
+  </div>
+
+</section>
+
+
+
+<!-- =====================================
+     FINAL
+===================================== -->
+
+<section id="finalScreen">
+
+  <div class="finalSmall">
+    MYSTERY GIFT COMPLETE
+  </div>
+
+
+  <h2 class="finalTitle">
+
+    Six people.
+
+    <span>
+      Six pieces of home.
+    </span>
+
+  </h2>
+
+
+  <p class="finalText">
+
+    Even when the people you love
+    can't all be in the same place,
+    they can still find a way
+    to be there with you.
+
+    <br><br>
+
+    But we're not done yet.
+
+  </p>
+
+
+  <a
+    href="couple.html"
+    class="finalButton"
+  >
+    CONTINUE
+  </a>
+
+</section>
+
+
+</main>
+
+
+
+<script>
+
+/* =====================================
+   PEOPLE
+===================================== */
+
+const people = [
+
+  {
+    name:"Dad",
+
+    video:"dad.mp4",
+
+    answers:[
+      "dad",
+      "father",
+      "my dad",
+      "my father"
+    ],
+
+    hint:
+    "Think of someone who's been there since the very beginning."
+  },
+
+
+  {
+    name:"Mother",
+
+    video:"mother.mp4",
+
+    answers:[
+      "mother",
+      "mom",
+      "mum",
+      "mommy",
+      "mummy",
+      "my mom",
+      "my mum",
+      "my mother"
+    ],
+
+    hint:
+    "Someone who probably knows you better than you know yourself."
+  },
+
+
+  {
+    name:"Sister",
+
+    video:"sister.mp4",
+
+    answers:[
+      "sister",
+      "my sister"
+    ],
+
+    hint:
+    "Someone who's had a front-row seat to your entire life."
+  },
+
+
+  {
+    name:"Grandmother",
+
+    video:"grandmother.mp4",
+
+    answers:[
+      "grandmother",
+      "grandma",
+      "granny",
+      "my grandmother",
+      "my grandma"
+    ],
+
+    hint:
+    "Think family... and think a little further back."
+  },
+
+
+  {
+    name:"Maria",
+
+    video:"maria.mp4",
+
+    answers:[
+      "maria"
+    ],
+
+    hint:
+    "Now we're leaving the family category 👀"
+  },
+
+
+  {
+    name:"Olivia",
+
+    video:"olivia.mp4",
+
+    answers:[
+      "olivia"
+    ],
+
+    hint:
+    "One last person. You definitely know her."
+  }
+
+];
+
+
+
+/* =====================================
+   SPECIAL BOYFRIEND ANSWERS
+===================================== */
+
+const boyfriendAnswers = [
+
+  "panagiotis",
+  "panos",
+  "teo",
+  "theo",
+
+  "boyfriend",
+  "my boyfriend",
+
+  "my bf",
+  "bf",
+
+  "παναγιωτης",
+  "παναγιώτης",
+
+  "αγορι μου",
+  "αγόρι μου"
+
+];
+
+
+
+/* =====================================
+   ELEMENTS
+===================================== */
+
+const questionCard =
+document.getElementById(
+  "questionCard"
+);
+
+
+const progress =
+document.getElementById(
+  "progress"
+);
+
+
+const guessInput =
+document.getElementById(
+  "guessInput"
+);
+
+
+const guessButton =
+document.getElementById(
+  "guessButton"
+);
+
+
+const message =
+document.getElementById(
+  "message"
+);
+
+
+const attempts =
+document.getElementById(
+  "attempts"
+);
+
+
+const revealScreen =
+document.getElementById(
+  "revealScreen"
+);
+
+
+const revealName =
+document.getElementById(
+  "revealName"
+);
+
+
+const videoStage =
+document.getElementById(
+  "videoStage"
+);
+
+
+const wishVideo =
+document.getElementById(
+  "wishVideo"
+);
+
+
+const videoStatus =
+document.getElementById(
+  "videoStatus"
+);
+
+
+const manualPlay =
+document.getElementById(
+  "manualPlay"
+);
+
+
+const nextButton =
+document.getElementById(
+  "nextButton"
+);
+
+
+const finalScreen =
+document.getElementById(
+  "finalScreen"
+);
+
+
+
+/* =====================================
+   STATE
+===================================== */
+
+let currentPerson =
+0;
+
+
+let wrongAttempts =
+0;
+
+
+let transitioning =
+false;
+
+
+
+/* =====================================
+   NORMALIZE TEXT
+===================================== */
+
+function normalize(value){
+
+  return value
+
+  .trim()
+
+  .toLowerCase()
+
+  .normalize("NFD")
+
+  .replace(
+    /[\u0300-\u036f]/g,
+    ""
+  )
+
+  .replace(
+    /\s+/g,
+    " "
+  );
+
+}
+
+
+
+/* =====================================
+   NORMALIZED ANSWERS
+===================================== */
+
+const normalizedBoyfriend =
+boyfriendAnswers.map(
+  normalize
+);
+
+
+people.forEach(
+person=>{
+
+  person.normalizedAnswers =
+  person.answers.map(
+    normalize
+  );
+
+}
+);
+
+
+
+/* =====================================
+   PROGRESS
+===================================== */
+
+function buildProgress(){
+
+  progress.innerHTML =
+  "";
+
+
+  people.forEach(
+  (person,index)=>{
+
+    const dot =
+    document.createElement(
+      "div"
+    );
+
+
+    dot.className =
+    "dot";
+
+
+    if(
+      index <
+      currentPerson
+    ){
+
+      dot.classList.add(
+        "done"
+      );
+
+    }
+
+
+    if(
+      index ===
+      currentPerson
+    ){
+
+      dot.classList.add(
+        "current"
+      );
+
+    }
+
+
+    progress.appendChild(
+      dot
+    );
+
+  });
+
+}
+
+
+buildProgress();
+
+
+
+/* =====================================
+   MESSAGE
+===================================== */
+
+function showMessage(text){
+
+  message.classList.remove(
+    "show"
+  );
+
+
+  setTimeout(()=>{
+
+    message.textContent =
+    text;
+
+
+    message.classList.add(
+      "show"
+    );
+
+  },80);
+
+}
+
+
+
+/* =====================================
+   FIND IF GUESS IS ANOTHER
+   PERSON FROM THE LIST
+===================================== */
+
+function findOtherPerson(value){
+
+  for(
+    let i=0;
+    i<people.length;
+    i++
+  ){
+
+    if(
+      i === currentPerson
+    ){
+      continue;
+    }
+
+
+    if(
+      people[i]
+      .normalizedAnswers
+      .includes(value)
+    ){
+
+      return {
+        index:i,
+        person:people[i]
+      };
+
+    }
+
+  }
+
+
+  return null;
+
+}
+
+
+
+/* =====================================
+   GUESS
+===================================== */
+
+async function submitGuess(){
+
+
+  if(
+    transitioning
+  ){
+    return;
+  }
+
+
+  const value =
+  normalize(
+    guessInput.value
+  );
+
+
+  if(
+    !value
+  ){
+
+    showMessage(
+      "You have to actually type someone 😭"
+    );
+
+    return;
+
+  }
+
+
+
+  /* =================================
+     BOYFRIEND JOKE
+
+     DOES NOT COUNT AS A WRONG GUESS
+  ================================= */
+
+  if(
+    normalizedBoyfriend.includes(
+      value
+    )
+  ){
+
+    showMessage(
+      "Girl... your boyfriend literally followed you all the way to Morocco 😭 Try someone who isn't already here."
+    );
+
+
+    guessInput.value =
+    "";
+
+
+    return;
+
+  }
+
+
+
+  const person =
+  people[
+    currentPerson
+  ];
+
+
+
+  /* =================================
+     CORRECT
+  ================================= */
+
+  if(
+    person
+    .normalizedAnswers
+    .includes(value)
+  ){
+
+    const correctText =
+    wrongAttempts === 0
+
+    ?
+
+    "Okay... that was suspiciously fast 👀 Maybe they prepared something for you."
+
+    :
+
+    "There we go 😭 Maybe they prepared something for you...";
+
+
+    showMessage(
+      correctText
+    );
+
+
+    /*
+      IMPORTANT FOR MOBILE:
+
+      The video is prepared and play()
+      is triggered from THIS actual tap.
+
+      Then we let the visual transition
+      happen while playback starts.
+    */
+
+    await revealPerson(
+      person,
+      true
+    );
+
+
+    return;
+
+  }
+
+
+
+  /* =================================
+     WRONG
+  ================================= */
+
+  wrongAttempts++;
+
+
+  const other =
+  findOtherPerson(
+    value
+  );
+
+
+
+  /* FIRST WRONG */
+
+  if(
+    wrongAttempts === 1
+  ){
+
+    if(other){
+
+      if(
+        other.index >
+        currentPerson
+      ){
+
+        showMessage(
+          `${other.person.name}? Interesting choice... maybe keep that name in mind 👀 But not yet.`
+        );
+
+      }
+
+      else{
+
+        showMessage(
+          `${other.person.name} already had their moment 😭 Think again.`
+        );
+
+      }
+
+    }
+
+    else{
+
+      showMessage(
+        person.hint
+      );
+
+    }
+
+
+    attempts.textContent =
+    "ONE MORE GUESS";
+
+
+    guessInput.value =
+    "";
+
+
+    guessInput.focus();
+
+
+    return;
+
+  }
+
+
+
+  /* =================================
+     SECOND WRONG:
+     REVEAL PERSON
+  ================================= */
+
+  showMessage(
+    `Okay, I'll stop torturing you 😭 It was ${person.name}.`
+  );
+
+
+  await revealPerson(
+    person,
+    false
+  );
+
+}
+
+
+
+/* =====================================
+   REVEAL PERSON
+===================================== */
+
+async function revealPerson(
+  person,
+  guessedCorrectly
+){
+
+  transitioning =
+  true;
+
+
+  guessInput.disabled =
+  true;
+
+  guessButton.disabled =
+  true;
+
+
+
+  /*
+    SET VIDEO BEFORE TRANSITION
+  */
+
+  wishVideo.pause();
+
+
+  wishVideo.src =
+  person.video;
+
+
+  wishVideo.currentTime =
+  0;
+
+
+  wishVideo.muted =
+  false;
+
+
+  wishVideo.volume =
+  1;
+
+
+  wishVideo.load();
+
+
+
+  /*
+    IMPORTANT:
+
+    Try playback NOW,
+    while we're still inside
+    the original button tap.
+  */
+
+  const playPromise =
+  wishVideo.play();
+
+
+
+  /*
+    Wait so the player doesn't
+    just appear instantly.
+  */
+
+  await wait(
+    1100
+  );
+
+
+  questionCard.classList.add(
+    "fadeOut"
+  );
+
+
+  await wait(
+    450
+  );
+
+
+  questionCard.style.display =
+  "none";
+
+
+  revealName.textContent =
+  person.name;
+
+
+  revealScreen.classList.add(
+    "show"
+  );
+
+
+  await wait(
+    350
+  );
+
+
+  videoStage.classList.add(
+    "show"
+  );
+
+
+  /*
+    Check whether mobile allowed
+    the original playback.
+  */
+
+  if(
+    playPromise
+  ){
+
+    playPromise
+
+    .then(()=>{
+
+      manualPlay.classList.remove(
+        "show"
+      );
+
+
+      videoStatus.textContent =
+      "PLAYING MESSAGE";
+
+    })
+
+    .catch(error=>{
+
+      console.log(
+        "Automatic video playback blocked:",
+        error
+      );
+
+
+      manualPlay.classList.add(
+        "show"
+      );
+
+
+      videoStatus.textContent =
+      "ONE TAP TO OPEN THE MESSAGE";
+
+    });
+
+  }
+
+
+}
+
+
+
+/* =====================================
+   MANUAL MOBILE PLAY
+===================================== */
+
+manualPlay.addEventListener(
+"click",
+async()=>{
+
+
+  try{
+
+    wishVideo.muted =
+    false;
+
+
+    wishVideo.volume =
+    1;
+
+
+    await wishVideo.play();
+
+
+    manualPlay.classList.remove(
+      "show"
+    );
+
+
+    videoStatus.textContent =
+    "PLAYING MESSAGE";
+
+
+  }
+
+  catch(error){
+
+    console.log(
+      "Manual playback failed:",
+      error
+    );
+
+  }
+
+
+}
+
+);
+
+
+
+/* =====================================
+   VIDEO STARTED
+===================================== */
+
+wishVideo.addEventListener(
+"playing",
+()=>{
+
+
+  manualPlay.classList.remove(
+    "show"
+  );
+
+
+  videoStatus.textContent =
+  "PLAYING MESSAGE";
+
+
+}
+
+);
+
+
+
+/* =====================================
+   VIDEO FINISHED
+
+   THERE IS NO TIMER HERE.
+
+   NEXT APPEARS ONLY WHEN THE
+   REAL VIDEO HAS ENDED.
+===================================== */
+
+wishVideo.addEventListener(
+"ended",
+()=>{
+
+
+  videoStatus.textContent =
+  currentPerson ===
+  people.length - 1
+
+  ?
+
+  "LAST MESSAGE COMPLETE"
+
+  :
+
+  "MESSAGE COMPLETE";
+
+
+  nextButton.style.display =
+  "block";
+
+
+  nextButton.textContent =
+  currentPerson ===
+  people.length - 1
+
+  ?
+
+  "FINISH →"
+
+  :
+
+  "READY FOR THE NEXT ONE? →";
+
+
+}
+
+);
+
+
+
+/* =====================================
+   NEXT PERSON
+===================================== */
+
+nextButton.addEventListener(
+"click",
+async()=>{
+
+
+  nextButton.style.display =
+  "none";
+
+
+  videoStage.classList.remove(
+    "show"
+  );
+
+
+  await wait(
+    450
+  );
+
+
+  revealScreen.classList.remove(
+    "show"
+  );
+
+
+  currentPerson++;
+
+
+  /*
+    ALL SIX FINISHED
+  */
+
+  if(
+    currentPerson >=
+    people.length
+  ){
+
+    await wait(
+      250
+    );
+
+
+    finalScreen.classList.add(
+      "show"
+    );
+
+
+    return;
+
+  }
+
+
+
+  /*
+    NEXT ROUND
+  */
+
+  wrongAttempts =
+  0;
+
+
+  transitioning =
+  false;
+
+
+  guessInput.disabled =
+  false;
+
+
+  guessButton.disabled =
+  false;
+
+
+  guessInput.value =
+  "";
+
+
+  message.textContent =
+  "";
+
+
+  message.classList.remove(
+    "show"
+  );
+
+
+  attempts.textContent =
+  "TWO GUESSES. CHOOSE WISELY.";
+
+
+  buildProgress();
+
+
+  questionCard.style.display =
+  "block";
+
+
+  questionCard.classList.remove(
+    "fadeOut"
+  );
+
+
+  await wait(
+    250
+  );
+
+
+  guessInput.focus();
+
+
+}
+
+);
+
+
+
+/* =====================================
+   BUTTON
+===================================== */
+
+guessButton.addEventListener(
+"click",
+submitGuess
+);
+
+
+
+/* =====================================
+   ENTER KEY
+===================================== */
+
+guessInput.addEventListener(
+"keydown",
+event=>{
+
+
+  if(
+    event.key ===
+    "Enter"
+  ){
+
+    event.preventDefault();
+
+
+    submitGuess();
+
+  }
+
+
+}
+
+);
+
+
+
+/* =====================================
+   WAIT
+===================================== */
+
+function wait(ms){
+
+  return new Promise(
+    resolve =>
+    setTimeout(
+      resolve,
+      ms
+    )
+  );
+
+}
+
+</script>
+
+
+</body>
+</html>
