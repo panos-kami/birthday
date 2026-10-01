@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 
 <meta
@@ -11,6 +13,10 @@
 <title>20 Years of Kami</title>
 
 <style>
+
+/* =========================================
+   RESET
+========================================= */
 
 *{
   margin:0;
@@ -24,10 +30,13 @@ html{
 }
 
 body{
-  margin:0;
   overflow-x:hidden;
 
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
   color:white;
 
   background:
@@ -42,47 +51,172 @@ body{
 }
 
 
-/* BACKGROUND */
+/* =========================================
+   START MUSIC SCREEN
+========================================= */
 
-body::before{
-  content:"";
+#startScreen{
   position:fixed;
   inset:0;
 
-  pointer-events:none;
-  z-index:-1;
+  z-index:9999;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:25px;
+
+  text-align:center;
 
   background:
     radial-gradient(
-      circle at 15% 10%,
-      rgba(255,198,216,.10),
-      transparent 30%
+      circle at 50% 25%,
+      rgba(255,214,190,.15),
+      transparent 35%
     ),
-    radial-gradient(
-      circle at 85% 25%,
-      rgba(140,150,255,.08),
-      transparent 30%
+    linear-gradient(
+      160deg,
+      #11182f,
+      #292c60,
+      #634675
     );
+
+  transition:
+    opacity .7s ease,
+    visibility .7s ease;
+}
+
+#startScreen.hide{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.startInner{
+  width:100%;
+  max-width:450px;
+}
+
+.startSmall{
+  font-size:10px;
+
+  letter-spacing:.32em;
+
+  text-transform:uppercase;
+
+  color:#ffd2bc;
+}
+
+.startTitle{
+  margin-top:18px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      48px,
+      14vw,
+      78px
+    );
+
+  font-weight:400;
+
+  line-height:.96;
+
+  letter-spacing:-.045em;
+}
+
+.startTitle span{
+  display:block;
+
+  margin-top:7px;
+
+  color:#ffd6bd;
+
+  font-style:italic;
+}
+
+.startText{
+  max-width:320px;
+
+  margin:
+    21px auto 0;
+
+  font-size:14px;
+
+  line-height:1.65;
+
+  color:
+    rgba(255,255,255,.66);
+}
+
+#startButton{
+  margin-top:29px;
+
+  padding:
+    16px 28px;
+
+  border:none;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff0cf,
+      #ffd0ba
+    );
+
+  color:#322f67;
+
+  font-size:12px;
+
+  font-weight:900;
+
+  letter-spacing:.14em;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 16px 45px
+    rgba(5,8,30,.25);
+}
+
+#startButton:active{
+  transform:scale(.96);
 }
 
 
-/* MUSIC BUTTON */
+/* =========================================
+   MUSIC BUTTON
+========================================= */
 
 #musicButton{
   position:fixed;
 
-  top:calc(env(safe-area-inset-top) + 14px);
+  top:
+    calc(
+      env(safe-area-inset-top)
+      + 14px
+    );
+
   right:14px;
 
-  z-index:9999;
+  z-index:900;
 
   width:44px;
   height:44px;
 
   border:none;
+
   border-radius:50%;
 
-  background:rgba(20,23,55,.88);
+  background:
+    rgba(18,22,54,.88);
 
   color:white;
 
@@ -91,8 +225,8 @@ body::before{
   cursor:pointer;
 
   box-shadow:
-    0 8px 22px
-    rgba(0,0,0,.20);
+    0 8px 24px
+    rgba(0,0,0,.22);
 }
 
 #musicButton:active{
@@ -100,7 +234,9 @@ body::before{
 }
 
 
-/* HERO */
+/* =========================================
+   HERO
+========================================= */
 
 .hero{
   min-height:92svh;
@@ -205,7 +341,9 @@ body::before{
 }
 
 
-/* STORY */
+/* =========================================
+   STORY
+========================================= */
 
 #story{
   width:100%;
@@ -215,24 +353,21 @@ body::before{
   margin:auto;
 
   padding:
-    0 14px
+    0 12px
     80px;
 }
 
 
-/* YEAR */
+/* =========================================
+   YEAR
+========================================= */
 
 .year{
   width:100%;
 
-  min-height:90svh;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
   padding:
-    45px 0;
+    42px 0
+    60px;
 
   content-visibility:auto;
 
@@ -245,7 +380,9 @@ body::before{
 }
 
 
-/* AGE */
+/* =========================================
+   AGE
+========================================= */
 
 .ageRow{
   display:flex;
@@ -293,7 +430,9 @@ body::before{
 }
 
 
-/* PHOTO */
+/* =========================================
+   PHOTO CARD
+========================================= */
 
 .photoCard{
   width:100%;
@@ -324,21 +463,23 @@ body::before{
 
   border-radius:18px;
 
-  object-fit:cover;
-
   background:#272d61;
 }
 
-.year:nth-child(odd) .photoCard{
+.year:nth-child(odd)
+.photoCard{
   transform:rotate(-.45deg);
 }
 
-.year:nth-child(even) .photoCard{
+.year:nth-child(even)
+.photoCard{
   transform:rotate(.45deg);
 }
 
 
-/* CAPTION */
+/* =========================================
+   CAPTION
+========================================= */
 
 .caption{
   margin:
@@ -363,10 +504,12 @@ body::before{
 }
 
 
-/* MEMORY BREAK */
+/* =========================================
+   MEMORY BREAK
+========================================= */
 
 .memoryBreak{
-  min-height:46svh;
+  min-height:43svh;
 
   display:flex;
   align-items:center;
@@ -401,7 +544,9 @@ body::before{
 }
 
 
-/* AGE 20 */
+/* =========================================
+   AGE 20
+========================================= */
 
 .year.twenty{
   padding-top:65px;
@@ -409,6 +554,7 @@ body::before{
 
 .year.twenty .ageNumber{
   font-size:50px;
+
   color:#ffebb3;
 }
 
@@ -423,7 +569,9 @@ body::before{
 }
 
 
-/* END */
+/* =========================================
+   END
+========================================= */
 
 .end{
   min-height:90svh;
@@ -538,7 +686,9 @@ body::before{
 }
 
 
-/* MOBILE */
+/* =========================================
+   MOBILE
+========================================= */
 
 @media(max-width:600px){
 
@@ -565,11 +715,9 @@ body::before{
   }
 
   .year{
-    min-height:auto;
-
     padding:
-      38px 0
-      58px;
+      36px 0
+      56px;
   }
 
   .photoCard{
@@ -577,9 +725,6 @@ body::before{
   }
 
   .photoCard img{
-    width:100%;
-    height:auto;
-
     border-radius:15px;
   }
 
@@ -592,7 +737,7 @@ body::before{
   }
 
   .memoryBreak{
-    min-height:38svh;
+    min-height:37svh;
 
     padding:
       35px 18px;
@@ -610,7 +755,9 @@ body::before{
 }
 
 
-/* DESKTOP */
+/* =========================================
+   DESKTOP
+========================================= */
 
 @media(min-width:750px){
 
@@ -630,19 +777,22 @@ body::before{
 }
 
 </style>
+
 </head>
 
 
 <body>
 
 
-<!-- MUSIC -->
+<!-- =========================================
+     MUSIC
+========================================= -->
 
 <audio
   id="music"
   loop
   playsinline
-  preload="metadata"
+  preload="auto"
 >
 
   <source
@@ -653,6 +803,53 @@ body::before{
 </audio>
 
 
+
+<!-- =========================================
+     START SCREEN
+========================================= -->
+
+<section id="startScreen">
+
+  <div class="startInner">
+
+    <div class="startSmall">
+      CHAPTER ONE
+    </div>
+
+    <h1 class="startTitle">
+
+      Ready to go
+
+      <span>
+        back in time?
+      </span>
+
+    </h1>
+
+    <p class="startText">
+
+      Twenty years.
+      Twenty little versions of you.
+
+    </p>
+
+    <button
+      id="startButton"
+      type="button"
+    >
+      START THE MEMORIES
+    </button>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================================
+     MUSIC BUTTON
+========================================= -->
+
 <button
   id="musicButton"
   aria-label="Toggle music"
@@ -662,7 +859,9 @@ body::before{
 
 
 
-<!-- HERO -->
+<!-- =========================================
+     HERO
+========================================= -->
 
 <section class="hero">
 
@@ -693,7 +892,9 @@ body::before{
   </p>
 
   <div class="scrollHint">
+
     scroll to go back in time ↓
+
   </div>
 
 </div>
@@ -702,13 +903,17 @@ body::before{
 
 
 
-<!-- STORY -->
+<!-- =========================================
+     STORY
+========================================= -->
 
 <main id="story"></main>
 
 
 
-<!-- END -->
+<!-- =========================================
+     END
+========================================= -->
 
 <section class="end">
 
@@ -753,9 +958,9 @@ body::before{
 
 <script>
 
-/* =========================
+/* =========================================
    PHOTOS
-========================= */
+========================================= */
 
 const photos = [
 
@@ -864,7 +1069,7 @@ const photos = [
   {
     age:18,
     file:"photos/age-18.jpeg",
-    caption:"Officially grown up. Supposedly."
+    caption:"And then... you became a dangerous driver."
   },
 
   {
@@ -882,22 +1087,34 @@ const photos = [
 ];
 
 
+
+/* =========================================
+   BUILD STORY
+========================================= */
+
 const story =
-document.getElementById("story");
+document.getElementById(
+  "story"
+);
 
 
 photos.forEach(
 (photo,index)=>{
 
+
   const year =
-  document.createElement("section");
+  document.createElement(
+    "section"
+  );
 
 
   year.className =
   "year";
 
 
-  if(photo.age===20){
+  if(
+    photo.age === 20
+  ){
 
     year.classList.add(
       "twenty"
@@ -921,30 +1138,20 @@ photos.forEach(
 
       <div class="ageRow">
 
-
         <div class="ageNumber">
-
           ${photo.age}
-
         </div>
-
 
         <div class="ageLine"></div>
 
-
         <div class="ageText">
-
           AGE ${photo.age}
-
         </div>
-
 
       </div>
 
 
-
       <div class="photoCard">
-
 
         <img
           src="${photo.file}"
@@ -953,19 +1160,24 @@ photos.forEach(
           decoding="async"
         >
 
-
       </div>
 
 
       ${
         photo.caption
+
         ?
+
         `
+
         <div class="caption">
           ${photo.caption}
         </div>
+
         `
+
         :
+
         ""
       }
 
@@ -980,17 +1192,26 @@ photos.forEach(
   );
 
 
-  if(photo.age===5){
+
+  /* AGE 5 */
+
+  if(
+    photo.age === 5
+  ){
 
     addBreak(
-      "we have many photos
-      so just admire them."
+      "Five years old and already stealing the show."
     );
 
   }
 
 
-  if(photo.age===10){
+
+  /* AGE 10 */
+
+  if(
+    photo.age === 10
+  ){
 
     addBreak(
       "Halfway to twenty."
@@ -999,7 +1220,12 @@ photos.forEach(
   }
 
 
-  if(photo.age===15){
+
+  /* AGE 15 */
+
+  if(
+    photo.age === 15
+  ){
 
     addBreak(
       "Somewhere along the way, childhood became memories."
@@ -1010,6 +1236,7 @@ photos.forEach(
 
 }
 );
+
 
 
 function addBreak(text){
@@ -1036,14 +1263,27 @@ function addBreak(text){
 
 
 
-/* =========================
+/* =========================================
    MUSIC
-========================= */
+========================================= */
 
 const music =
 document.getElementById(
   "music"
 );
+
+
+const startScreen =
+document.getElementById(
+  "startScreen"
+);
+
+
+const startButton =
+document.getElementById(
+  "startButton"
+);
+
 
 const musicButton =
 document.getElementById(
@@ -1051,47 +1291,84 @@ document.getElementById(
 );
 
 
-music.volume = 0.35;
+music.volume =
+0.35;
 
 
 
-/* TRY AUTOPLAY */
+/* =========================================
+   START MEMORIES
 
-window.addEventListener(
-"load",
+   THIS IS A REAL USER TAP,
+   SO MOBILE ALLOWS AUDIO.
+========================================= */
+
+startButton.addEventListener(
+"click",
 async()=>{
+
 
   try{
 
+    music.currentTime =
+    0;
+
+
     await music.play();
+
 
     musicButton.textContent =
     "♫";
+
 
   }
 
   catch(error){
 
     console.log(
-      "Autoplay blocked:",
+      "Music playback error:",
       error
     );
+
 
     musicButton.textContent =
     "♪";
 
   }
 
+
+  startScreen.classList.add(
+    "hide"
+  );
+
+
+  setTimeout(()=>{
+
+    startScreen.style.display =
+    "none";
+
+  },750);
+
+
+  window.scrollTo(
+    0,
+    0
+  );
+
+
 }
 );
 
 
 
-/* MUSIC BUTTON */
+/* =========================================
+   MUSIC BUTTON
+========================================= */
 
 musicButton.addEventListener(
 "click",
 async()=>{
+
 
   if(
     music.paused
@@ -1100,6 +1377,7 @@ async()=>{
     try{
 
       await music.play();
+
 
       musicButton.textContent =
       "♫";
@@ -1113,10 +1391,6 @@ async()=>{
         error
       );
 
-      alert(
-        "Music could not start."
-      );
-
     }
 
   }
@@ -1125,81 +1399,17 @@ async()=>{
 
     music.pause();
 
+
     musicButton.textContent =
     "♪";
 
   }
 
-}
-);
-
-
-
-/* =========================
-   FIRST MOBILE TOUCH
-========================= */
-
-let triedTouch = false;
-
-
-async function startFromTouch(){
-
-  if(triedTouch){
-    return;
-  }
-
-
-  triedTouch = true;
-
-
-  if(!music.paused){
-    return;
-  }
-
-
-  try{
-
-    await music.play();
-
-    musicButton.textContent =
-    "♫";
-
-  }
-
-  catch(error){
-
-    console.log(
-      "Mobile play blocked:",
-      error
-    );
-
-  }
 
 }
-
-
-document.addEventListener(
-  "touchstart",
-  startFromTouch,
-  {
-    once:true,
-    passive:true
-  }
 );
 
 
-document.addEventListener(
-  "pointerdown",
-  startFromTouch,
-  {
-    once:true,
-    passive:true
-  }
-);
-
-
-
-/* UPDATE ICON */
 
 music.addEventListener(
 "play",
@@ -1224,14 +1434,12 @@ music.addEventListener(
 
 
 
-/* AUDIO ERROR */
-
 music.addEventListener(
 "error",
 ()=>{
 
   console.log(
-    "Audio error:",
+    "Audio file error:",
     music.error
   );
 
@@ -1242,4 +1450,5 @@ music.addEventListener(
 
 
 </body>
+
 </html>
