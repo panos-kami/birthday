@@ -865,46 +865,6 @@ a{
 }
 
 
-/* MOBILE SAFETY BUTTON */
-
-#talkFallback{
-  position:absolute;
-  inset:0;
-  z-index:15;
-
-  display:none;
-  align-items:center;
-  justify-content:center;
-
-  background:rgba(8,12,34,.38);
-}
-
-#talkFallback.show{
-  display:flex;
-}
-
-#talkFallback button{
-  padding:14px 24px;
-
-  border-radius:999px;
-
-  border:
-    1px solid
-    rgba(255,255,255,.34);
-
-  background:
-    rgba(18,22,55,.86);
-
-  color:#fff;
-
-  font-size:12px;
-  font-weight:800;
-  letter-spacing:.12em;
-
-  cursor:pointer;
-}
-
-
 /* =================================
    AFTER VIDEO
 ================================= */
@@ -1190,7 +1150,7 @@ a{
   id="entryTalk"
   playsinline
   webkit-playsinline
-  preload="auto"
+  preload="metadata"
 >
 
 <source
@@ -1199,12 +1159,6 @@ a{
 >
 
 </video>
-
-<div id="talkFallback">
-  <button type="button">
-    TAP TO PLAY
-  </button>
-</div>
 
 </div>
 
@@ -1280,9 +1234,6 @@ document.getElementById("videoFrame");
 const entryTalk =
 document.getElementById("entryTalk");
 
-const talkFallback =
-document.getElementById("talkFallback");
-
 const nextChapter =
 document.getElementById("nextChapter");
 
@@ -1293,81 +1244,18 @@ let introFinished = false;
 
 function wait(ms){
 
-return new Promise(
-
-resolve =>
-
-setTimeout(
-resolve,
-ms
-)
-
-);
+  return new Promise(
+    resolve =>
+      setTimeout(resolve,ms)
+  );
 
 }
 
 
-/* =========================
-   PRIME TALK VIDEO FOR MOBILE
-========================= */
+/* preload */
 
-function primeEntryTalk(){
-
-  try{
-
-    entryTalk.pause();
-    entryTalk.currentTime = 0;
-    entryTalk.muted = false;
-    entryTalk.volume = 0;
-    entryTalk.loop = false;
-
-    const primePromise = entryTalk.play();
-
-    if(primePromise){
-
-      primePromise
-      .then(()=>{
-
-        setTimeout(()=>{
-
-          entryTalk.pause();
-
-          try{
-            entryTalk.currentTime = 0;
-          }catch(error){}
-
-          entryTalk.volume = 1;
-
-        },80);
-
-      })
-      .catch(error=>{
-
-        console.log(
-          "Talk prime error:",
-          error
-        );
-
-        entryTalk.volume = 1;
-
-      });
-
-    }
-
-  }
-
-  catch(error){
-
-    console.log(
-      "Talk prime setup error:",
-      error
-    );
-
-    entryTalk.volume = 1;
-
-  }
-
-}
+introVideo.load();
+entryTalk.load();
 
 
 /* =========================
@@ -1375,70 +1263,103 @@ function primeEntryTalk(){
 ========================= */
 
 yesButton.addEventListener(
-
 "click",
-
 async ()=>{
 
+  if(started) return;
 
-if(started) return;
-
-started = true;
-
-
-/* unlock the later talking video on the SAME user tap */
-
-primeEntryTalk();
+  started = true;
 
 
-/* unlock intro sound */
+  /* unlock intro */
 
-introVideo.currentTime = 0;
-introVideo.volume = 1;
-introVideo.muted = false;
-introVideo.loop = false;
-
-
-try{
-
-await introVideo.play();
-
-}
-
-catch(error){
-
-console.log(
-"Intro playback error:",
-error
-);
-
-}
+  introVideo.currentTime = 0;
+  introVideo.volume = 1;
+  introVideo.muted = false;
+  introVideo.loop = false;
 
 
-/* leave first screen */
+  try{
 
-gate.classList.add(
-"hide"
-);
+    await introVideo.play();
 
+  }
 
-await wait(450);
+  catch(error){
 
+    console.log(
+      "Intro problem:",
+      error
+    );
 
-/* reveal birthday world */
-
-blackout.classList.add(
-"remove"
-);
-
-
-await wait(300);
+  }
 
 
-titleGroup.classList.add(
-"play"
-);
+  /* try to unlock entry talk for mobile */
 
+  try{
+
+    entryTalk.muted = true;
+
+    entryTalk.currentTime = 0;
+
+    await entryTalk.play();
+
+    entryTalk.pause();
+
+    entryTalk.currentTime = 0;
+
+    entryTalk.muted = false;
+
+  }
+
+  catch(error){
+
+    console.log(
+      "Entry talk unlock:",
+      error
+    );
+
+  }
+
+
+  /* leave first screen */
+
+  gate.classList.add(
+    "hide"
+  );
+
+
+  await wait(450);
+
+
+  blackout.classList.add(
+    "remove"
+  );
+
+
+  await wait(250);
+
+
+  titleGroup.classList.add(
+    "play"
+  );
+
+
+  /*
+    Fallback:
+    even if intro gets stuck,
+    continue after 10 seconds
+  */
+
+  setTimeout(
+    ()=>{
+
+      finishIntro();
+
+    },
+    10000
+  );
 
 }
 
@@ -1452,188 +1373,83 @@ titleGroup.classList.add(
 
 async function finishIntro(){
 
+  if(introFinished)
+    return;
 
-if(introFinished)
-return;
 
+  introFinished = true;
 
-introFinished = true;
 
+  try{
+    introVideo.pause();
+  }
+  catch(e){}
 
-/* keep the 20 / Happy Birthday on screen a little longer */
 
-await wait(900);
+  titleGroup.classList.add(
+    "out"
+  );
 
 
-/* title flies away */
+  await wait(850);
 
-titleGroup.classList.add(
-"out"
-);
 
+  bridge.classList.add(
+    "show"
+  );
 
-await wait(850);
 
+  await wait(1500);
 
-/* AND NOW */
 
-bridge.classList.add(
-"show"
-);
+  bridge.classList.remove(
+    "show"
+  );
 
 
-await wait(1500);
+  await wait(350);
 
 
-bridge.classList.remove(
-"show"
-);
+  videoStage.classList.add(
+    "show"
+  );
 
 
-await wait(400);
+  await wait(350);
 
 
-/* show video world */
+  videoLine.classList.add(
+    "open"
+  );
 
-videoStage.classList.add(
-"show"
-);
 
+  await wait(600);
 
-await wait(450);
 
+  videoFrame.classList.add(
+    "reveal"
+  );
 
-/* light opens */
 
-videoLine.classList.add(
-"open"
-);
+  await wait(250);
 
 
-await wait(600);
+  entryTalk.currentTime = 0;
+  entryTalk.loop = false;
+  entryTalk.muted = false;
+  entryTalk.volume = 1;
 
-
-/* reveal video */
-
-videoFrame.classList.add(
-"reveal"
-);
-
-
-await wait(120);
-
-
-/* play video */
-
-entryTalk.currentTime = 0;
-
-entryTalk.volume = 1;
-
-entryTalk.muted = false;
-
-entryTalk.loop = false;
-
-
-try{
-
-await entryTalk.play();
-
-talkFallback.classList.remove(
-"show"
-);
-
-}
-
-catch(error){
-
-console.log(
-"Entry talk playback error:",
-error
-);
-
-talkFallback.classList.add(
-"show"
-);
-
-}
-
-
-}
-
-
-
-introVideo.addEventListener(
-"ended",
-finishIntro
-);
-
-
-
-introVideo.addEventListener(
-
-"timeupdate",
-
-()=>{
-
-if(
-
-!introFinished
-
-&&
-
-Number.isFinite(
-introVideo.duration
-)
-
-&&
-
-introVideo.duration > 0
-
-&&
-
-introVideo.currentTime
->=
-introVideo.duration - .12
-
-){
-
-finishIntro();
-
-}
-
-}
-
-);
-
-
-
-/* =========================
-   MANUAL MOBILE FALLBACK
-========================= */
-
-talkFallback.addEventListener(
-
-"click",
-
-async ()=>{
 
   try{
 
-    entryTalk.muted = false;
-    entryTalk.volume = 1;
-
     await entryTalk.play();
-
-    talkFallback.classList.remove(
-      "show"
-    );
 
   }
 
   catch(error){
 
     console.log(
-      "Manual talk playback error:",
+      "Entry talk playback:",
       error
     );
 
@@ -1641,67 +1457,56 @@ async ()=>{
 
 }
 
-);
 
+/* normal end */
 
-entryTalk.addEventListener(
-
-"playing",
-
+introVideo.addEventListener(
+"ended",
 ()=>{
 
-  talkFallback.classList.remove(
-    "show"
-  );
+  finishIntro();
 
 }
-
 );
 
 
 /* =========================
-   TALK FINISHES
+   ENTRY TALK FINISHES
 ========================= */
 
 entryTalk.addEventListener(
-
 "ended",
-
 async ()=>{
 
 
-videoFrame.style.transition =
-"opacity .75s ease, transform .75s ease";
+  videoFrame.style.transition =
+    "opacity .75s ease, transform .75s ease";
 
 
-videoFrame.style.opacity =
-"0";
+  videoFrame.style.opacity =
+    "0";
 
 
-videoFrame.style.transform =
-"scale(1.08)";
+  videoFrame.style.transform =
+    "scale(1.08)";
 
 
-await wait(800);
+  await wait(800);
 
 
-videoStage.classList.remove(
-"show"
-);
+  videoStage.classList.remove(
+    "show"
+  );
 
 
-await wait(400);
+  await wait(400);
 
 
-/* Go to photo chapter teaser */
-
-nextChapter.classList.add(
-"show"
-);
-
+  nextChapter.classList.add(
+    "show"
+  );
 
 }
-
 );
 
 </script>
