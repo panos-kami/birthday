@@ -1,0 +1,1932 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>Happy 20th, Kami</title>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+  width:100%;
+  height:100%;
+}
+
+body{
+  overflow:hidden;
+
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+  color:#fff;
+
+  background:#080c1d;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+#world{
+  position:fixed;
+  inset:0;
+
+  overflow:hidden;
+
+  background:
+    radial-gradient(
+      circle at 18% 18%,
+      rgba(105,126,232,.30),
+      transparent 33%
+    ),
+    radial-gradient(
+      circle at 82% 78%,
+      rgba(206,139,175,.24),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(106,91,169,.12),
+      transparent 45%
+    ),
+    linear-gradient(
+      145deg,
+      #080c1d 0%,
+      #111b3d 45%,
+      #312851 72%,
+      #57364f 100%
+    );
+}
+
+.glow{
+  position:absolute;
+
+  border-radius:50%;
+
+  filter:blur(100px);
+
+  opacity:.26;
+
+  animation:
+    floatGlow 9s ease-in-out infinite alternate;
+}
+
+.glow.one{
+  width:420px;
+  height:420px;
+
+  top:-180px;
+  right:-150px;
+
+  background:#7d8df3;
+}
+
+.glow.two{
+  width:390px;
+  height:390px;
+
+  left:-160px;
+  bottom:-150px;
+
+  background:#d58cac;
+
+  animation-delay:-3s;
+}
+
+.glow.three{
+  width:260px;
+  height:260px;
+
+  left:42%;
+  top:30%;
+
+  background:#a99ee8;
+
+  opacity:.10;
+
+  animation-delay:-6s;
+}
+
+@keyframes floatGlow{
+
+  from{
+    transform:
+      translate(-15px,-12px)
+      scale(.95);
+  }
+
+  to{
+    transform:
+      translate(30px,25px)
+      scale(1.07);
+  }
+
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+#intro{
+  position:absolute;
+  inset:0;
+
+  z-index:20;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:
+    calc(env(safe-area-inset-top) + 40px)
+    24px
+    calc(env(safe-area-inset-bottom) + 40px);
+
+  text-align:center;
+
+  transition:
+    opacity .75s ease,
+    transform .75s ease;
+}
+
+#intro.hide{
+  opacity:0;
+
+  transform:
+    scale(1.025);
+
+  pointer-events:none;
+}
+
+.introInner{
+  max-width:720px;
+
+  position:relative;
+}
+
+.introSmall{
+  font-size:9px;
+  font-weight:800;
+
+  letter-spacing:.38em;
+
+  color:#d8a0b9;
+}
+
+.introTitle{
+  margin-top:24px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      52px,
+      14vw,
+      92px
+    );
+
+  line-height:.91;
+
+  font-weight:400;
+
+  letter-spacing:-.045em;
+
+  color:#fff5ea;
+
+  text-shadow:
+    0 10px 50px
+    rgba(255,224,210,.08);
+}
+
+.introTitle span{
+  display:block;
+
+  margin-top:12px;
+
+  color:#e3aec5;
+
+  font-style:italic;
+}
+
+.introText{
+  margin-top:26px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      18px,
+      4.7vw,
+      24px
+    );
+
+  line-height:1.5;
+
+  font-style:italic;
+
+  color:
+    rgba(247,230,236,.72);
+}
+
+#playFinal{
+  margin-top:38px;
+
+  border:0;
+
+  padding:
+    17px 31px;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fae2cf,
+      #e2aec3
+    );
+
+  color:#322b51;
+
+  font-size:10px;
+  font-weight:900;
+
+  letter-spacing:.17em;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 16px 50px
+    rgba(0,0,0,.28),
+    0 0 35px
+    rgba(223,168,195,.14);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+#playFinal:active{
+  transform:
+    scale(.97);
+}
+
+
+/* =========================================================
+   VIDEO SCENE
+========================================================= */
+
+#videoScene{
+  position:absolute;
+  inset:0;
+
+  z-index:30;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:
+    opacity .75s ease;
+
+  overflow:hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(121,111,192,.23),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 18% 80%,
+      rgba(204,131,170,.20),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 82% 18%,
+      rgba(105,130,231,.20),
+      transparent 32%
+    ),
+    linear-gradient(
+      155deg,
+      #080c1e,
+      #151d43 46%,
+      #322853 75%,
+      #58374d
+    );
+}
+
+#videoScene.show{
+  opacity:1;
+
+  pointer-events:auto;
+}
+
+
+/* =========================================================
+   VIDEO AMBIENT LIGHT
+========================================================= */
+
+.videoAura{
+  position:absolute;
+
+  width:min(95vw,720px);
+  height:min(95vw,720px);
+
+  border-radius:50%;
+
+  background:
+    conic-gradient(
+      from 40deg,
+      rgba(116,139,244,.28),
+      rgba(197,142,203,.20),
+      rgba(229,155,186,.25),
+      rgba(116,139,244,.28)
+    );
+
+  filter:blur(100px);
+
+  animation:
+    auraMove 10s linear infinite;
+
+  opacity:.48;
+}
+
+@keyframes auraMove{
+
+  from{
+    transform:
+      rotate(0deg)
+      scale(.95);
+  }
+
+  to{
+    transform:
+      rotate(360deg)
+      scale(1.05);
+  }
+
+}
+
+
+/* =========================================================
+   VIDEO FRAME
+========================================================= */
+
+.videoMain{
+  position:relative;
+
+  z-index:3;
+
+  width:100%;
+  height:100%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:
+    calc(env(safe-area-inset-top) + 15px)
+    14px
+    calc(env(safe-area-inset-bottom) + 15px);
+}
+
+.videoFrame{
+  position:relative;
+
+  width:min(93vw,520px);
+
+  padding:8px;
+
+  border-radius:30px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,244,235,.30),
+      rgba(188,177,234,.15),
+      rgba(226,165,194,.18)
+    );
+
+  border:
+    1px solid
+    rgba(255,255,255,.15);
+
+  box-shadow:
+    0 35px 100px
+    rgba(0,0,0,.52),
+    0 0 70px
+    rgba(153,132,220,.18),
+    0 0 40px
+    rgba(224,154,187,.10);
+
+  backdrop-filter:
+    blur(18px);
+
+  transform:
+    translateY(30px)
+    scale(.95);
+
+  opacity:0;
+}
+
+#videoScene.show .videoFrame{
+  animation:
+    frameIn .85s
+    cubic-bezier(.2,.8,.2,1)
+    forwards;
+}
+
+@keyframes frameIn{
+
+  to{
+    opacity:1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+}
+
+.videoInner{
+  position:relative;
+
+  overflow:hidden;
+
+  border-radius:22px;
+
+  background:#03050c;
+}
+
+#mainVideo{
+  width:100%;
+
+  max-height:
+    calc(
+      100svh -
+      env(safe-area-inset-top) -
+      env(safe-area-inset-bottom) -
+      42px
+    );
+
+  display:block;
+
+  object-fit:contain;
+
+  background:#03050c;
+}
+
+
+/* =========================================================
+   VIDEO TOP LABEL
+========================================================= */
+
+.videoLabel{
+  position:absolute;
+
+  z-index:5;
+
+  top:20px;
+  left:50%;
+
+  transform:
+    translateX(-50%);
+
+  font-size:8px;
+  font-weight:800;
+
+  letter-spacing:.30em;
+
+  color:
+    rgba(255,244,236,.60);
+
+  white-space:nowrap;
+
+  pointer-events:none;
+}
+
+
+/* =========================================================
+   MANUAL PLAY
+========================================================= */
+
+#manualPlay{
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  transform:
+    translate(-50%,-50%);
+
+  z-index:20;
+
+  display:none;
+
+  padding:
+    16px 25px;
+
+  border:0;
+
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fae2cf,
+      #dda8c0
+    );
+
+  color:#312a50;
+
+  font-size:10px;
+  font-weight:900;
+
+  letter-spacing:.14em;
+
+  box-shadow:
+    0 15px 45px
+    rgba(0,0,0,.40);
+}
+
+#manualPlay.show{
+  display:block;
+}
+
+
+/* =========================================================
+   BLACKOUT
+========================================================= */
+
+#blackout{
+  position:absolute;
+  inset:0;
+
+  z-index:45;
+
+  background:#03040a;
+
+  opacity:0;
+
+  pointer-events:none;
+
+  transition:
+    opacity 1.4s ease;
+}
+
+#blackout.show{
+  opacity:1;
+}
+
+
+/* =========================================================
+   CREDITS
+========================================================= */
+
+#creditsScene{
+  position:absolute;
+  inset:0;
+
+  z-index:50;
+
+  display:none;
+
+  overflow:hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 85%,
+      rgba(202,132,171,.16),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 20% 18%,
+      rgba(112,130,229,.15),
+      transparent 35%
+    ),
+    linear-gradient(
+      160deg,
+      #050815,
+      #0d132d 55%,
+      #241b39
+    );
+}
+
+#creditsScene.show{
+  display:block;
+}
+
+.creditsTrack{
+  position:absolute;
+
+  width:100%;
+
+  padding:
+    100svh 24px
+    115svh;
+
+  text-align:center;
+
+  animation:
+    creditsRoll 25s linear forwards;
+}
+
+@keyframes creditsRoll{
+
+  from{
+    transform:
+      translateY(0);
+  }
+
+  to{
+    transform:
+      translateY(-190svh);
+  }
+
+}
+
+.creditBlock{
+  margin-bottom:75px;
+}
+
+.creditLabel{
+  font-size:8px;
+  font-weight:800;
+
+  letter-spacing:.37em;
+
+  color:#d69bb7;
+}
+
+.creditName{
+  margin-top:14px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      34px,
+      9vw,
+      62px
+    );
+
+  line-height:1.05;
+
+  color:#fff4ea;
+}
+
+.creditTiny{
+  margin-top:11px;
+
+  font-size:12px;
+
+  color:
+    rgba(255,255,255,.42);
+}
+
+.creditBig{
+  margin-top:30px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      47px,
+      13vw,
+      88px
+    );
+
+  color:#fff4ea;
+
+  line-height:.95;
+}
+
+.creditBig span{
+  display:block;
+
+  color:#dfa5bf;
+
+  font-style:italic;
+}
+
+
+/* =========================================================
+   FINAL
+========================================================= */
+
+#finalScene{
+  position:absolute;
+  inset:0;
+
+  z-index:80;
+
+  display:none;
+
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  padding:
+    calc(env(safe-area-inset-top) + 35px)
+    22px
+    calc(env(safe-area-inset-bottom) + 35px);
+
+  overflow:hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 35%,
+      rgba(128,142,232,.28),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 50% 80%,
+      rgba(220,143,180,.27),
+      transparent 36%
+    ),
+    linear-gradient(
+      145deg,
+      #0a1029 0%,
+      #253b7a 47%,
+      #49345f 72%,
+      #75485c 100%
+    );
+}
+
+#finalScene.show{
+  display:flex;
+}
+
+
+/* =========================================================
+   FINAL BIG 20
+========================================================= */
+
+.big20{
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  transform:
+    translate(-50%,-52%);
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      230px,
+      70vw,
+      560px
+    );
+
+  line-height:1;
+
+  color:
+    rgba(255,245,238,.045);
+
+  user-select:none;
+}
+
+
+/* =========================================================
+   FINAL CONTENT
+========================================================= */
+
+.finalContent{
+  position:relative;
+
+  z-index:5;
+
+  max-width:760px;
+
+  opacity:0;
+
+  transform:
+    translateY(35px)
+    scale(.95);
+}
+
+#finalScene.show .finalContent{
+  animation:
+    finalContentIn 1.2s
+    cubic-bezier(.2,.8,.2,1)
+    .35s forwards;
+}
+
+@keyframes finalContentIn{
+
+  to{
+    opacity:1;
+
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+}
+
+.finalSmall{
+  font-size:8px;
+  font-weight:800;
+
+  letter-spacing:.37em;
+
+  color:#e0a8be;
+}
+
+.finalTitle{
+  margin-top:22px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      57px,
+      15vw,
+      104px
+    );
+
+  line-height:.88;
+
+  font-weight:400;
+
+  color:#fff5eb;
+
+  text-shadow:
+    0 15px 70px
+    rgba(255,218,206,.11);
+}
+
+.finalTitle span{
+  display:block;
+
+  margin-top:12px;
+
+  color:#efb9ce;
+
+  font-style:italic;
+}
+
+.finalText{
+  margin-top:28px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      15px,
+      4vw,
+      20px
+    );
+
+  line-height:1.65;
+
+  color:
+    rgba(255,241,235,.72);
+}
+
+.signature{
+  margin-top:36px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      22px,
+      6vw,
+      30px
+    );
+
+  color:#ffd7e4;
+
+  font-style:italic;
+}
+
+.theEnd{
+  margin-top:36px;
+
+  font-size:8px;
+  font-weight:800;
+
+  letter-spacing:.40em;
+
+  color:
+    rgba(255,255,255,.36);
+}
+
+
+/* =========================================================
+   CONFETTI
+========================================================= */
+
+.confetti{
+  position:absolute;
+
+  top:-30px;
+
+  width:7px;
+  height:15px;
+
+  border-radius:4px;
+
+  opacity:.9;
+
+  animation:
+    confettiFall linear forwards;
+}
+
+@keyframes confettiFall{
+
+  0%{
+    transform:
+      translateY(-30px)
+      rotate(0deg);
+
+    opacity:0;
+  }
+
+  10%{
+    opacity:1;
+  }
+
+  100%{
+    transform:
+      translateY(115svh)
+      rotate(720deg);
+
+    opacity:.65;
+  }
+
+}
+
+
+/* =========================================================
+   FIREWORKS
+========================================================= */
+
+.firework{
+  position:absolute;
+
+  width:5px;
+  height:5px;
+
+  pointer-events:none;
+}
+
+.spark{
+  position:absolute;
+
+  width:5px;
+  height:5px;
+
+  border-radius:50%;
+
+  background:#ffdce9;
+
+  box-shadow:
+    0 0 14px
+    rgba(255,213,229,.85);
+
+  animation:
+    sparkOut 1.3s ease-out forwards;
+}
+
+@keyframes sparkOut{
+
+  from{
+    opacity:1;
+
+    transform:
+      translate(0,0)
+      scale(1);
+  }
+
+  to{
+    opacity:0;
+
+    transform:
+      translate(
+        var(--x),
+        var(--y)
+      )
+      scale(.15);
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:650px){
+
+  .videoFrame{
+    width:95vw;
+
+    padding:6px;
+
+    border-radius:24px;
+  }
+
+  .videoInner{
+    border-radius:18px;
+  }
+
+  .creditBlock{
+    margin-bottom:64px;
+  }
+
+  .creditsTrack{
+    animation-duration:23s;
+  }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation:none !important;
+    transition:none !important;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- BACKGROUND -->
+
+<div id="world">
+
+  <div class="glow one"></div>
+
+  <div class="glow two"></div>
+
+  <div class="glow three"></div>
+
+</div>
+
+
+<!-- =========================================================
+     INTRO
+========================================================= -->
+
+<section id="intro">
+
+  <div class="introInner">
+
+    <div class="introSmall">
+      ONE LAST MESSAGE
+    </div>
+
+
+    <div class="introTitle">
+
+      I saved mine
+
+      <span>
+        for last.
+      </span>
+
+    </div>
+
+
+    <div class="introText">
+
+      Everyone else had their turn.<br>
+      Now it's mine.
+
+    </div>
+
+
+    <button
+      id="playFinal"
+      type="button"
+    >
+      PLAY MY MESSAGE
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     VIDEO
+========================================================= -->
+
+<section id="videoScene">
+
+  <div class="videoAura"></div>
+
+
+  <div class="videoLabel">
+    ONE LAST MESSAGE
+  </div>
+
+
+  <div class="videoMain">
+
+    <div class="videoFrame">
+
+      <div class="videoInner">
+
+        <video
+          id="mainVideo"
+          playsinline
+          webkit-playsinline
+          preload="auto"
+        >
+
+          <source
+            src="final-video.mp4"
+            type="video/mp4"
+          >
+
+        </video>
+
+
+        <button
+          id="manualPlay"
+          type="button"
+        >
+          TAP TO PLAY
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     BLACKOUT
+========================================================= -->
+
+<div id="blackout"></div>
+
+
+<!-- =========================================================
+     CREDITS
+========================================================= -->
+
+<section id="creditsScene">
+
+  <div class="creditsTrack">
+
+
+    <div class="creditBlock">
+
+      <div class="creditLabel">
+        STARRING
+      </div>
+
+      <div class="creditName">
+        Kami
+      </div>
+
+    </div>
+
+
+    <div class="creditBlock">
+
+      <div class="creditLabel">
+        FEATURING
+      </div>
+
+      <div class="creditName">
+        Everyone who loves you
+      </div>
+
+    </div>
+
+
+    <div class="creditBlock">
+
+      <div class="creditLabel">
+        SPECIAL APPEARANCE
+      </div>
+
+      <div class="creditName">
+        Morocco
+      </div>
+
+    </div>
+
+
+    <div class="creditBlock">
+
+      <div class="creditLabel">
+        ALSO FEATURING
+      </div>
+
+      <div class="creditName">
+        A little chaos
+      </div>
+
+      <div class="creditTiny">
+        probably more than a little
+      </div>
+
+    </div>
+
+
+    <div class="creditBlock">
+
+      <div class="creditLabel">
+        WITH
+      </div>
+
+      <div class="creditName">
+        A lot of memories
+      </div>
+
+    </div>
+
+
+    <div class="creditBlock">
+
+      <div class="creditLabel">
+        AND
+      </div>
+
+      <div class="creditName">
+        Emotions
+      </div>
+
+    </div>
+
+
+    <div class="creditBlock">
+
+      <div class="creditLabel">
+        MADE ESPECIALLY FOR
+      </div>
+
+      <div class="creditBig">
+
+        your
+
+        <span>
+          20th.
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="creditBlock">
+
+      <div class="creditLabel">
+        BUT
+      </div>
+
+      <div class="creditBig">
+
+        this isn't
+
+        <span>
+          the end.
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     FINAL
+========================================================= -->
+
+<section id="finalScene">
+
+  <div class="big20">
+    20
+  </div>
+
+
+  <div class="finalContent">
+
+    <div class="finalSmall">
+      OCTOBER 2026
+    </div>
+
+
+    <div class="finalTitle">
+
+      Happy 20th,
+
+      <span>
+        Kami.
+      </span>
+
+    </div>
+
+
+    <div class="finalText">
+
+      Twenty years of you.<br>
+
+      And hopefully a lot more memories
+      still to come.
+
+    </div>
+
+
+    <div class="signature">
+      With love, Theo. ♡
+    </div>
+
+
+    <div class="theEnd">
+      THE END
+    </div>
+
+  </div>
+
+</section>
+
+
+<script>
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const intro =
+document.getElementById(
+  "intro"
+);
+
+const playFinal =
+document.getElementById(
+  "playFinal"
+);
+
+const videoScene =
+document.getElementById(
+  "videoScene"
+);
+
+const mainVideo =
+document.getElementById(
+  "mainVideo"
+);
+
+const manualPlay =
+document.getElementById(
+  "manualPlay"
+);
+
+const blackout =
+document.getElementById(
+  "blackout"
+);
+
+const creditsScene =
+document.getElementById(
+  "creditsScene"
+);
+
+const finalScene =
+document.getElementById(
+  "finalScene"
+);
+
+
+/* =========================================================
+   START VIDEO
+========================================================= */
+
+playFinal.addEventListener(
+  "click",
+  async()=>{
+
+    /*
+      IMPORTANT:
+      We show the video scene and call play()
+      directly from the button tap.
+
+      This is much safer on phones.
+    */
+
+    videoScene.classList.add(
+      "show"
+    );
+
+    intro.classList.add(
+      "hide"
+    );
+
+
+    mainVideo.currentTime = 0;
+
+
+    try{
+
+      await mainVideo.play();
+
+      manualPlay.classList.remove(
+        "show"
+      );
+
+    }
+    catch(error){
+
+      console.log(
+        "Video play blocked:",
+        error
+      );
+
+      manualPlay.classList.add(
+        "show"
+      );
+
+      mainVideo.controls = true;
+
+    }
+
+
+    setTimeout(
+      ()=>{
+
+        intro.style.display =
+          "none";
+
+      },
+      750
+    );
+
+  }
+);
+
+
+/* =========================================================
+   FALLBACK PLAY
+========================================================= */
+
+manualPlay.addEventListener(
+  "click",
+  async()=>{
+
+    try{
+
+      await mainVideo.play();
+
+      manualPlay.classList.remove(
+        "show"
+      );
+
+    }
+    catch(error){
+
+      console.log(error);
+
+      mainVideo.controls =
+        true;
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   WHEN PLAYING
+========================================================= */
+
+mainVideo.addEventListener(
+  "playing",
+  ()=>{
+
+    manualPlay.classList.remove(
+      "show"
+    );
+
+  }
+);
+
+
+/* =========================================================
+   VIDEO ERROR
+========================================================= */
+
+mainVideo.addEventListener(
+  "error",
+  ()=>{
+
+    console.log(
+      "Video error:",
+      mainVideo.error
+    );
+
+    manualPlay.textContent =
+      "VIDEO COULDN'T LOAD";
+
+    manualPlay.classList.add(
+      "show"
+    );
+
+  }
+);
+
+
+/* =========================================================
+   VIDEO END
+========================================================= */
+
+mainVideo.addEventListener(
+  "ended",
+  ()=>{
+
+    blackout.classList.add(
+      "show"
+    );
+
+
+    setTimeout(
+      ()=>{
+
+        videoScene.style.display =
+          "none";
+
+        creditsScene.classList.add(
+          "show"
+        );
+
+      },
+      1300
+    );
+
+
+    setTimeout(
+      ()=>{
+
+        blackout.classList.remove(
+          "show"
+        );
+
+      },
+      2000
+    );
+
+
+    setTimeout(
+      ()=>{
+
+        creditsScene.style.display =
+          "none";
+
+        finalScene.classList.add(
+          "show"
+        );
+
+
+        createConfetti();
+
+        startFireworks();
+
+      },
+      27000
+    );
+
+  }
+);
+
+
+/* =========================================================
+   CONFETTI
+========================================================= */
+
+function createConfetti(){
+
+  const colors = [
+
+    "#f7d8e4",
+    "#e6abc3",
+    "#a9a7f0",
+    "#f6d9c7",
+    "#ffffff"
+
+  ];
+
+
+  for(
+    let i = 0;
+    i < 95;
+    i++
+  ){
+
+    const piece =
+      document.createElement(
+        "div"
+      );
+
+
+    piece.className =
+      "confetti";
+
+
+    piece.style.left =
+      Math.random() * 100 +
+      "vw";
+
+
+    piece.style.background =
+      colors[
+        Math.floor(
+          Math.random() *
+          colors.length
+        )
+      ];
+
+
+    piece.style.animationDuration =
+      (
+        4 +
+        Math.random() * 5
+      ) +
+      "s";
+
+
+    piece.style.animationDelay =
+      (
+        Math.random() * 3
+      ) +
+      "s";
+
+
+    finalScene.appendChild(
+      piece
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   FIREWORK
+========================================================= */
+
+function firework(
+  x,
+  y
+){
+
+  const holder =
+    document.createElement(
+      "div"
+    );
+
+
+  holder.className =
+    "firework";
+
+
+  holder.style.left =
+    x + "%";
+
+
+  holder.style.top =
+    y + "%";
+
+
+  finalScene.appendChild(
+    holder
+  );
+
+
+  const sparks = 24;
+
+
+  for(
+    let i = 0;
+    i < sparks;
+    i++
+  ){
+
+    const spark =
+      document.createElement(
+        "div"
+      );
+
+
+    spark.className =
+      "spark";
+
+
+    const angle =
+      (
+        Math.PI *
+        2 *
+        i
+      ) /
+      sparks;
+
+
+    const distance =
+      50 +
+      Math.random() *
+      65;
+
+
+    spark.style.setProperty(
+      "--x",
+      (
+        Math.cos(angle) *
+        distance
+      ) +
+      "px"
+    );
+
+
+    spark.style.setProperty(
+      "--y",
+      (
+        Math.sin(angle) *
+        distance
+      ) +
+      "px"
+    );
+
+
+    holder.appendChild(
+      spark
+    );
+
+  }
+
+
+  setTimeout(
+    ()=>{
+
+      holder.remove();
+
+    },
+    1500
+  );
+
+}
+
+
+/* =========================================================
+   FIREWORK SEQUENCE
+========================================================= */
+
+function startFireworks(){
+
+  firework(
+    22,
+    25
+  );
+
+
+  setTimeout(
+    ()=>{
+
+      firework(
+        77,
+        24
+      );
+
+    },
+    500
+  );
+
+
+  setTimeout(
+    ()=>{
+
+      firework(
+        50,
+        17
+      );
+
+    },
+    1050
+  );
+
+
+  setTimeout(
+    ()=>{
+
+      firework(
+        17,
+        58
+      );
+
+    },
+    1650
+  );
+
+
+  setTimeout(
+    ()=>{
+
+      firework(
+        84,
+        54
+      );
+
+    },
+    2200
+  );
+
+
+  setTimeout(
+    ()=>{
+
+      firework(
+        50,
+        65
+      );
+
+    },
+    2900
+  );
+
+}
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,2599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>Messages From Home</title>
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+  width:100%;
+  height:100%;
+}
+
+body{
+  overflow:hidden;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+  background:#10162f;
+  color:white;
+}
+
+
+/* ======================================================
+   INTRO / MAP
+====================================================== */
+
+#travelIntro{
+  position:fixed;
+  inset:0;
+  z-index:100;
+  overflow:hidden;
+
+  background:
+    radial-gradient(circle at 18% 15%, rgba(120,110,180,.22), transparent 32%),
+    radial-gradient(circle at 82% 80%, rgba(210,145,175,.17), transparent 32%),
+    #10162f;
+}
+
+#map{
+  position:absolute;
+  inset:-40px;
+
+  opacity:0;
+
+  transform:scale(1.07);
+
+  transition:
+    opacity 1.2s ease,
+    transform 9s cubic-bezier(.2,.7,.2,1);
+}
+
+#map.visible{
+  opacity:1;
+  transform:scale(1);
+}
+
+.leaflet-tile-pane{
+  filter:
+    grayscale(.75)
+    brightness(.64)
+    contrast(1.17)
+    saturate(.78)
+    hue-rotate(175deg);
+}
+
+.leaflet-control-container{
+  display:none;
+}
+
+.mapTint{
+  position:absolute;
+  inset:0;
+  z-index:401;
+  pointer-events:none;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(35,48,97,.18),
+      rgba(98,78,138,.17),
+      rgba(176,111,147,.14)
+    );
+}
+
+.mapVignette{
+  position:absolute;
+  inset:0;
+  z-index:402;
+  pointer-events:none;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 18%,
+      rgba(12,15,35,.14) 50%,
+      rgba(7,10,25,.72) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(8,11,28,.55),
+      transparent 26%,
+      transparent 68%,
+      rgba(8,11,28,.76)
+    );
+}
+
+.grain{
+  position:absolute;
+  inset:-50%;
+  z-index:405;
+  pointer-events:none;
+
+  opacity:.04;
+
+  background-image:
+    radial-gradient(
+      rgba(255,255,255,.8) .6px,
+      transparent .6px
+    );
+
+  background-size:5px 5px;
+
+  animation:grainMove .27s steps(2) infinite;
+}
+
+@keyframes grainMove{
+  0%{ transform:translate(0,0); }
+  25%{ transform:translate(2%,-2%); }
+  50%{ transform:translate(-2%,2%); }
+  75%{ transform:translate(1%,-1%); }
+}
+
+
+/* ======================================================
+   TITLE
+====================================================== */
+
+#travelTitle{
+  position:absolute;
+
+  top:calc(env(safe-area-inset-top) + 28px);
+  left:50%;
+
+  z-index:450;
+
+  width:90%;
+
+  transform:
+    translateX(-50%)
+    translateY(-12px);
+
+  text-align:center;
+
+  opacity:0;
+
+  transition:
+    opacity .8s ease,
+    transform .8s ease;
+}
+
+#travelTitle.show{
+  opacity:1;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+.travelSmall{
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.32em;
+  text-transform:uppercase;
+  color:#e6b5c8;
+}
+
+.travelMain{
+  margin-top:12px;
+
+  font-family:Georgia,"Times New Roman",serif;
+
+  font-size:clamp(30px,8vw,55px);
+
+  font-weight:400;
+
+  color:#fff3e9;
+}
+
+
+/* ======================================================
+   LOCATIONS
+====================================================== */
+
+.locationCard{
+  position:absolute;
+  z-index:450;
+
+  opacity:0;
+
+  transition:
+    opacity .8s ease,
+    transform .8s ease;
+}
+
+.locationCard.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+.departure{
+  left:17px;
+
+  bottom:calc(env(safe-area-inset-bottom) + 35px);
+
+  transform:translateY(14px);
+}
+
+.destination{
+  right:17px;
+
+  top:calc(env(safe-area-inset-top) + 112px);
+
+  text-align:right;
+
+  transform:translateY(-14px);
+}
+
+.locationTiny{
+  font-size:7px;
+  font-weight:800;
+  letter-spacing:.28em;
+  color:rgba(255,255,255,.45);
+}
+
+.locationBig{
+  margin-top:6px;
+
+  font-family:Georgia,"Times New Roman",serif;
+
+  font-size:clamp(30px,8vw,50px);
+
+  color:#fff0e5;
+}
+
+.locationCountry{
+  margin-top:3px;
+  font-size:10px;
+  letter-spacing:.10em;
+  color:#dba9c0;
+}
+
+
+/* ======================================================
+   DISTANCE
+====================================================== */
+
+#distanceBox{
+  position:absolute;
+
+  z-index:455;
+
+  left:50%;
+
+  bottom:calc(env(safe-area-inset-bottom) + 30px);
+
+  transform:translateX(-50%);
+
+  text-align:center;
+
+  opacity:0;
+
+  transition:opacity .5s ease;
+}
+
+#distanceBox.show{
+  opacity:1;
+}
+
+.distanceNumber{
+  font-family:Georgia,"Times New Roman",serif;
+
+  font-size:clamp(36px,10vw,66px);
+
+  line-height:.9;
+
+  color:#ffe7d8;
+}
+
+.distanceLabel{
+  margin-top:7px;
+
+  font-size:7px;
+  font-weight:800;
+
+  letter-spacing:.30em;
+
+  color:rgba(255,255,255,.45);
+}
+
+
+/* ======================================================
+   AIRPLANE
+====================================================== */
+
+.planeMarker{
+  position:relative;
+
+  width:44px;
+  height:44px;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  font-size:28px;
+
+  filter:
+    drop-shadow(
+      0 5px 12px rgba(0,0,0,.75)
+    );
+
+  transform:rotate(135deg);
+}
+
+.planeMarker::after{
+  content:"✉";
+
+  position:absolute;
+
+  font-size:13px;
+
+  transform:
+    translate(-13px,18px)
+    rotate(-135deg);
+}
+
+
+/* ======================================================
+   END OF TRAVEL
+====================================================== */
+
+#travelEnd{
+  position:absolute;
+  inset:0;
+
+  z-index:500;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:28px 22px;
+
+  text-align:center;
+
+  opacity:0;
+  visibility:hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 60%,
+      rgba(114,90,160,.34),
+      transparent 39%
+    ),
+    rgba(12,15,34,.91);
+
+  backdrop-filter:blur(9px);
+
+  transition:opacity .9s ease;
+}
+
+#travelEnd.show{
+  opacity:1;
+  visibility:visible;
+}
+
+.travelDone{
+  font-size:8px;
+  font-weight:800;
+
+  letter-spacing:.32em;
+
+  color:#e2b0c4;
+}
+
+.travelQuote{
+  max-width:650px;
+
+  margin:24px auto 0;
+
+  font-family:Georgia,"Times New Roman",serif;
+
+  font-size:clamp(31px,8vw,52px);
+
+  line-height:1.1;
+
+  color:#fff4ea;
+}
+
+.travelQuote span{
+  display:block;
+
+  margin-top:11px;
+
+  color:#e8b2c7;
+
+  font-style:italic;
+}
+
+#openMessages{
+  margin-top:34px;
+
+  padding:16px 28px;
+
+  border:none;
+  border-radius:999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f9e2cf,
+      #dba8c0
+    );
+
+  color:#322a50;
+
+  font-size:10px;
+  font-weight:900;
+
+  letter-spacing:.14em;
+
+  cursor:pointer;
+}
+
+
+/* ======================================================
+   EXPERIENCE
+====================================================== */
+
+#experience{
+  position:fixed;
+
+  inset:0;
+
+  z-index:50;
+
+  display:none;
+
+  overflow:hidden;
+
+  background:#10162f;
+}
+
+#experience.active{
+  display:block;
+}
+
+
+/* ======================================================
+   BLURRED VIDEO BACKGROUND
+====================================================== */
+
+.videoBackground{
+  position:absolute;
+
+  inset:-50px;
+
+  overflow:hidden;
+}
+
+#blurVideo{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  transform:scale(1.16);
+
+  filter:
+    blur(35px)
+    brightness(.52)
+    saturate(.95);
+}
+
+.videoTint{
+  position:absolute;
+
+  inset:0;
+
+  background:
+    radial-gradient(
+      circle at center,
+      transparent 10%,
+      rgba(28,35,75,.15) 48%,
+      rgba(10,13,30,.60)
+    ),
+    linear-gradient(
+      145deg,
+      rgba(35,48,97,.33),
+      rgba(92,75,134,.28),
+      rgba(165,104,139,.23)
+    );
+}
+
+
+/* ======================================================
+   MAIN VIDEO
+====================================================== */
+
+.videoMain{
+  position:absolute;
+
+  inset:0;
+
+  z-index:5;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:
+    calc(env(safe-area-inset-top) + 12px)
+    12px
+    calc(env(safe-area-inset-bottom) + 12px);
+}
+
+#videoWrap{
+  width:min(94vw,480px);
+
+  position:relative;
+
+  opacity:0;
+
+  transform:
+    translateY(35px)
+    scale(.93);
+}
+
+#videoWrap.show{
+  animation:
+    videoReveal
+    .75s cubic-bezier(.2,.8,.2,1)
+    forwards;
+}
+
+@keyframes videoReveal{
+
+  0%{
+    opacity:0;
+
+    transform:
+      translateY(40px)
+      scale(.90);
+
+    filter:blur(10px);
+  }
+
+  60%{
+    opacity:1;
+    filter:blur(0);
+  }
+
+  100%{
+    opacity:1;
+
+    transform:
+      translateY(0)
+      scale(1);
+
+    filter:blur(0);
+  }
+
+}
+
+.videoFrame{
+  width:100%;
+
+  padding:7px;
+
+  border-radius:28px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,235,223,.22),
+      rgba(184,166,226,.13),
+      rgba(219,157,190,.15)
+    );
+
+  border:1px solid rgba(255,255,255,.12);
+
+  backdrop-filter:blur(14px);
+
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.38),
+    0 0 70px rgba(156,116,181,.12);
+}
+
+#mainVideo{
+  width:100%;
+
+  max-height:
+    calc(
+      100svh -
+      env(safe-area-inset-top) -
+      env(safe-area-inset-bottom) -
+      30px
+    );
+
+  display:block;
+
+  object-fit:contain;
+
+  border-radius:20px;
+
+  background:rgba(13,16,34,.38);
+}
+
+
+/* ======================================================
+   PERSON PRESENTATION
+====================================================== */
+
+#personIntro{
+  position:absolute;
+
+  inset:0;
+
+  z-index:20;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:28px 22px;
+
+  text-align:center;
+
+  overflow:hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 64%,
+      rgba(112,88,159,.40),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 82% 18%,
+      rgba(198,129,160,.14),
+      transparent 28%
+    ),
+    linear-gradient(
+      180deg,
+      #192149,
+      #10132c 72%
+    );
+
+  transition:
+    opacity .45s ease,
+    transform .45s ease;
+}
+
+.personBg{
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  transform:translate(-50%,-50%);
+
+  white-space:nowrap;
+
+  font-size:clamp(125px,39vw,330px);
+
+  font-weight:900;
+
+  letter-spacing:-.08em;
+
+  color:rgba(255,255,255,.025);
+}
+
+.personContent{
+  position:relative;
+
+  z-index:3;
+
+  width:100%;
+
+  max-width:650px;
+}
+
+.personLead{
+  font-size:clamp(10px,3vw,14px);
+
+  font-weight:700;
+
+  letter-spacing:.17em;
+
+  line-height:1.5;
+
+  text-transform:uppercase;
+
+  color:rgba(255,230,235,.64);
+}
+
+.personName{
+  margin-top:17px;
+
+  font-family:Georgia,"Times New Roman",serif;
+
+  font-size:clamp(82px,25vw,168px);
+
+  font-weight:400;
+
+  line-height:.8;
+
+  letter-spacing:-.07em;
+
+  color:#fff4ea;
+}
+
+.personSub{
+  max-width:430px;
+
+  margin:27px auto 0;
+
+  font-size:14px;
+
+  line-height:1.65;
+
+  color:rgba(255,255,255,.67);
+}
+
+#playMessage{
+  margin-top:29px;
+
+  padding:15px 28px;
+
+  border:none;
+
+  border-radius:999px;
+
+  cursor:pointer;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f9e2cf,
+      #dba8c0
+    );
+
+  color:#322b50;
+
+  font-size:10px;
+  font-weight:900;
+
+  letter-spacing:.14em;
+}
+
+
+/* ======================================================
+   BETWEEN VIDEOS
+====================================================== */
+
+#betweenScreen{
+  position:absolute;
+
+  inset:0;
+
+  z-index:35;
+
+  display:none;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:30px 22px;
+
+  text-align:center;
+
+  overflow:hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 65%,
+      rgba(114,89,160,.42),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 82% 18%,
+      rgba(201,132,164,.14),
+      transparent 27%
+    ),
+    linear-gradient(
+      160deg,
+      #182149,
+      #11142d 58%,
+      #241c3e
+    );
+}
+
+#betweenScreen.show{
+  display:flex;
+}
+
+.betweenHuge{
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  transform:translate(-50%,-50%);
+
+  white-space:nowrap;
+
+  font-size:clamp(125px,42vw,340px);
+
+  font-weight:900;
+
+  letter-spacing:-.08em;
+
+  color:rgba(255,255,255,.022);
+}
+
+.betweenContent{
+  position:relative;
+
+  z-index:3;
+
+  width:100%;
+
+  max-width:620px;
+}
+
+.betweenLine{
+  font-family:Georgia,"Times New Roman",serif;
+
+  font-size:clamp(26px,7vw,42px);
+
+  line-height:1.15;
+
+  color:rgba(255,245,238,.89);
+}
+
+.betweenSmall{
+  margin-top:28px;
+
+  font-size:8px;
+  font-weight:800;
+
+  letter-spacing:.32em;
+
+  color:#dca9c0;
+}
+
+.betweenName{
+  margin-top:10px;
+
+  font-family:Georgia,"Times New Roman",serif;
+
+  font-size:clamp(68px,21vw,130px);
+
+  font-weight:400;
+
+  line-height:.82;
+
+  letter-spacing:-.06em;
+
+  color:#fff3e8;
+}
+
+#nextMessageButton{
+  margin-top:31px;
+
+  padding:16px 30px;
+
+  border:none;
+
+  border-radius:999px;
+
+  cursor:pointer;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f9e2ce,
+      #dba9c1
+    );
+
+  color:#312a4d;
+
+  font-size:10px;
+  font-weight:900;
+
+  letter-spacing:.14em;
+}
+
+
+/* ======================================================
+   FINAL
+====================================================== */
+
+#finalScreen{
+  position:absolute;
+
+  inset:0;
+
+  z-index:50;
+
+  display:none;
+
+  align-items:center;
+  justify-content:center;
+
+  padding:30px 22px;
+
+  text-align:center;
+
+  background:
+    radial-gradient(
+      circle at 50% 65%,
+      rgba(114,89,159,.38),
+      transparent 42%
+    ),
+    linear-gradient(
+      #182149,
+      #0f1228
+    );
+}
+
+#finalScreen.show{
+  display:flex;
+}
+
+.finalSmall{
+  font-size:8px;
+  font-weight:800;
+
+  letter-spacing:.30em;
+
+  color:#dfafc3;
+}
+
+.finalTitle{
+  margin-top:20px;
+
+  font-family:Georgia,"Times New Roman",serif;
+
+  font-size:clamp(47px,13vw,80px);
+
+  font-weight:400;
+
+  line-height:.96;
+
+  color:#fff4ea;
+}
+
+.finalTitle span{
+  display:block;
+
+  margin-top:8px;
+
+  color:#e6afc5;
+
+  font-style:italic;
+}
+
+.finalText{
+  max-width:430px;
+
+  margin:23px auto 0;
+
+  font-size:14px;
+
+  line-height:1.7;
+
+  color:rgba(255,255,255,.65);
+}
+
+.finalMissing{
+  margin-top:28px;
+
+  font-family:Georgia,"Times New Roman",serif;
+
+  font-size:clamp(22px,6vw,34px);
+
+  line-height:1.2;
+
+  color:#fff4ea;
+}
+
+.finalMissing span{
+  display:block;
+
+  margin-top:7px;
+
+  color:#e6afc5;
+
+  font-style:italic;
+}
+
+.finalButton{
+  display:inline-flex;
+
+  align-items:center;
+  justify-content:center;
+
+  margin-top:30px;
+
+  padding:16px 30px;
+
+  border-radius:999px;
+
+  text-decoration:none;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f9e2ce,
+      #dba9c1
+    );
+
+  color:#312a4d;
+
+  font-size:10px;
+  font-weight:900;
+
+  letter-spacing:.14em;
+
+  box-shadow:
+    0 16px 45px rgba(0,0,0,.24);
+}
+
+
+/* ======================================================
+   MOBILE
+====================================================== */
+
+@media(max-width:600px){
+
+  #distanceBox{
+    bottom:
+      calc(
+        env(safe-area-inset-bottom) +
+        125px
+      );
+  }
+
+  .personName{
+    font-size:91px;
+  }
+
+  .betweenName{
+    font-size:79px;
+  }
+
+  .videoFrame{
+    border-radius:23px;
+  }
+
+  #mainVideo{
+    border-radius:17px;
+  }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ======================================================
+     MAP INTRO
+====================================================== -->
+
+<section id="travelIntro">
+
+
+  <div id="map"></div>
+
+
+  <div class="mapTint"></div>
+
+  <div class="mapVignette"></div>
+
+  <div class="grain"></div>
+
+
+  <div id="travelTitle">
+
+    <div class="travelSmall">
+
+      A LITTLE PIECE OF HOME
+
+    </div>
+
+
+    <div class="travelMain">
+
+      Somewhere between Lithuania
+      and Morocco…
+
+    </div>
+
+  </div>
+
+
+
+  <div
+    id="kaunasCard"
+    class="locationCard departure"
+  >
+
+    <div class="locationTiny">
+
+      FROM
+
+    </div>
+
+
+    <div class="locationBig">
+
+      Kaunas
+
+    </div>
+
+
+    <div class="locationCountry">
+
+      LITHUANIA
+
+    </div>
+
+  </div>
+
+
+
+  <div
+    id="casablancaCard"
+    class="locationCard destination"
+  >
+
+    <div class="locationTiny">
+
+      TO
+
+    </div>
+
+
+    <div class="locationBig">
+
+      Casablanca
+
+    </div>
+
+
+    <div class="locationCountry">
+
+      MOROCCO
+
+    </div>
+
+  </div>
+
+
+
+  <div id="distanceBox">
+
+    <div
+      class="distanceNumber"
+      id="distanceNumber"
+    >
+
+      0
+
+    </div>
+
+
+    <div class="distanceLabel">
+
+      KILOMETRES FROM HOME
+
+    </div>
+
+  </div>
+
+
+
+  <div id="travelEnd">
+
+    <div>
+
+
+      <div class="travelDone">
+
+        THOUSANDS OF KILOMETRES LATER
+
+      </div>
+
+
+      <div class="travelQuote">
+
+        You couldn’t bring everyone
+        to Morocco…
+
+        <span>
+
+          so I brought a little piece
+          of them to you.
+
+        </span>
+
+      </div>
+
+
+      <button
+        id="openMessages"
+        type="button"
+      >
+
+        OPEN THE FIRST MESSAGE
+
+      </button>
+
+    </div>
+
+  </div>
+
+
+</section>
+
+
+
+<!-- ======================================================
+     VIDEO EXPERIENCE
+====================================================== -->
+
+<section id="experience">
+
+
+  <div class="videoBackground">
+
+    <video
+      id="blurVideo"
+      muted
+      playsinline
+      webkit-playsinline
+      preload="none"
+    ></video>
+
+    <div class="videoTint"></div>
+
+  </div>
+
+
+
+  <div class="videoMain">
+
+    <div id="videoWrap">
+
+
+      <div class="videoFrame">
+
+        <video
+          id="mainVideo"
+          playsinline
+          webkit-playsinline
+          preload="none"
+        ></video>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- PERSON PRESENTATION -->
+
+  <div id="personIntro">
+
+
+    <div
+      class="personBg"
+      id="personBg"
+    >
+      HOME
+    </div>
+
+
+    <div class="personContent">
+
+
+      <div
+        class="personLead"
+        id="personLead"
+      >
+        THE FIRST VOICE FROM HOME
+      </div>
+
+
+      <div
+        class="personName"
+        id="personName"
+      >
+        Dad
+      </div>
+
+
+      <div
+        class="personSub"
+        id="personSub"
+      >
+        He couldn't be here, but he still wanted to be part of this moment.
+      </div>
+
+
+      <button
+        id="playMessage"
+        type="button"
+      >
+        OPEN MESSAGE
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- BETWEEN -->
+
+  <div id="betweenScreen">
+
+
+    <div
+      class="betweenHuge"
+      id="betweenHuge"
+    >
+      LOVE
+    </div>
+
+
+    <div class="betweenContent">
+
+
+      <div
+        class="betweenLine"
+        id="betweenLine"
+      >
+        That wasn't the only message that made the trip.
+      </div>
+
+
+      <div class="betweenSmall">
+
+        NEXT
+
+      </div>
+
+
+      <div
+        class="betweenName"
+        id="betweenName"
+      >
+        Mom
+      </div>
+
+
+      <button
+        id="nextMessageButton"
+        type="button"
+      >
+        NEXT MESSAGE
+      </button>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- FINAL -->
+
+  <div id="finalScreen">
+
+    <div>
+
+
+      <div class="finalSmall">
+
+        ALL THE WAY TO CASABLANCA
+
+      </div>
+
+
+      <div class="finalTitle">
+
+        Different places.
+
+        <span>
+          All here for you.
+        </span>
+
+      </div>
+
+
+      <div class="finalText">
+
+        Different voices, different places,
+        but every single one wanted to be
+        part of your twentieth birthday.
+
+      </div>
+
+
+      <div class="finalMissing">
+
+        Everyone had something to say.
+
+        <span>
+          Well… almost everyone.
+        </span>
+
+      </div>
+
+
+      <a
+        class="finalButton"
+        href="together.html"
+      >
+        FIND OUT
+      </a>
+
+    </div>
+
+  </div>
+
+
+</section>
+
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+<script>
+
+/* ======================================================
+   MAP LOCATIONS
+====================================================== */
+
+const kaunas = [
+  54.8985,
+  23.9036
+];
+
+
+const casablanca = [
+  33.5731,
+  -7.5898
+];
+
+
+
+/* ======================================================
+   MAP SETUP
+====================================================== */
+
+const map = L.map(
+  "map",
+  {
+    zoomControl:false,
+    attributionControl:false,
+    dragging:false,
+    touchZoom:false,
+    doubleClickZoom:false,
+    scrollWheelZoom:false,
+    boxZoom:false,
+    keyboard:false
+  }
+);
+
+
+L.tileLayer(
+  "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+  {
+    maxZoom:19
+  }
+).addTo(map);
+
+
+map.fitBounds(
+  [
+    [27,-17],
+    [61,32]
+  ],
+  {
+    padding:[25,25]
+  }
+);
+
+
+
+/* ======================================================
+   DOTS
+====================================================== */
+
+const cityIcon = L.divIcon({
+
+  className:"",
+
+  html:`
+    <div style="
+      width:11px;
+      height:11px;
+      border-radius:50%;
+      background:#e5b2c5;
+      box-shadow:
+        0 0 0 7px rgba(229,178,197,.13),
+        0 0 28px rgba(229,178,197,.8);
+    "></div>
+  `,
+
+  iconSize:[11,11],
+
+  iconAnchor:[5.5,5.5]
+
+});
+
+
+const kaunasMarker =
+L.marker(
+  kaunas,
+  {
+    icon:cityIcon
+  }
+);
+
+
+const casablancaMarker =
+L.marker(
+  casablanca,
+  {
+    icon:cityIcon
+  }
+);
+
+
+
+/* ======================================================
+   PLANE
+====================================================== */
+
+const planeIcon = L.divIcon({
+
+  className:"",
+
+  html:`
+    <div class="planeMarker">
+      ✈
+    </div>
+  `,
+
+  iconSize:[44,44],
+
+  iconAnchor:[22,22]
+
+});
+
+
+const plane =
+L.marker(
+  kaunas,
+  {
+    icon:planeIcon
+  }
+);
+
+
+let routeLine = null;
+
+
+
+/* ======================================================
+   MAP ELEMENTS
+====================================================== */
+
+const mapElement =
+document.getElementById("map");
+
+
+const travelTitle =
+document.getElementById("travelTitle");
+
+
+const kaunasCard =
+document.getElementById("kaunasCard");
+
+
+const casablancaCard =
+document.getElementById("casablancaCard");
+
+
+const distanceBox =
+document.getElementById("distanceBox");
+
+
+const distanceNumber =
+document.getElementById("distanceNumber");
+
+
+const travelEnd =
+document.getElementById("travelEnd");
+
+
+
+/* ======================================================
+   CURVED ROUTE
+====================================================== */
+
+function interpolate(start,end,t){
+
+  const lat =
+    start[0] +
+    (end[0] - start[0]) * t;
+
+
+  const lng =
+    start[1] +
+    (end[1] - start[1]) * t;
+
+
+  const arc =
+    Math.sin(Math.PI * t) * 4.2;
+
+
+  return [
+    lat + arc,
+    lng
+  ];
+
+}
+
+
+
+/* ======================================================
+   DISTANCE
+====================================================== */
+
+function animateDistance(){
+
+  const target = 3500;
+
+  const duration = 5000;
+
+  const start = performance.now();
+
+
+  function frame(now){
+
+    const progress =
+      Math.min(
+        1,
+        (now - start) / duration
+      );
+
+
+    const eased =
+      1 -
+      Math.pow(
+        1 - progress,
+        3
+      );
+
+
+    distanceNumber.textContent =
+      Math.round(
+        target * eased
+      ).toLocaleString();
+
+
+    if(progress < 1){
+
+      requestAnimationFrame(frame);
+
+    }
+
+  }
+
+
+  requestAnimationFrame(frame);
+
+}
+
+
+
+/* ======================================================
+   AIRPLANE ANIMATION
+====================================================== */
+
+function flyPlane(){
+
+  const duration = 5000;
+
+  const start = performance.now();
+
+  const routePoints = [];
+
+
+  plane.addTo(map);
+
+
+  function frame(now){
+
+    const progress =
+      Math.min(
+        1,
+        (now - start) / duration
+      );
+
+
+    const eased =
+      progress < .5
+      ?
+      2 * progress * progress
+      :
+      1 -
+      Math.pow(
+        -2 * progress + 2,
+        2
+      ) / 2;
+
+
+    const position =
+      interpolate(
+        kaunas,
+        casablanca,
+        eased
+      );
+
+
+    plane.setLatLng(position);
+
+
+    routePoints.push(position);
+
+
+    if(routeLine){
+
+      routeLine.remove();
+
+    }
+
+
+    routeLine =
+      L.polyline(
+        routePoints,
+        {
+          color:"#dca9c0",
+          weight:2.4,
+          opacity:.88,
+          dashArray:"6 9"
+        }
+      ).addTo(map);
+
+
+    if(progress < 1){
+
+      requestAnimationFrame(frame);
+
+    }
+
+    else{
+
+      plane.setLatLng(casablanca);
+
+
+      casablancaMarker.addTo(map);
+
+
+      casablancaCard.classList.add("show");
+
+
+      setTimeout(
+        ()=>{
+          travelEnd.classList.add("show");
+        },
+        1100
+      );
+
+    }
+
+  }
+
+
+  requestAnimationFrame(frame);
+
+}
+
+
+
+/* ======================================================
+   INTRO SEQUENCE
+====================================================== */
+
+window.addEventListener(
+  "load",
+  ()=>{
+
+    setTimeout(
+      ()=>{
+        mapElement.classList.add("visible");
+      },
+      250
+    );
+
+
+    setTimeout(
+      ()=>{
+        travelTitle.classList.add("show");
+      },
+      700
+    );
+
+
+    setTimeout(
+      ()=>{
+
+        kaunasMarker.addTo(map);
+
+        kaunasCard.classList.add("show");
+
+      },
+      1500
+    );
+
+
+    setTimeout(
+      ()=>{
+
+        distanceBox.classList.add("show");
+
+        animateDistance();
+
+        flyPlane();
+
+      },
+      2500
+    );
+
+  }
+);
+
+
+
+/* ======================================================
+   PEOPLE
+====================================================== */
+
+const messages = [
+
+  {
+    name:"Dad",
+    file:"dad.mp4",
+
+    lead:"THE FIRST VOICE FROM HOME",
+
+    bg:"HOME",
+
+    sub:
+    "He couldn't be here, but he still wanted to be part of this moment."
+  },
+
+
+  {
+    name:"Mom",
+    file:"mom.mp4",
+
+    lead:
+    "OF COURSE SHE HAD SOMETHING TO SAY",
+
+    bg:"LOVE",
+
+    sub:
+    "There was no way your birthday was happening without a message from her.",
+
+    between:
+    "That wasn't the only message that made the trip.",
+
+    betweenBg:
+    "LOVE"
+  },
+
+
+  {
+    name:"Sister",
+    file:"sister.mp4",
+
+    lead:
+    "SHE'S SEEN ALMOST EVERY VERSION OF YOU",
+
+    bg:"SISTER",
+
+    sub:
+    "From childhood memories to twenty. She has been there through almost all of it.",
+
+    between:
+    "Next comes someone who's basically had a front-row seat to your whole life.",
+
+    betweenBg:
+    "MEMORIES"
+  },
+
+
+  {
+    name:"Aunt",
+    file:"aunt.mp4",
+
+    lead:
+    "ANOTHER LITTLE PIECE OF FAMILY",
+
+    bg:"FAMILY",
+
+    sub:
+    "Another familiar voice wanted to make the journey all the way to Casablanca.",
+
+    between:
+    "Your family still wasn't finished.",
+
+    betweenBg:
+    "FAMILY"
+  },
+
+
+  {
+    name:"Grandma",
+    file:"grandma.mp4",
+
+    lead:
+    "SOME LOVE NEVER FEELS FAR AWAY",
+
+    bg:"HOME",
+
+    sub:
+    "This next message comes with a whole lifetime of love behind it.",
+
+    between:
+    "Some voices instantly feel like home.",
+
+    betweenBg:
+    "HOME"
+  },
+
+
+  {
+    name:"Marija",
+    file:"marija.mp4",
+
+    lead:
+    "AND FAMILY WASN'T THE ONLY ONE",
+
+    bg:"FRIENDS",
+
+    sub:
+    "Someone else wanted her own little place in your birthday surprise.",
+
+    between:
+    "Okay… time to leave the family category for a moment.",
+
+    betweenBg:
+    "FRIENDS"
+  },
+
+
+  {
+    name:"Julia",
+    file:"julia.mp4",
+
+    lead:
+    "THIS ONE CAME ALL THE WAY FROM THE USA",
+
+    bg:"USA",
+
+    sub:
+    "One of your closest friends wanted to send a little piece of America all the way to your twentieth birthday.",
+
+    between:
+    "And now, one of your closest friends is checking in from across the Atlantic.",
+
+    betweenBg:
+    "USA"
+  },
+
+
+  {
+    name:"Cousins",
+    file:"cousins.mp4",
+
+    lead:
+    "A LITTLE MORE FAMILY CHAOS",
+
+    bg:"TOGETHER",
+
+    sub:
+    "Because apparently your birthday needed a little more family chaos.",
+
+    between:
+    "And just when you thought the family messages were over…",
+
+    betweenBg:
+    "CHAOS"
+  },
+
+
+  {
+    name:"Olivia",
+    file:"olivia.mp4",
+
+    lead:
+    "THIS ONE DIDN'T HAVE TO TRAVEL VERY FAR",
+
+    bg:"CASABLANCA",
+
+    sub:
+    "She's already here in Morocco… but she still wanted her own birthday moment.",
+
+    between:
+    "One last message. And this one didn't have to travel thousands of kilometres.",
+
+    betweenBg:
+    "MOROCCO"
+  }
+
+];
+
+
+
+/* ======================================================
+   ELEMENTS
+====================================================== */
+
+const openMessages =
+document.getElementById("openMessages");
+
+
+const travelIntro =
+document.getElementById("travelIntro");
+
+
+const experience =
+document.getElementById("experience");
+
+
+const blurVideo =
+document.getElementById("blurVideo");
+
+
+const mainVideo =
+document.getElementById("mainVideo");
+
+
+const videoWrap =
+document.getElementById("videoWrap");
+
+
+const personIntro =
+document.getElementById("personIntro");
+
+
+const personBg =
+document.getElementById("personBg");
+
+
+const personLead =
+document.getElementById("personLead");
+
+
+const personName =
+document.getElementById("personName");
+
+
+const personSub =
+document.getElementById("personSub");
+
+
+const playMessage =
+document.getElementById("playMessage");
+
+
+const betweenScreen =
+document.getElementById("betweenScreen");
+
+
+const betweenHuge =
+document.getElementById("betweenHuge");
+
+
+const betweenLine =
+document.getElementById("betweenLine");
+
+
+const betweenName =
+document.getElementById("betweenName");
+
+
+const nextMessageButton =
+document.getElementById("nextMessageButton");
+
+
+const finalScreen =
+document.getElementById("finalScreen");
+
+
+let currentIndex = 0;
+
+
+
+/* ======================================================
+   OPEN FIRST MESSAGE
+====================================================== */
+
+openMessages.addEventListener(
+  "click",
+  ()=>{
+
+    travelIntro.style.display =
+      "none";
+
+
+    experience.classList.add(
+      "active"
+    );
+
+
+    currentIndex = 0;
+
+
+    showPerson();
+
+  }
+);
+
+
+
+/* ======================================================
+   PRESENT PERSON
+====================================================== */
+
+function showPerson(){
+
+  const item =
+    messages[currentIndex];
+
+
+  betweenScreen.classList.remove(
+    "show"
+  );
+
+
+  videoWrap.classList.remove(
+    "show"
+  );
+
+
+  personIntro.style.display =
+    "flex";
+
+
+  personIntro.style.opacity =
+    "1";
+
+
+  personIntro.style.transform =
+    "scale(1)";
+
+
+  personBg.textContent =
+    item.bg;
+
+
+  personLead.textContent =
+    item.lead;
+
+
+  personName.textContent =
+    item.name;
+
+
+  personSub.textContent =
+    item.sub;
+
+
+  playMessage.textContent =
+    "OPEN MESSAGE";
+
+
+  mainVideo.pause();
+
+  blurVideo.pause();
+
+
+  mainVideo.removeAttribute(
+    "src"
+  );
+
+
+  blurVideo.removeAttribute(
+    "src"
+  );
+
+
+  mainVideo.load();
+
+  blurVideo.load();
+
+
+  personLead.animate(
+
+    [
+      {
+        opacity:0,
+        letterSpacing:".28em"
+      },
+
+      {
+        opacity:1,
+        letterSpacing:".17em"
+      }
+    ],
+
+    {
+      duration:650,
+      fill:"both"
+    }
+
+  );
+
+
+  personName.animate(
+
+    [
+      {
+        opacity:0,
+
+        transform:
+          "translateY(38px) scale(.94)"
+      },
+
+      {
+        opacity:1,
+
+        transform:
+          "translateY(0) scale(1)"
+      }
+    ],
+
+    {
+      duration:720,
+
+      easing:
+        "cubic-bezier(.2,.8,.2,1)",
+
+      fill:"both"
+    }
+
+  );
+
+
+  personSub.animate(
+
+    [
+      {
+        opacity:0
+      },
+
+      {
+        opacity:1
+      }
+    ],
+
+    {
+      duration:700,
+      delay:250,
+      fill:"both"
+    }
+
+  );
+
+}
+
+
+
+/* ======================================================
+   PLAY VIDEO
+====================================================== */
+
+playMessage.addEventListener(
+  "click",
+  async()=>{
+
+    const item =
+      messages[currentIndex];
+
+
+    mainVideo.src =
+      item.file;
+
+
+    blurVideo.src =
+      item.file;
+
+
+    mainVideo.currentTime = 0;
+
+    blurVideo.currentTime = 0;
+
+
+    mainVideo.load();
+
+    blurVideo.load();
+
+
+    personIntro.style.opacity =
+      "0";
+
+
+    personIntro.style.transform =
+      "scale(1.035)";
+
+
+    setTimeout(
+      ()=>{
+
+        personIntro.style.display =
+          "none";
+
+
+        videoWrap.classList.remove(
+          "show"
+        );
+
+
+        void videoWrap.offsetWidth;
+
+
+        videoWrap.classList.add(
+          "show"
+        );
+
+      },
+      430
+    );
+
+
+    blurVideo.muted = true;
+
+
+    try{
+
+      await mainVideo.play();
+
+
+      blurVideo.play()
+      .catch(()=>{});
+
+    }
+
+    catch(error){
+
+      mainVideo.controls = true;
+
+
+      mainVideo.play()
+      .catch(()=>{});
+
+    }
+
+  }
+);
+
+
+
+/* ======================================================
+   VIDEO FINISHED
+====================================================== */
+
+mainVideo.addEventListener(
+  "ended",
+  ()=>{
+
+    blurVideo.pause();
+
+
+    const last =
+      currentIndex ===
+      messages.length - 1;
+
+
+    if(last){
+
+      finalScreen.classList.add(
+        "show"
+      );
+
+      return;
+
+    }
+
+
+    const next =
+      messages[currentIndex + 1];
+
+
+    betweenLine.textContent =
+      next.between;
+
+
+    betweenHuge.textContent =
+      next.betweenBg;
+
+
+    betweenName.textContent =
+      next.name;
+
+
+    betweenScreen.classList.add(
+      "show"
+    );
+
+
+    animateBetween();
+
+  }
+);
+
+
+
+/* ======================================================
+   BETWEEN ANIMATION
+====================================================== */
+
+function animateBetween(){
+
+  betweenLine.animate(
+
+    [
+      {
+        opacity:0,
+
+        transform:
+          "translateY(18px)"
+      },
+
+      {
+        opacity:1,
+
+        transform:
+          "translateY(0)"
+      }
+    ],
+
+    {
+      duration:650,
+      easing:"ease",
+      fill:"both"
+    }
+
+  );
+
+
+  betweenName.animate(
+
+    [
+      {
+        opacity:0,
+
+        transform:
+          "translateY(28px) scale(.94)"
+      },
+
+      {
+        opacity:1,
+
+        transform:
+          "translateY(0) scale(1)"
+      }
+    ],
+
+    {
+      duration:720,
+
+      delay:260,
+
+      easing:
+        "cubic-bezier(.2,.8,.2,1)",
+
+      fill:"both"
+    }
+
+  );
+
+
+  nextMessageButton.animate(
+
+    [
+      {
+        opacity:0
+      },
+
+      {
+        opacity:1
+      }
+    ],
+
+    {
+      duration:600,
+      delay:650,
+      fill:"both"
+    }
+
+  );
+
+}
+
+
+
+/* ======================================================
+   NEXT MESSAGE
+====================================================== */
+
+nextMessageButton.addEventListener(
+  "click",
+  ()=>{
+
+    currentIndex++;
+
+
+    betweenScreen.classList.remove(
+      "show"
+    );
+
+
+    showPerson();
+
+  }
+);
+
+
+
+/* ======================================================
+   PHONE FALLBACK
+====================================================== */
+
+mainVideo.addEventListener(
+  "click",
+  ()=>{
+
+    if(mainVideo.paused){
+
+      mainVideo.play()
+      .catch(()=>{});
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+
+</html>

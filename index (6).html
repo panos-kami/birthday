@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>Kami</title>
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,
+body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#10152f;
+  color:white;
+}
+
+button,
+a{
+  -webkit-tap-highlight-color:transparent;
+}
+
+/* =================================
+   FIRST SCREEN
+================================= */
+
+#gate{
+  position:fixed;
+  inset:0;
+  z-index:999;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:
+    radial-gradient(
+      circle at 50% 28%,
+      rgba(88,101,166,.18),
+      transparent 32%
+    ),
+    linear-gradient(
+      155deg,
+      #0d1228 0%,
+      #151a38 58%,
+      #202750 100%
+    );
+
+  transition:
+    opacity .8s ease,
+    transform .8s ease,
+    visibility .8s;
+}
+
+#gate.hide{
+  opacity:0;
+  visibility:hidden;
+  transform:scale(1.07);
+}
+
+.gateInner{
+  text-align:center;
+  padding:30px;
+}
+
+.gateTitle{
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-weight:400;
+
+  font-size:
+    clamp(
+      44px,
+      12vw,
+      82px
+    );
+
+  letter-spacing:-.04em;
+
+  color:#f2eee8;
+}
+
+#yesButton{
+  margin-top:34px;
+
+  padding:
+    14px 39px;
+
+  border-radius:999px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.22);
+
+  background:
+    rgba(255,255,255,.06);
+
+  color:#f3efe8;
+
+  font-size:14px;
+
+  letter-spacing:.2em;
+
+  cursor:pointer;
+
+  backdrop-filter:
+    blur(10px);
+
+  transition:.25s ease;
+}
+
+#yesButton:active{
+  transform:scale(.96);
+}
+
+
+/* =================================
+   BIRTHDAY WORLD
+================================= */
+
+#world{
+  position:fixed;
+  inset:0;
+
+  overflow:hidden;
+
+  perspective:1500px;
+
+  background:
+    radial-gradient(
+      circle at 50% 18%,
+      rgba(255,225,166,.28),
+      transparent 24%
+    ),
+
+    radial-gradient(
+      circle at 13% 72%,
+      rgba(236,130,190,.26),
+      transparent 34%
+    ),
+
+    radial-gradient(
+      circle at 88% 27%,
+      rgba(110,127,245,.31),
+      transparent 38%
+    ),
+
+    linear-gradient(
+      150deg,
+      #17265e 0%,
+      #31519d 35%,
+      #705ab8 67%,
+      #c879a8 100%
+    );
+}
+
+
+/* =================================
+   OPENING DARKNESS
+================================= */
+
+#blackout{
+  position:absolute;
+  inset:0;
+
+  z-index:100;
+
+  background:#10152e;
+
+  opacity:1;
+
+  pointer-events:none;
+
+  transition:
+    opacity 1s ease;
+}
+
+#blackout.remove{
+  opacity:0;
+}
+
+
+/* =================================
+   MOVING HAZE
+================================= */
+
+.haze{
+  position:absolute;
+  inset:-30%;
+
+  filter:blur(75px);
+
+  opacity:.55;
+}
+
+.haze1{
+  background:
+    radial-gradient(
+      circle at 25% 40%,
+      rgba(255,175,213,.62),
+      transparent 31%
+    );
+
+  animation:
+    haze1
+    10s
+    ease-in-out
+    infinite alternate;
+}
+
+.haze2{
+  background:
+    radial-gradient(
+      circle at 75% 39%,
+      rgba(108,132,255,.54),
+      transparent 34%
+    );
+
+  animation:
+    haze2
+    12s
+    ease-in-out
+    infinite alternate;
+}
+
+@keyframes haze1{
+  to{
+    transform:
+      translate(6%,-4%)
+      scale(1.09);
+  }
+}
+
+@keyframes haze2{
+  to{
+    transform:
+      translate(-5%,5%)
+      scale(1.12);
+  }
+}
+
+
+/* =================================
+   SEARCH LIGHTS
+================================= */
+
+.light{
+  position:absolute;
+
+  bottom:-50%;
+
+  width:200px;
+  height:170%;
+
+  transform-origin:
+    bottom center;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(255,239,180,.32),
+      transparent
+    );
+
+  filter:blur(31px);
+
+  opacity:.72;
+
+  z-index:2;
+}
+
+.light.left{
+  left:-25px;
+
+  animation:
+    leftLight
+    4.1s
+    ease-in-out
+    infinite alternate;
+}
+
+.light.right{
+  right:-25px;
+
+  animation:
+    rightLight
+    4.5s
+    ease-in-out
+    infinite alternate;
+}
+
+@keyframes leftLight{
+  from{
+    transform:rotate(25deg);
+  }
+
+  to{
+    transform:rotate(-7deg);
+  }
+}
+
+@keyframes rightLight{
+  from{
+    transform:rotate(-25deg);
+  }
+
+  to{
+    transform:rotate(8deg);
+  }
+}
+
+
+/* =================================
+   SPARKLES
+================================= */
+
+.spark{
+  position:absolute;
+
+  width:3px;
+  height:3px;
+
+  border-radius:50%;
+
+  background:#fff3c0;
+
+  box-shadow:
+    0 0 13px 4px
+    rgba(255,225,150,.48);
+
+  opacity:0;
+
+  animation:
+    sparkle
+    3.6s
+    ease-in-out
+    infinite;
+
+  z-index:3;
+}
+
+@keyframes sparkle{
+  0%,100%{
+    opacity:0;
+    transform:scale(.3);
+  }
+
+  50%{
+    opacity:1;
+    transform:scale(1.25);
+  }
+}
+
+
+/* =================================
+   BIRTHDAY TITLE
+================================= */
+
+#birthdayIntro{
+  position:absolute;
+  inset:0;
+
+  z-index:10;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  transform-style:
+    preserve-3d;
+}
+
+#titleGroup{
+  position:relative;
+
+  width:92vw;
+
+  opacity:0;
+
+  transform:
+    translateZ(-1700px)
+    scale(.08);
+
+  filter:
+    blur(30px);
+}
+
+#titleGroup.play{
+  animation:
+    titleArrival
+    5.1s
+    cubic-bezier(.12,.8,.18,1)
+    forwards;
+}
+
+@keyframes titleArrival{
+
+  0%{
+    opacity:0;
+
+    transform:
+      translateZ(-1700px)
+      scale(.08);
+
+    filter:
+      blur(30px);
+  }
+
+  16%{
+    opacity:1;
+  }
+
+  72%{
+    transform:
+      translateZ(90px)
+      scale(1.06);
+
+    filter:
+      blur(0);
+  }
+
+  100%{
+    opacity:1;
+
+    transform:
+      translateZ(0)
+      scale(1);
+
+    filter:
+      blur(0);
+  }
+}
+
+
+/* 20 */
+
+.twenty{
+  font-size:
+    clamp(
+      155px,
+      47vw,
+      320px
+    );
+
+  line-height:.69;
+
+  font-weight:900;
+
+  letter-spacing:-.1em;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fffbea 0%,
+      #ffe2a0 34%,
+      #dca13f 68%,
+      #fff1bd 100%
+    );
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  filter:
+    drop-shadow(
+      0 18px 28px
+      rgba(25,18,70,.45)
+    )
+    drop-shadow(
+      0 0 25px
+      rgba(255,225,150,.20)
+    );
+}
+
+
+/* HAPPY BIRTHDAY */
+
+.happy{
+  margin-top:31px;
+
+  font-size:
+    clamp(
+      15px,
+      4vw,
+      27px
+    );
+
+  font-weight:800;
+
+  letter-spacing:.27em;
+
+  text-transform:uppercase;
+
+  color:#fff0cd;
+
+  text-shadow:
+    0 9px 25px
+    rgba(25,18,70,.36);
+}
+
+
+/* KAMI */
+
+.kami{
+  margin-top:10px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-style:italic;
+
+  font-size:
+    clamp(
+      58px,
+      17vw,
+      112px
+    );
+
+  line-height:.94;
+
+  color:#fff;
+
+  text-shadow:
+    0 13px 36px
+    rgba(25,17,75,.38),
+    0 0 25px
+    rgba(255,226,175,.14);
+}
+
+
+/* LIGHT HALO AROUND TITLE */
+
+.titleHalo{
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  width:95vw;
+  height:70vh;
+
+  transform:
+    translate(-50%,-50%);
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(255,227,169,.22),
+      transparent 60%
+    );
+
+  filter:blur(30px);
+
+  z-index:-1;
+}
+
+
+/* LIGHT LINES */
+
+.streak{
+  position:absolute;
+
+  left:50%;
+
+  height:1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,246,212,.85),
+      transparent
+    );
+
+  transform-origin:center;
+
+  opacity:.7;
+}
+
+.streak.s1{
+  width:82vw;
+
+  top:36%;
+
+  transform:
+    translateX(-50%)
+    rotate(-5deg);
+}
+
+.streak.s2{
+  width:72vw;
+
+  top:66%;
+
+  transform:
+    translateX(-50%)
+    rotate(5deg);
+}
+
+
+/* EXIT */
+
+#titleGroup.out{
+  animation:
+    titleOut
+    .85s
+    ease
+    forwards;
+}
+
+@keyframes titleOut{
+  to{
+    opacity:0;
+
+    transform:
+      translateZ(300px)
+      scale(1.17);
+
+    filter:
+      blur(16px);
+  }
+}
+
+
+/* =================================
+   AND NOW
+================================= */
+
+#bridge{
+  position:absolute;
+  inset:0;
+
+  z-index:30;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  opacity:0;
+  visibility:hidden;
+
+  transition:
+    opacity .45s ease;
+}
+
+#bridge.show{
+  opacity:1;
+  visibility:visible;
+}
+
+.bridgeText{
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-style:italic;
+
+  font-size:
+    clamp(
+      42px,
+      12vw,
+      74px
+    );
+
+  color:#fff0d5;
+
+  text-shadow:
+    0 13px 36px
+    rgba(20,15,70,.4);
+}
+
+
+/* =================================
+   VIDEO
+================================= */
+
+#videoStage{
+  position:absolute;
+  inset:0;
+
+  z-index:40;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  opacity:0;
+  visibility:hidden;
+
+  transition:
+    opacity .5s ease;
+}
+
+#videoStage.show{
+  opacity:1;
+  visibility:visible;
+}
+
+.videoBackground{
+  position:absolute;
+  inset:0;
+
+  background:
+    rgba(13,17,47,.66);
+
+  backdrop-filter:
+    blur(16px);
+}
+
+
+/* FIRST LIGHT LINE */
+
+#videoLine{
+  position:absolute;
+
+  width:2px;
+  height:3px;
+
+  background:#fff2c7;
+
+  box-shadow:
+    0 0 28px 9px
+    rgba(255,229,171,.50);
+
+  opacity:0;
+}
+
+#videoLine.open{
+  animation:
+    openLine
+    .65s
+    ease
+    forwards;
+}
+
+@keyframes openLine{
+
+  from{
+    width:2px;
+    opacity:0;
+  }
+
+  20%{
+    opacity:1;
+  }
+
+  to{
+    width:84vw;
+    opacity:1;
+  }
+}
+
+
+/* VIDEO FRAME */
+
+#videoFrame{
+  position:relative;
+
+  width:84vw;
+  max-width:400px;
+
+  aspect-ratio:9/16;
+
+  overflow:hidden;
+
+  border-radius:27px;
+
+  opacity:0;
+
+  clip-path:
+    inset(
+      50% 0
+      50% 0
+      round 27px
+    );
+
+  transform:
+    scale(.78);
+
+  box-shadow:
+    0 40px 120px
+    rgba(9,11,43,.62),
+    0 0 0 1px
+    rgba(255,255,255,.18);
+}
+
+#videoFrame.reveal{
+  animation:
+    videoReveal
+    1.2s
+    cubic-bezier(.12,.8,.18,1)
+    forwards;
+}
+
+@keyframes videoReveal{
+
+  0%{
+    opacity:1;
+
+    clip-path:
+      inset(
+        50% 0
+        50% 0
+        round 27px
+      );
+
+    transform:
+      scale(.78);
+  }
+
+  55%{
+    clip-path:
+      inset(
+        0 0
+        0 0
+        round 27px
+      );
+  }
+
+  100%{
+    opacity:1;
+
+    clip-path:
+      inset(
+        0 0
+        0 0
+        round 27px
+      );
+
+    transform:
+      scale(1);
+  }
+}
+
+
+#entryTalk{
+  width:100%;
+  height:100%;
+
+  display:block;
+
+  object-fit:cover;
+
+  background:#000;
+}
+
+
+/* =================================
+   AFTER VIDEO
+================================= */
+
+#nextChapter{
+  position:absolute;
+  inset:0;
+
+  z-index:70;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  text-align:center;
+
+  opacity:0;
+  visibility:hidden;
+
+  padding:30px;
+
+  transition:
+    opacity .8s ease;
+}
+
+#nextChapter.show{
+  opacity:1;
+  visibility:visible;
+}
+
+.nextSmall{
+  font-size:11px;
+
+  letter-spacing:.28em;
+
+  text-transform:uppercase;
+
+  color:#ffecc7;
+
+  opacity:.82;
+
+  margin-bottom:18px;
+}
+
+.nextTitle{
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(
+      42px,
+      11vw,
+      78px
+    );
+
+  font-weight:400;
+
+  line-height:1.03;
+
+  letter-spacing:-.04em;
+}
+
+.nextText{
+  max-width:330px;
+
+  margin:
+    19px auto 0;
+
+  color:
+    rgba(255,255,255,.76);
+
+  font-size:15px;
+
+  line-height:1.6;
+}
+
+#photosButton{
+  display:inline-block;
+
+  margin-top:31px;
+
+  padding:
+    15px 30px;
+
+  border-radius:999px;
+
+  background:#fff0cf;
+
+  color:#302f6c;
+
+  text-decoration:none;
+
+  font-size:13px;
+
+  font-weight:800;
+
+  letter-spacing:.12em;
+
+  box-shadow:
+    0 16px 45px
+    rgba(25,18,70,.28);
+
+  transition:
+    transform .25s ease;
+}
+
+#photosButton:active{
+  transform:scale(.96);
+}
+
+
+/* =================================
+   MOBILE
+================================= */
+
+@media(max-width:600px){
+
+  #titleGroup{
+    width:95vw;
+  }
+
+  .twenty{
+    font-size:49vw;
+  }
+
+  .happy{
+    font-size:4vw;
+    letter-spacing:.22em;
+  }
+
+  .kami{
+    font-size:18vw;
+  }
+
+  #videoFrame{
+    width:84vw;
+
+    max-height:
+      calc(100dvh - 100px);
+  }
+
+  #videoLine.open{
+    width:84vw;
+  }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ============================
+     START
+============================ -->
+
+<section id="gate">
+
+  <div class="gateInner">
+
+    <div class="gateTitle">
+      Are you ready?
+    </div>
+
+    <button id="yesButton">
+      YES
+    </button>
+
+  </div>
+
+</section>
+
+
+
+<!-- ============================
+     WORLD
+============================ -->
+
+<main id="world">
+
+
+<div id="blackout"></div>
+
+
+<div class="haze haze1"></div>
+<div class="haze haze2"></div>
+
+
+<div class="light left"></div>
+<div class="light right"></div>
+
+
+<span class="spark" style="left:8%;top:18%;animation-delay:.2s"></span>
+<span class="spark" style="left:19%;top:67%;animation-delay:1.2s"></span>
+<span class="spark" style="left:28%;top:29%;animation-delay:2.1s"></span>
+<span class="spark" style="left:67%;top:18%;animation-delay:.7s"></span>
+<span class="spark" style="left:82%;top:65%;animation-delay:2.4s"></span>
+<span class="spark" style="left:91%;top:33%;animation-delay:1.3s"></span>
+
+
+
+<!-- INTRO VIDEO / SOUND ONLY -->
+
+<video
+  id="introVideo"
+  playsinline
+  webkit-playsinline
+  preload="auto"
+  style="
+    position:absolute;
+    width:1px;
+    height:1px;
+    opacity:0;
+    pointer-events:none;
+  "
+>
+
+<source
+  src="entry-video.mp4"
+  type="video/mp4"
+>
+
+</video>
+
+
+
+<!-- TITLE -->
+
+<section id="birthdayIntro">
+
+<div id="titleGroup">
+
+  <div class="titleHalo"></div>
+
+  <div class="streak s1"></div>
+  <div class="streak s2"></div>
+
+  <div class="twenty">
+    20
+  </div>
+
+  <div class="happy">
+    Happy Birthday
+  </div>
+
+  <div class="kami">
+    Kami
+  </div>
+
+</div>
+
+</section>
+
+
+
+<!-- AND NOW -->
+
+<section id="bridge">
+
+  <div class="bridgeText">
+    And now...
+  </div>
+
+</section>
+
+
+
+<!-- ENTRY TALK -->
+
+<section id="videoStage">
+
+<div class="videoBackground"></div>
+
+<div id="videoLine"></div>
+
+<div id="videoFrame">
+
+<video
+  id="entryTalk"
+  playsinline
+  webkit-playsinline
+  preload="metadata"
+>
+
+<source
+  src="entry-talk.mp4"
+  type="video/mp4"
+>
+
+</video>
+
+</div>
+
+</section>
+
+
+
+<!-- NEXT PAGE -->
+
+<section id="nextChapter">
+
+<div>
+
+  <div class="nextSmall">
+    Chapter One
+  </div>
+
+  <div class="nextTitle">
+    Let's look<br>
+    back a little.
+  </div>
+
+  <div class="nextText">
+    Before anything else, let's go through
+    a few moments from the years that made you, you.
+  </div>
+
+  <a
+    id="photosButton"
+    href="age-photos.html"
+  >
+    SEE THE PHOTOS
+  </a>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+
+<script>
+
+const gate =
+document.getElementById("gate");
+
+const yesButton =
+document.getElementById("yesButton");
+
+const blackout =
+document.getElementById("blackout");
+
+const introVideo =
+document.getElementById("introVideo");
+
+const titleGroup =
+document.getElementById("titleGroup");
+
+const bridge =
+document.getElementById("bridge");
+
+const videoStage =
+document.getElementById("videoStage");
+
+const videoLine =
+document.getElementById("videoLine");
+
+const videoFrame =
+document.getElementById("videoFrame");
+
+const entryTalk =
+document.getElementById("entryTalk");
+
+const nextChapter =
+document.getElementById("nextChapter");
+
+
+let started = false;
+let introFinished = false;
+
+
+function wait(ms){
+
+  return new Promise(
+    resolve =>
+      setTimeout(resolve,ms)
+  );
+
+}
+
+
+/* preload */
+
+introVideo.load();
+entryTalk.load();
+
+
+/* =========================
+   YES
+========================= */
+
+yesButton.addEventListener(
+"click",
+async ()=>{
+
+  if(started) return;
+
+  started = true;
+
+
+  /* unlock intro */
+
+  introVideo.currentTime = 0;
+  introVideo.volume = 1;
+  introVideo.muted = false;
+  introVideo.loop = false;
+
+
+  try{
+
+    await introVideo.play();
+
+  }
+
+  catch(error){
+
+    console.log(
+      "Intro problem:",
+      error
+    );
+
+  }
+
+
+  /* try to unlock entry talk for mobile */
+
+  try{
+
+    entryTalk.muted = true;
+
+    entryTalk.currentTime = 0;
+
+    await entryTalk.play();
+
+    entryTalk.pause();
+
+    entryTalk.currentTime = 0;
+
+    entryTalk.muted = false;
+
+  }
+
+  catch(error){
+
+    console.log(
+      "Entry talk unlock:",
+      error
+    );
+
+  }
+
+
+  /* leave first screen */
+
+  gate.classList.add(
+    "hide"
+  );
+
+
+  await wait(450);
+
+
+  blackout.classList.add(
+    "remove"
+  );
+
+
+  await wait(250);
+
+
+  titleGroup.classList.add(
+    "play"
+  );
+
+
+  /*
+    Fallback:
+    even if intro gets stuck,
+    continue after 10 seconds
+  */
+
+  setTimeout(
+    ()=>{
+
+      finishIntro();
+
+    },
+    10000
+  );
+
+}
+
+);
+
+
+
+/* =========================
+   INTRO FINISHES
+========================= */
+
+async function finishIntro(){
+
+  if(introFinished)
+    return;
+
+
+  introFinished = true;
+
+
+  try{
+    introVideo.pause();
+  }
+  catch(e){}
+
+
+  titleGroup.classList.add(
+    "out"
+  );
+
+
+  await wait(850);
+
+
+  bridge.classList.add(
+    "show"
+  );
+
+
+  await wait(1500);
+
+
+  bridge.classList.remove(
+    "show"
+  );
+
+
+  await wait(350);
+
+
+  videoStage.classList.add(
+    "show"
+  );
+
+
+  await wait(350);
+
+
+  videoLine.classList.add(
+    "open"
+  );
+
+
+  await wait(600);
+
+
+  videoFrame.classList.add(
+    "reveal"
+  );
+
+
+  await wait(250);
+
+
+  entryTalk.currentTime = 0;
+  entryTalk.loop = false;
+  entryTalk.muted = false;
+  entryTalk.volume = 1;
+
+
+  try{
+
+    await entryTalk.play();
+
+  }
+
+  catch(error){
+
+    console.log(
+      "Entry talk playback:",
+      error
+    );
+
+  }
+
+}
+
+
+/* normal end */
+
+introVideo.addEventListener(
+"ended",
+()=>{
+
+  finishIntro();
+
+}
+);
+
+
+/* =========================
+   ENTRY TALK FINISHES
+========================= */
+
+entryTalk.addEventListener(
+"ended",
+async ()=>{
+
+
+  videoFrame.style.transition =
+    "opacity .75s ease, transform .75s ease";
+
+
+  videoFrame.style.opacity =
+    "0";
+
+
+  videoFrame.style.transform =
+    "scale(1.08)";
+
+
+  await wait(800);
+
+
+  videoStage.classList.remove(
+    "show"
+  );
+
+
+  await wait(400);
+
+
+  nextChapter.classList.add(
+    "show"
+  );
+
+}
+);
+
+</script>
+
+
+</body>
+</html>
